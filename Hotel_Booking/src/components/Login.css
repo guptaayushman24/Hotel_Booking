@@ -1,0 +1,78 @@
+.parentdiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.formdiv{
+    box-shadow: 10px 10px 5px 12px rgb(178, 33, 218);
+    box-shadow: 20px;
+    margin-top: 8rem;
+    height: 26rem;
+    width: 25rem;
+}
+.heading{
+    text-align: center;
+}
+.Email{
+
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+
+}
+.emailheading{
+    font-size: 20px;
+    font-weight: bold;
+}
+.emailinput{
+    margin-left: 0.5rem;
+    margin-top: 0.2rem;
+    width: 20rem;
+    height: 2rem;
+}
+.buttonclass{
+   display: flex;
+   justify-content: center;
+}
+.button{
+    width: 20rem;
+    height: 2rem;
+    background-color: #0e6efe;
+    border: 0.5px solid white;
+    color: white;
+    font-weight: bold;
+}
+.newUser{
+    display: flex;
+    flex-direction: row;
+    margin-left: 14rem;
+    gap: 12px;
+    margin-top: 5px;
+}
+.register{
+    color: #0e6efe;
+}
+.continuewith{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imagestyle{
+    width: 20rem;
+    height: 4rem;
+}
+.emailwarning{
+    color: red;
+    margin-left: 5px;
+    display: none;
+}
+.passwordwarning{
+    color: red;
+    margin-left: 5px;
+    display: none;
+}

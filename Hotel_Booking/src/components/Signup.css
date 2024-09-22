@@ -6,9 +6,9 @@
 .formdiv{
     box-shadow: 10px 10px 5px 12px rgb(178, 33, 218);
     box-shadow: 20px;
-    margin-top: 2rem;
-    height: 35rem;
-    width: 28rem;
+    margin-top: 1rem;
+    height: 40rem;
+    width: 30rem;
 }
 .heading{
     text-align: center;
@@ -40,6 +40,8 @@
     border: 0.5px solid white;
     color: white;
     font-weight: bold;
+    margin-right: 2.5rem;
+    justify-content: center;
 }
 .newUser{
     display: flex;

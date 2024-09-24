@@ -5,7 +5,6 @@
 }
 .formdiv{
     box-shadow: 10px 10px 5px 12px rgb(178, 33, 218);
-    box-shadow: 20px;
     margin-top: 1rem;
     height: 40rem;
     width: 30rem;
@@ -14,8 +13,8 @@
     text-align: center;
 }
 .Email{
-
     margin-left: 2rem;
+  
     margin-bottom: 1rem;
 
 }
@@ -63,10 +62,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    /* background-color: red; */
+
 }
 .imagestyle{
-    width: 20rem;
-    height: 4rem;
+   height: "100%";
+   width: "100%";
 }
 .emailwarning{
     color: red;

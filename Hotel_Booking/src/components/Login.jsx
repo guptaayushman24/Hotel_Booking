@@ -7,7 +7,7 @@ import {toast} from 'react-toastify'
 
 
 
-function Login1() {
+function Login() {
     const [email,Setemail] = useState('');
     const [password,Setpassword] = useState('');
     const displawarning = useRef();
@@ -123,7 +123,9 @@ function Login1() {
                     </div>
 
                     <div className='image'>
-                        <img src={'/SigninwithGoogle.png'} className='imagestyle' onClick={googleLogin}></img>
+                    <div className='imagestyle'>
+                    <img src={'/SigninwithGoogle.png'}  onClick={googleLogin}></img>
+                    </div>
                     </div>
 
                 </div>
@@ -132,4 +134,4 @@ function Login1() {
     )
 }
 
-export default Login1
+export default Login;

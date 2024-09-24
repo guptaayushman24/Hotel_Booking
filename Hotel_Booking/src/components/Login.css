@@ -5,9 +5,8 @@
 }
 .formdiv{
     box-shadow: 10px 10px 5px 12px rgb(178, 33, 218);
-    box-shadow: 20px;
     margin-top: 8rem;
-    height: 26rem;
+    height: 30rem;
     width: 25rem;
 }
 .heading{
@@ -32,6 +31,7 @@
 .buttonclass{
    display: flex;
    justify-content: center;
+   margin-left: 50px;
 }
 .button{
     width: 20rem;
@@ -63,9 +63,9 @@
     align-items: center;
 }
 .imagestyle{
-    width: 20rem;
-    height: 4rem;
-}
+    height: "100%";
+    width: "100%";
+ }
 .emailwarning{
     color: red;
     margin-left: 5px;

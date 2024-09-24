@@ -230,7 +230,10 @@ function Signup() {
                     </div>
 
                     <div className='image'>
-                        <img src={'/SigninwithGoogle.png'} className='imagestyle' onClick={googleLogin}></img>
+                    <div className='imagestyle'>
+                    <img src={'/SigninwithGoogle.png'}  onClick={googleLogin}></img>
+                    </div>
+                        
                     </div>
 
                 </div>

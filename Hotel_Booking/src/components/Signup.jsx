@@ -139,7 +139,7 @@ function Signup() {
         <div>
             <div className='parentdiv'>
 
-                <div className='formdiv'>
+                <div className='formdiv' style={{height:'42rem'}}>
                     {/* div->heading */}
                     <div className='heading'>
                         <h2>Sign Up</h2>
@@ -227,6 +227,7 @@ function Signup() {
                     {/* continue with*/}
                     <div className='continuewith'>
                         -- Or continue with --
+                        
                     </div>
 
                     <div className='image'>

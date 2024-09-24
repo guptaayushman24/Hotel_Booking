@@ -9,30 +9,38 @@ import Contact from './components/Contact'
 import About from './components/About'
 import Navbar from './components/Navbar'
 import NavBar from './components/Navbar'
-// const router = createBrowserRouter(
-//   [
-//     {
-//       path:'/signup', 
-//       element:
-    
-//     <div>
-//         <Signup></Signup>
-//       </div>
-//     }
-//   ]
-// )
+const router = createBrowserRouter(
+  [
+    {
+      path:'/', 
+      element:
+       
+      <Home></Home>
+    },
+    {
+      path:'/signup', 
+      element:
+        <Signup></Signup>
+    },
+    {
+      path:'/signin',
+      element:
+      <Login></Login>
+    }
+  ]
+)
 function App() {
  
 
   return (
     <>
   
-    <Signup></Signup>
+    {/* <Signup></Signup> */}
      {/* <Home></Home> */}
      {/* <Login></Login> */}
-     {/* <div>
+     {/* <div> */}
       <RouterProvider router={router}></RouterProvider>
-    </div> */}
+    {/* </div> */}
     </>
   )
 }

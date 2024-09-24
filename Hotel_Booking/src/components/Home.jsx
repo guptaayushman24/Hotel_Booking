@@ -2,20 +2,24 @@ import React, { useState } from 'react'
 import './Home.css'
 import { useNavigate } from 'react-router-dom';
 function Home() {
-  // const navigate = useNavigate();
-  // function opensignup(){
-  //   navigate('./signup');
-  // }
+  const navigate = useNavigate();
+  function opensignup(){
+    navigate('./signup');
+  }
+  function opensignin(){
+    navigate('./signin')
+  }
   return (
     <div className='parentdiv'>
       <div className='navbar'>
         <div className='services'>Services</div>
         <div className='services'>Blog</div>
+    
         <div className='services'>Contact Us</div>
-        <div className='services'><button id='signup'>SingUp</button></div>
+        <div className='services'><button id='signup' onClick={opensignup}>SingUp</button></div>
        
        
-        <div className='services'><button id='login'>LogIn</button></div>
+        <div className='services'><button id='login' onClick={opensignin}>LogIn</button></div>
      
       </div>
 

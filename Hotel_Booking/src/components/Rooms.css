@@ -112,3 +112,7 @@ img {
     margin-top: 2rem;
     color: white
 }
+.togglebtn{
+    background-color: transparent;
+    border: none;
+}

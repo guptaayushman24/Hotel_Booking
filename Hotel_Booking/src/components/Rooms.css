@@ -1,0 +1,114 @@
+.parentdiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    /* background-color: #00BCAD; */
+    box-shadow: 10px 10px 5px 12px rgb(178, 33, 218);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.navbar-start {
+    display: flex;
+   
+    gap: 50px;
+    align-items: center;
+
+}
+
+.customerProfile {
+    gap: 10px;
+}
+
+img {
+    margin-left: 2px;
+    width: 32px;
+    height: 32px;
+}
+
+.searchdiv {
+    height: 80px;
+    width: 100%;
+    background-color: blue;
+    display: flex;
+    margin-top: 40px;
+    gap: 50px;
+}
+
+.city {
+    margin-left: 2px;
+    width: 20rem;
+}
+
+.city-div {
+    display: flex;
+    flex-direction: row;
+}
+
+.city-div1 {
+    width: 5rem;
+    margin-top: 2px;
+    color: white;
+    font-weight: bold;
+}
+
+.checkinparent {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkin {
+    color: white;
+    width: 15rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.checkindiv1 {
+    margin-left: 1rem;
+    margin-top: 2px;
+}
+
+.checkindivicon {
+    margin-inline: 1rem;
+}
+
+.search {
+    margin-top: 14px;
+}
+
+.btn {
+    width: 10rem;
+    height: 2rem;
+    border-radius: 10px;
+    background-color: #1369f5;
+    color: white;
+    font-size: 20px;
+    border: none;
+}
+
+.custom-select {
+    margin-top: 4px;
+    background: transparent;
+    border: 0px;
+    padding: 0px;
+}
+
+.cityname {
+    margin-top: 2rem;
+    font-weight: bold;
+    color: white;
+    margin-left: 0.5rem;
+}
+
+.showdate {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 2rem;
+    color: white
+}

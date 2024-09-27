@@ -39,7 +39,8 @@ function App() {
      {/* <Home></Home> */}
      {/* <Login></Login> */}
      {/* <div> */}
-      <RouterProvider router={router}></RouterProvider>
+      {/* <RouterProvider router={router}></RouterProvider> */}
+      <Rooms></Rooms>
     {/* </div> */}
     </>
   )

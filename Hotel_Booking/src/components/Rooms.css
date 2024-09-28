@@ -31,9 +31,9 @@ img {
 }
 
 .searchdiv {
-    height: 80px;
+    height: 100px;
     width: 100%;
-    background-color: blue;
+    background-color: #12365e;
     display: flex;
     margin-top: 40px;
     gap: 50px;
@@ -52,7 +52,7 @@ img {
 .city-div1 {
     width: 5rem;
     margin-top: 2px;
-    color: white;
+    color: #0084ff;
     font-weight: bold;
 }
 
@@ -62,7 +62,7 @@ img {
 }
 
 .checkin {
-    color: white;
+    color: #0084ff;
     width: 15rem;
     display: flex;
     flex-direction: row;
@@ -76,6 +76,7 @@ img {
 .checkindivicon {
     margin-inline: 1rem;
 }
+
 
 .search {
     margin-top: 14px;
@@ -96,6 +97,7 @@ img {
     background: transparent;
     border: 0px;
     padding: 0px;
+    color: #0084ff;
 }
 
 .cityname {
@@ -116,3 +118,77 @@ img {
     background-color: transparent;
     border: none;
 }
+.search{
+    display: flex;
+    align-content: center;
+    border: none;
+}
+.btn{
+    margin-bottom: 2rem;
+}
+.parent1{
+    display: flex;
+    background-color: red;
+    height: 80rem;
+    width: 100%;
+    flex-direction: row;
+    
+}
+.child1{
+    display: flex;
+    background-color: green;
+    width: 20%;
+    flex-direction: column;
+}
+/* .filter{
+    background-color: brown;
+} */
+.filters{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.filter-heading-text{
+    text-align: center;
+}
+.selectRating{
+    text-align: center;
+    font-size: 20px;
+}
+.slider{
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+.ratingfont{
+    font-size: 1rem;
+}
+ .reviewScore{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 5rem;
+    margin-right: 4rem;
+}
+.checkbox-parent{
+    display: flex;
+    flex-direction: row;
+}
+.checkbox-container {
+    display: flex; /* Aligns items in a row */
+    align-items: center; /* Ensures checkbox and text are vertically aligned */
+    gap: 10px; /* Adds space between the checkbox and the text */
+  }
+  
+  .checkbox {
+    margin: 0; /* Reset any default margin */
+  }
+  
+  .reviewtext {
+    margin: 0; /* Reset any default margin */
+  }
+
+
+
+
+
+

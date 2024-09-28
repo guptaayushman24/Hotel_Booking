@@ -1,6 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Calendar from "react-calendar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Slider } from 'primereact/slider';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';  // Choose your theme
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
 import './Rooms.css'
 function Rooms() {
   const [selectedValue, SetselectedValue] = useState('');
@@ -12,12 +16,25 @@ function Rooms() {
   // Checkout
   const [datecheckout, setDatecheckout] = useState(null);
   const [showcalendarcheckout, setshowcalendarcheckout] = useState(false);
+
+
+  // Slider State
+  const [value, setValue] = useState(null);
+  // Checbox for the review score
+  const [checked, setChecked] = React.useState(false);
+
   const changeValue = (selectedDate) => {
     setDate(selectedDate);      // Set the selected date
 
     setCalendarState(false);    // Close the calendar
 
   };
+
+  // Handing the check box functionality
+  function handleChange() {
+    setChecked(!checked);
+  }
+
   const changeValuecheckout = (selectedDate) => {
 
     setDatecheckout(selectedDate);      // Set the selected date
@@ -30,7 +47,6 @@ function Rooms() {
     setshowcalendar(!showcalendar);
   }
   function togglecheckout() {
-    console.log("Hello");
     setshowcalendarcheckout(!showcalendarcheckout);
   }
 
@@ -129,10 +145,95 @@ function Rooms() {
         <div className='search'>
           <button className='btn'>Search</button>
         </div>
-      </div>
-      <div>
 
       </div>
+      <div className='parent1'>
+        <div className='child1'>
+          <div className='filters'>
+            <div className='filter-heading'>
+              <h2 className='filter-heading-text'>Selet Filters</h2>
+            </div>
+            <div className='filter'>
+              <h2 className='filter-heading-text'>Suggested For You</h2>
+            </div>
+            {/* Rating div */}
+            <div className='selectRating'>
+              Select Rating
+              <div className='slider'>
+                <p className='ratingfont'>Selected Rating:- {value}</p>
+                <Slider value={value} onChange={(e) => setValue(e.value)} min={0} max={10} step={0.5} />
+
+              </div>
+              <div className='reviewScore'>
+                Review Score
+              </div>
+
+              <div className='chackbox-parent'>
+                {/* Excellent */}
+               <div className='checkbox-container'>
+                <div className='checkbox'>
+                  <input type='checkbox' checked={checked} onChange={handleChange} />
+                </div>
+                <div className='reviewtext'>
+                  Excellent
+                </div>
+                
+              </div> 
+                {/* Good */}
+              <div className='checkbox-container'>
+                <div className='checkbox'>
+                  <input type='checkbox' checked={checked} onChange={handleChange} />
+                </div>
+                <div className='reviewtext'>
+                  Good
+                </div>
+                
+              </div> 
+                {/* Very Good */}
+              <div className='checkbox-container'>
+                <div className='checkbox'>
+                  <input type='checkbox' checked={checked} onChange={handleChange} />
+                </div>
+                <div className='reviewtext'>
+                  Very Good
+                </div>
+                
+              </div>
+               {/* Wonderful */} 
+              <div className='checkbox-container'>
+                <div className='checkbox'>
+                  <input type='checkbox' checked={checked} onChange={handleChange} />
+                </div>
+                <div className='reviewtext'>
+                  Wonderful
+                </div>
+                
+              </div> 
+              </div>
+              {/* <div className='checkbox-container'>
+                <div className='checkbox'>
+                  <input type='checkbox' checked={checked} onChange={handleChange} />
+                </div>
+                <div className='reviewtext'>
+                  Excellent
+                </div>
+                
+              </div> */}
+              
+            </div>
+          </div>
+        </div>
+        <div className='child2'>
+          Hello2
+
+        </div>
+      </div>
+
+      <div>
+
+
+      </div>
+
     </div>
 
   )
@@ -141,4 +242,3 @@ function Rooms() {
 export default Rooms
 
 
-// <FontAwesomeIcon icon="fa-solid fa-caret-down" />

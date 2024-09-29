@@ -140,9 +140,7 @@ img {
     width: 20%;
     flex-direction: column;
 }
-/* .filter{
-    background-color: brown;
-} */
+
 .filters{
     display: flex;
     flex-direction: column;
@@ -186,8 +184,14 @@ img {
   .reviewtext {
     margin: 0; /* Reset any default margin */
   }
-
-
+.otherfacility{
+    margin-right: 2rem;
+    margin-top: 4rem;
+}
+.roomviews{
+    margin-right: 2rem;
+    margin-top: 4rem;
+}
 
 
 

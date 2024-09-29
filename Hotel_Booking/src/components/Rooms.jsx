@@ -160,7 +160,13 @@ function Rooms() {
             <div className='selectRating'>
               Select Rating
               <div className='slider'>
-                <p className='ratingfont'>Selected Rating:- {value}</p>
+              {
+                value==null?(
+                  <p className='ratingfont'>Selected Rating:- Drag Slider</p>
+                ):(
+                  <p className='ratingfont'>Selected Rating:- {value}</p>
+                )
+              }
                 <Slider value={value} onChange={(e) => setValue(e.value)} min={0} max={10} step={0.5} />
 
               </div>
@@ -209,17 +215,93 @@ function Rooms() {
                 </div>
                 
               </div> 
+
+              <div className='otherfacility'>
+                Other Facility
               </div>
-              {/* <div className='checkbox-container'>
+              <div className='checkbox-parent'>
+                {/* Spa */}
+              <div className='checkbox-container'>
                 <div className='checkbox'>
                   <input type='checkbox' checked={checked} onChange={handleChange} />
                 </div>
                 <div className='reviewtext'>
-                  Excellent
+                  Spa
                 </div>
                 
-              </div> */}
+              </div>
+
+              </div>
+               {/* Swimming Pool */}
+              <div className='checkbox-container'>
+                <div className='checkbox'>
+                  <input type='checkbox' checked={checked} onChange={handleChange} />
+                </div>
+                <div className='reviewtext'>
+                  Swimming Pool
+                </div>
+                
+              </div>
+               {/* Wifi*/}
+              <div className='checkbox-container'>
+                <div className='checkbox'>
+                  <input type='checkbox' checked={checked} onChange={handleChange} />
+                </div>
+                <div className='reviewtext'>
+                Wifi
+                </div>
+                
+              </div>
               
+              <div className='roomviews'>
+                Room Views
+              </div>
+                {/* City View*/}
+              <div className='checkbox-container'>
+                <div className='checkbox'>
+                  <input type='checkbox' checked={checked} onChange={handleChange} />
+                </div>
+                <div className='reviewtext'>
+                 City View
+                </div>
+                
+              </div>
+
+            
+              {/* Garden View */}
+              <div className='checkbox-container'>
+                <div className='checkbox'>
+                  <input type='checkbox' checked={checked} onChange={handleChange} />
+                </div>
+                <div className='reviewtext'>
+                 Garden View
+                </div>
+                
+                {/* Pool View */}
+              </div>
+              <div className='checkbox-container'>
+                <div className='checkbox'>
+                  <input type='checkbox' checked={checked} onChange={handleChange} />
+                </div>
+                <div className='reviewtext'>
+                Pool View
+                </div>
+                
+              </div>
+
+                {/* Sea View*/}
+              <div className='checkbox-container'>
+                <div className='checkbox'>
+                  <input type='checkbox' checked={checked} onChange={handleChange} />
+                </div>
+                <div className='reviewtext'>
+                  Sea View
+                </div>
+                
+              </div>
+
+              <div className=''></div>
+              </div>
             </div>
           </div>
         </div>

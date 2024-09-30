@@ -299,16 +299,57 @@ function Rooms() {
                 </div>
                 
               </div>
-
-              <div className=''></div>
               </div>
             </div>
           </div>
         </div>
         <div className='child2'>
-          Hello2
+        {/* Display Rooms*/}
+        <div className='roomviewsparent'>
+          <div className='roomimageanddetail'>
+            <img src='./Hotel_Room.jpeg' className='roomimage'></img>
+          </div>
+            
+            <div className='roomdetailparent'>
+             <div className='roomdetail'>
+            <span className='title'>Hotel Name:- </span><span className='sub-title'>Rawai VIP Villas & Kids Park</span>
+          </div>
+          <div className='roomdetail'>
+          <span className='title'>Location:- </span><span className='sub-title'> Rawai Beach</span>
+          </div>
+
+
+          <div className='roomdetail'>
+          <span className='title'>Room Type:- </span><span className='sub-title'> 2 Bedroom Pool Villa </span>
+          </div>
+
+          <div className='roomdetail'>
+          <span className='title'>BedType:- </span><span className='sub-title'> 2 queen beds  </span>
+          </div>
+            </div>
+
+            <div className='roompriceparent'>
+            <div className='roomprice'>
+              <div className='reviewscore'>
+                Very Good
+              </div>
+              <div className='rating'>
+               8.3
+              </div>
+            </div>
+
+            <div className='roomprice-1'>
+                Rs.304768.8
+            </div>
+            </div>
+
+            
 
         </div>
+
+        </div>
+
+       
       </div>
 
       <div>

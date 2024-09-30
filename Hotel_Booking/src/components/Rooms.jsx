@@ -2,11 +2,34 @@ import React, { useState, useRef, useEffect } from 'react'
 import Calendar from "react-calendar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Slider } from 'primereact/slider';
+import axios from 'axios';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';  // Choose your theme
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import './Rooms.css'
 function Rooms() {
+
+  // Function for fetching the hotel data
+  const [hoteldata, sethoteldata] = useState([]);
+  async function fetchhoteldata() {
+    try {
+      const data = await axios.get('http://localhost:5000/getalldata');
+
+      sethoteldata(data.data);
+
+      // console.log("The hotel data is",hoteldata.data[0].HotelName);
+      console.log("Hotel Data", data.data);
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+  useEffect(() => {
+    fetchhoteldata();
+  }, [])
+  // Creating state for the pagination
+  const [page, setPage] = useState(1);
+
   const [selectedValue, SetselectedValue] = useState('');
   // Checkin
   const [date, setDate] = useState(null);
@@ -48,6 +71,11 @@ function Rooms() {
   }
   function togglecheckout() {
     setshowcalendarcheckout(!showcalendarcheckout);
+  }
+
+  // Creating the function for the pagination
+  const selectPageHandler = (selectedPage) => {
+    setPage(selectedPage);
   }
 
 
@@ -143,7 +171,7 @@ function Rooms() {
           </div>
         </div>
         <div className='search'>
-          <button className='btn'>Search</button>
+          <button className='btn' onClick={fetchhoteldata}>Search</button>
         </div>
 
       </div>
@@ -160,13 +188,13 @@ function Rooms() {
             <div className='selectRating'>
               Select Rating
               <div className='slider'>
-              {
-                value==null?(
-                  <p className='ratingfont'>Selected Rating:- Drag Slider</p>
-                ):(
-                  <p className='ratingfont'>Selected Rating:- {value}</p>
-                )
-              }
+                {
+                  value == null ? (
+                    <p className='ratingfont'>Selected Rating:- Drag Slider</p>
+                  ) : (
+                    <p className='ratingfont'>Selected Rating:- {value}</p>
+                  )
+                }
                 <Slider value={value} onChange={(e) => setValue(e.value)} min={0} max={10} step={0.5} />
 
               </div>
@@ -176,188 +204,196 @@ function Rooms() {
 
               <div className='chackbox-parent'>
                 {/* Excellent */}
-               <div className='checkbox-container'>
-                <div className='checkbox'>
-                  <input type='checkbox' checked={checked} onChange={handleChange} />
+                <div className='checkbox-container'>
+                  <div className='checkbox'>
+                    <input type='checkbox' checked={checked} onChange={handleChange} />
+                  </div>
+                  <div className='reviewtext'>
+                    Excellent
+                  </div>
+
                 </div>
-                <div className='reviewtext'>
-                  Excellent
-                </div>
-                
-              </div> 
                 {/* Good */}
-              <div className='checkbox-container'>
-                <div className='checkbox'>
-                  <input type='checkbox' checked={checked} onChange={handleChange} />
+                <div className='checkbox-container'>
+                  <div className='checkbox'>
+                    <input type='checkbox' checked={checked} onChange={handleChange} />
+                  </div>
+                  <div className='reviewtext'>
+                    Good
+                  </div>
+
                 </div>
-                <div className='reviewtext'>
-                  Good
-                </div>
-                
-              </div> 
                 {/* Very Good */}
-              <div className='checkbox-container'>
-                <div className='checkbox'>
-                  <input type='checkbox' checked={checked} onChange={handleChange} />
-                </div>
-                <div className='reviewtext'>
-                  Very Good
-                </div>
-                
-              </div>
-               {/* Wonderful */} 
-              <div className='checkbox-container'>
-                <div className='checkbox'>
-                  <input type='checkbox' checked={checked} onChange={handleChange} />
-                </div>
-                <div className='reviewtext'>
-                  Wonderful
-                </div>
-                
-              </div> 
+                <div className='checkbox-container'>
+                  <div className='checkbox'>
+                    <input type='checkbox' checked={checked} onChange={handleChange} />
+                  </div>
+                  <div className='reviewtext'>
+                    Very Good
+                  </div>
 
-              <div className='otherfacility'>
-                Other Facility
-              </div>
-              <div className='checkbox-parent'>
-                {/* Spa */}
-              <div className='checkbox-container'>
-                <div className='checkbox'>
-                  <input type='checkbox' checked={checked} onChange={handleChange} />
                 </div>
-                <div className='reviewtext'>
-                  Spa
-                </div>
-                
-              </div>
+                {/* Wonderful */}
+                <div className='checkbox-container'>
+                  <div className='checkbox'>
+                    <input type='checkbox' checked={checked} onChange={handleChange} />
+                  </div>
+                  <div className='reviewtext'>
+                    Wonderful
+                  </div>
 
-              </div>
-               {/* Swimming Pool */}
-              <div className='checkbox-container'>
-                <div className='checkbox'>
-                  <input type='checkbox' checked={checked} onChange={handleChange} />
                 </div>
-                <div className='reviewtext'>
-                  Swimming Pool
+
+                <div className='otherfacility'>
+                  Other Facility
                 </div>
-                
-              </div>
-               {/* Wifi*/}
-              <div className='checkbox-container'>
-                <div className='checkbox'>
-                  <input type='checkbox' checked={checked} onChange={handleChange} />
+                <div className='checkbox-parent'>
+                  {/* Spa */}
+                  <div className='checkbox-container'>
+                    <div className='checkbox'>
+                      <input type='checkbox' checked={checked} onChange={handleChange} />
+                    </div>
+                    <div className='reviewtext'>
+                      Spa
+                    </div>
+
+                  </div>
+
                 </div>
-                <div className='reviewtext'>
-                Wifi
+                {/* Swimming Pool */}
+                <div className='checkbox-container'>
+                  <div className='checkbox'>
+                    <input type='checkbox' checked={checked} onChange={handleChange} />
+                  </div>
+                  <div className='reviewtext'>
+                    Swimming Pool
+                  </div>
+
                 </div>
-                
-              </div>
-              
-              <div className='roomviews'>
-                Room Views
-              </div>
+                {/* Wifi*/}
+                <div className='checkbox-container'>
+                  <div className='checkbox'>
+                    <input type='checkbox' checked={checked} onChange={handleChange} />
+                  </div>
+                  <div className='reviewtext'>
+                    Wifi
+                  </div>
+
+                </div>
+
+                <div className='roomviews'>
+                  Room Views
+                </div>
                 {/* City View*/}
-              <div className='checkbox-container'>
-                <div className='checkbox'>
-                  <input type='checkbox' checked={checked} onChange={handleChange} />
-                </div>
-                <div className='reviewtext'>
-                 City View
-                </div>
-                
-              </div>
+                <div className='checkbox-container'>
+                  <div className='checkbox'>
+                    <input type='checkbox' checked={checked} onChange={handleChange} />
+                  </div>
+                  <div className='reviewtext'>
+                    City View
+                  </div>
 
-            
-              {/* Garden View */}
-              <div className='checkbox-container'>
-                <div className='checkbox'>
-                  <input type='checkbox' checked={checked} onChange={handleChange} />
                 </div>
-                <div className='reviewtext'>
-                 Garden View
+
+
+                {/* Garden View */}
+                <div className='checkbox-container'>
+                  <div className='checkbox'>
+                    <input type='checkbox' checked={checked} onChange={handleChange} />
+                  </div>
+                  <div className='reviewtext'>
+                    Garden View
+                  </div>
+
+                  {/* Pool View */}
                 </div>
-                
-                {/* Pool View */}
-              </div>
-              <div className='checkbox-container'>
-                <div className='checkbox'>
-                  <input type='checkbox' checked={checked} onChange={handleChange} />
+                <div className='checkbox-container'>
+                  <div className='checkbox'>
+                    <input type='checkbox' checked={checked} onChange={handleChange} />
+                  </div>
+                  <div className='reviewtext'>
+                    Pool View
+                  </div>
+
                 </div>
-                <div className='reviewtext'>
-                Pool View
-                </div>
-                
-              </div>
 
                 {/* Sea View*/}
-              <div className='checkbox-container'>
-                <div className='checkbox'>
-                  <input type='checkbox' checked={checked} onChange={handleChange} />
+                <div className='checkbox-container'>
+                  <div className='checkbox'>
+                    <input type='checkbox' checked={checked} onChange={handleChange} />
+                  </div>
+                  <div className='reviewtext'>
+                    Sea View
+                  </div>
+
                 </div>
-                <div className='reviewtext'>
-                  Sea View
-                </div>
-                
-              </div>
               </div>
             </div>
           </div>
         </div>
         <div className='child2'>
-        {/* Display Rooms*/}
-        <div className='roomviewsparent'>
-          <div className='roomimageanddetail'>
-            <img src='./Hotel_Room.jpeg' className='roomimage'></img>
-          </div>
-            
-            <div className='roomdetailparent'>
-             <div className='roomdetail'>
-            <span className='title'>Hotel Name:- </span><span className='sub-title'>Rawai VIP Villas & Kids Park</span>
-          </div>
-          <div className='roomdetail'>
-          <span className='title'>Location:- </span><span className='sub-title'> Rawai Beach</span>
-          </div>
+          {hoteldata.data ? (
+            hoteldata.data.slice(page * 5 - 5, page * 5).map((hotel, index) => (
+              <div key={index} className='roomviewsparent'>
+                <img src='./Hotel_Room.jpeg' className='roomimage' alt="Hotel room" />
 
+                <div className='roomdetailparent'>
+                  <div className='roomdetail'>
+                    <span className='title'>Hotel Name: </span>
+                    <span className='sub-title'>{hotel.HotelName}</span>
+                  </div>
+                  <div className='roomdetail'>
+                    <span className='title'>Location: </span>
+                    <span className='sub-title'>{hotel.Location}</span>
+                  </div>
+                  <div className='roomdetail'>
+                    <span className='title'>Room Type: </span>
+                    <span className='sub-title'>{hotel.RoomType}</span>
+                  </div>
+                  <div className='roomdetail'>
+                    <span className='title'>Bed Type: </span>
+                    <span className='sub-title'>{hotel.BedType}</span>
+                  </div>
+                </div>
 
-          <div className='roomdetail'>
-          <span className='title'>Room Type:- </span><span className='sub-title'> 2 Bedroom Pool Villa </span>
-          </div>
-
-          <div className='roomdetail'>
-          <span className='title'>BedType:- </span><span className='sub-title'> 2 queen beds  </span>
-          </div>
-            </div>
-
-            <div className='roompriceparent'>
-            <div className='roomprice'>
-              <div className='reviewscore'>
-                Very Good
+                <div className='roompriceparent'>
+                  <div className='roomprice'>
+                    <div className='reviewscore'>
+                      {hotel.ReviewScore}
+                    </div>
+                    <div className='rating'>
+                      {hotel.Rating}
+                    </div>
+                  </div>
+                  <div className='roomprice-1'>
+                    Rs. {hotel.RoomPrice}
+                  </div>
+                </div>
               </div>
-              <div className='rating'>
-               8.3
-              </div>
-            </div>
-
-            <div className='roomprice-1'>
-                Rs.304768.8
-            </div>
-            </div>
-
-            
-
+            ))
+          ) : (
+            <p>Loading ....</p>
+          )}
+          {/* Pagination*/}
+          <div className='pagination'>
+            <span>&lt;</span>
+            {
+              hoteldata && hoteldata.data && Array.from({ length: Math.ceil(hoteldata.data.length / 5) }).map((_, i) => {
+                return <span onClick={() => selectPageHandler(i + 1)} key={i}>{i + 1}</span>;
+              })
+            }
+            <span>&gt;</span>
+          </div>
         </div>
-
-        </div>
-
-       
       </div>
 
       <div>
 
 
-      </div>
 
+      </div>
     </div>
+
 
   )
 }

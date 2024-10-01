@@ -58,6 +58,24 @@ function Rooms() {
     setChecked(!checked);
   }
 
+  // Handling the checkbox event
+  const [checkboxes, setCheckboxes] = useState([
+    { id: 1, label: 'Excellent', checked: false },
+    { id: 2, label: 'Good', checked: false },
+    { id: 3, label: 'Very Good', checked: false },
+    { id: 4, label: 'Wonderful', checked: false },
+  ]);
+
+  const handleCheckboxChange = (id) => {
+    setCheckboxes((prevCheckboxes) =>
+      prevCheckboxes.map((checkbox) =>
+        checkbox.id === id
+          ? { ...checkbox, checked: !checkbox.checked } // Toggle checked state
+          : checkbox
+      )
+    );
+  };
+
   const changeValuecheckout = (selectedDate) => {
 
     setDatecheckout(selectedDate);      // Set the selected date
@@ -75,7 +93,11 @@ function Rooms() {
 
   // Creating the function for the pagination
   const selectPageHandler = (selectedPage) => {
-    setPage(selectedPage);
+    const totalPages = Math.ceil(hoteldata.data.length / 5); // Assuming 5 items per page
+
+    if (selectedPage >= 1 && selectedPage <= totalPages && selectedPage !== page) {
+      setPage(selectedPage);
+    }
   }
 
 
@@ -203,46 +225,20 @@ function Rooms() {
               </div>
 
               <div className='chackbox-parent'>
-                {/* Excellent */}
-                <div className='checkbox-container'>
-                  <div className='checkbox'>
-                    <input type='checkbox' checked={checked} onChange={handleChange} />
-                  </div>
-                  <div className='reviewtext'>
-                    Excellent
-                  </div>
 
-                </div>
-                {/* Good */}
-                <div className='checkbox-container'>
-                  <div className='checkbox'>
-                    <input type='checkbox' checked={checked} onChange={handleChange} />
-                  </div>
-                  <div className='reviewtext'>
-                    Good
-                  </div>
 
-                </div>
-                {/* Very Good */}
-                <div className='checkbox-container'>
-                  <div className='checkbox'>
-                    <input type='checkbox' checked={checked} onChange={handleChange} />
-                  </div>
-                  <div className='reviewtext'>
-                    Very Good
-                  </div>
 
-                </div>
-                {/* Wonderful */}
-                <div className='checkbox-container'>
-                  <div className='checkbox'>
-                    <input type='checkbox' checked={checked} onChange={handleChange} />
+                {checkboxes.map((checkbox) => (
+                  <div key={checkbox.id} className='checkbox-container'>
+                    <input
+                      type="checkbox"
+                      checked={checkbox.checked}
+                      onChange={() => handleCheckboxChange(checkbox.id)}
+                    />
+                    <label>{checkbox.label}</label>
                   </div>
-                  <div className='reviewtext'>
-                    Wonderful
-                  </div>
+                ))}
 
-                </div>
 
                 <div className='otherfacility'>
                   Other Facility
@@ -374,23 +370,25 @@ function Rooms() {
           ) : (
             <p>Loading ....</p>
           )}
-          {/* Pagination*/}
-          <div className='pagination'>
-            <span>&lt;</span>
-            {
-              hoteldata && hoteldata.data && Array.from({ length: Math.ceil(hoteldata.data.length / 5) }).map((_, i) => {
-                return <span onClick={() => selectPageHandler(i + 1)} key={i}>{i + 1}</span>;
-              })
-            }
-            <span>&gt;</span>
-          </div>
         </div>
+
       </div>
 
       <div>
+      </div>
 
 
 
+      <div className='paginationparent'>
+        <div className='pagination'>
+          <span onClick={() => selectPageHandler(page - 1)}>&lt;</span>
+          {
+            hoteldata && hoteldata.data && Array.from({ length: Math.ceil(hoteldata.data.length / 5) }).map((_, i) => {
+              return <span className={page === i + 1 ? "pagination_selected" : ""} onClick={() => selectPageHandler(i + 1)} key={i}>{i + 1}</span>;
+            })
+          }
+          <span onClick={() => selectPageHandler(page + 1)}>&gt;</span>
+        </div>
       </div>
     </div>
 

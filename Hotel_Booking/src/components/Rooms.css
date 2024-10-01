@@ -278,16 +278,25 @@ img {
     font-size: 1rem;
     font-weight: bold;
 }
-
+.paginationparent{
+   margin-left: 10rem;
+   
+}
 .pagination {
     padding: 10px;
     margin: 15px;
     display: flex;
     justify-content: center;
+    background-color: green;
+    
+
 }
 
 .pagination>span {
     padding: 15px;
     border: 15px solid gray;
     cursor: pointer;
+}
+.pagination_selected{
+    background-color: rgb(220,220,220);
 }

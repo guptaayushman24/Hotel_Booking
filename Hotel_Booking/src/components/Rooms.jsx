@@ -7,18 +7,22 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';  // Choose you
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import './Rooms.css'
+import Filter_data from './Filter_Data'
 function Rooms() {
 
   // Function for fetching the hotel data
   const [hoteldata, sethoteldata] = useState([]);
-  async function fetchhoteldata() {
-    try {
-      const data = await axios.get('http://localhost:5000/getalldata');
+  const [excellentchecked,setexcellentchecked] = useState(false);
+ 
 
+  async function fetchhoteldata() {
+    
+    try {
+   
+      const data = await axios.get('http://localhost:5000/getalldata');
       sethoteldata(data.data);
 
-      // console.log("The hotel data is",hoteldata.data[0].HotelName);
-      console.log("Hotel Data", data.data);
+     
     }
     catch (err) {
       console.log(err);
@@ -58,8 +62,12 @@ function Rooms() {
     setChecked(!checked);
   }
 
+
+
+  
   // Handling the checkbox event
   const [checkboxes, setCheckboxes] = useState([
+    // {id:0,label:'No Filter',checked:false},
     { id: 1, label: 'Excellent', checked: false },
     { id: 2, label: 'Good', checked: false },
     { id: 3, label: 'Very Good', checked: false },
@@ -67,14 +75,39 @@ function Rooms() {
   ]);
 
   const handleCheckboxChange = (id) => {
-    setCheckboxes((prevCheckboxes) =>
-      prevCheckboxes.map((checkbox) =>
-        checkbox.id === id
-          ? { ...checkbox, checked: !checkbox.checked } // Toggle checked state
-          : checkbox
-      )
+    const newCheckboxes = checkboxes.map((checkbox) =>
+      checkbox.id === id
+        ? { ...checkbox, checked: !checkbox.checked } // Toggle the checked state
+        : checkbox
     );
-  };
+
+    // Find the currently toggled checkbox
+    const currentCheckbox = newCheckboxes.find((checkbox) => checkbox.id === id);
+
+    if (id === 1 && currentCheckbox.checked) {
+      console.log("Excellent Checked");
+      setexcellentchecked(true);
+    }
+    else if (id===1 && !currentCheckbox.checked){
+      console.log("Excellent UnChecked");
+      setexcellentchecked(false);
+    }
+
+    // Update the state with the new array
+    setCheckboxes(newCheckboxes);
+    
+  }
+
+  useEffect(() => {
+    console.log("Excellent checked state:", excellentchecked);
+  }, [excellentchecked]);
+ 
+
+ 
+
+
+
+  
 
   const changeValuecheckout = (selectedDate) => {
 
@@ -328,7 +361,7 @@ function Rooms() {
           </div>
         </div>
         <div className='child2'>
-          {hoteldata.data ? (
+          {hoteldata.data && !excellentchecked   ? (
             hoteldata.data.slice(page * 5 - 5, page * 5).map((hotel, index) => (
               <div key={index} className='roomviewsparent'>
                 <img src='./Hotel_Room.jpeg' className='roomimage' alt="Hotel room" />
@@ -367,19 +400,23 @@ function Rooms() {
                 </div>
               </div>
             ))
-          ) : (
+          ) : excellentchecked ? (
+            <Filter_data/>
+          )
+            :(
             <p>Loading ....</p>
           )}
         </div>
+
 
       </div>
 
       <div>
       </div>
 
-
-
-      <div className='paginationparent'>
+      {
+        !excellentchecked && (
+          <div className='paginationparent'>
         <div className='pagination'>
           <span onClick={() => selectPageHandler(page - 1)}>&lt;</span>
           {
@@ -389,7 +426,11 @@ function Rooms() {
           }
           <span onClick={() => selectPageHandler(page + 1)}>&gt;</span>
         </div>
-      </div>
+      </div> 
+        )
+      }
+
+  
     </div>
 
 
@@ -397,5 +438,3 @@ function Rooms() {
 }
 
 export default Rooms
-
-

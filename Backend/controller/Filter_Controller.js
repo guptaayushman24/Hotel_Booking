@@ -28,7 +28,7 @@ async function filterReviewScore(req, res) {
             })
             return res.json({ filterd_data });
         }
-        else if ('Wonderful'){
+        else if (body == 'Wonderful'){
             const filterd_data = await Hotel.find({
                 'ReviewScore': {
                     $eq: "Wonderful"

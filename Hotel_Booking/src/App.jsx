@@ -9,10 +9,13 @@ import Contact from './components/Contact'
 import About from './components/About'
 import Navbar from './components/Navbar'
 import NavBar from './components/Navbar'
+import Filter_data from './components/Filter_Data'
+import Newfile from './components/newfile'
 const router = createBrowserRouter(
   [
     {
       path:'/', 
+    
       element:
        
       <Home></Home>
@@ -40,7 +43,9 @@ function App() {
      {/* <Login></Login> */}
      {/* <div> */}
       {/* <RouterProvider router={router}></RouterProvider> */}
-      <Rooms></Rooms>
+     <Rooms></Rooms> 
+       {/* <Filter_data></Filter_data> */}
+       {/* <Newfile/> */}
     {/* </div> */}
     </>
   )

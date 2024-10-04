@@ -1,19 +1,23 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-
-function Filter_data() {
+import { useEffect, useState,useContext } from "react";
+import { CheckboxContext } from "./Context";
+function Filter_data({checkboxselected}) {
     const [data, setdata] = useState([]);
     const [page, setPage] = useState(1);
+    // var columnname = {};
+    console.log("The column name is",{checkboxselected});
     function fetchAndActivate() {
         axios.post("http://localhost:5000/reviewscore", {
-            ReviewScore: "Excellent"
+            ReviewScore: checkboxselected // If any how we pass the data here out lots of work can be simplified
         }).then((res) => {
             console.log("API Response:", res.data); // Log API response to check structure
             console.log(typeof res.data);
             setdata(res.data);  // Assuming `res.data.data` is correct, adjust if needed
         }).catch((error) => {
+        
             console.error("Error fetching data:", error);
         
+       
         });
 
     }
@@ -22,7 +26,7 @@ function Filter_data() {
     useEffect(() => {
         fetchAndActivate();
         console.log("Component Called");
-    }, []);
+    }, [checkboxselected]);
 
     const itemsPerPage = 5;  // Number of items to display per page
     const selectPageHandler = (selectedPage) => {

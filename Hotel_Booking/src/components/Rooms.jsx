@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect ,createContext,useContext} from 'react'
 import Calendar from "react-calendar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Slider } from 'primereact/slider';
@@ -8,12 +8,20 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import './Rooms.css'
 import Filter_data from './Filter_Data'
+import { CheckboxContext } from './Context';
 function Rooms() {
-
   // Function for fetching the hotel data
   const [hoteldata, sethoteldata] = useState([]);
   const [excellentchecked,setexcellentchecked] = useState(false);
- 
+  // const [goodchecked,setgoodchecked] = useState(false);
+  
+  const [checkboxselected,setcheckboxselected] = useState('');
+  const [goodcheckboxselected,setgoodheckboxselected] = useState('');
+
+  const [filterexcellentchecked,setfilterexcellentchecked] = useState(false);
+  const [goodfilter,setgoodfilter] = useState(false); 
+
+  // let goodcheckboxselected = "Good";
 
   async function fetchhoteldata() {
     
@@ -86,23 +94,40 @@ function Rooms() {
 
     if (id === 1 && currentCheckbox.checked) {
       console.log("Excellent Checked");
-      setexcellentchecked(true);
+      setcheckboxselected(checkboxes[id-1].label);  // This updates the selected filter label
+      setfilterexcellentchecked(!filterexcellentchecked);
     }
-    else if (id===1 && !currentCheckbox.checked){
-      console.log("Excellent UnChecked");
-      setexcellentchecked(false);
+    if (id===1 && !currentCheckbox.checked){
+      setcheckboxselected('');
+      setfilterexcellentchecked(!filterexcellentchecked);
     }
 
+     if (id===2 && currentCheckbox.checked){
+      console.log("Good Checked");
+        setcheckboxselected(checkboxes[id-1].label);
+        setfilterexcellentchecked(!filterexcellentchecked);
+        setgoodfilter(!goodfilter);
+        console.log("The previous state is",filterexcellentchecked);
+    }
+    if (id===2 && !currentCheckbox.checked){
+      setcheckboxselected('');
+      setfilterexcellentchecked(!filterexcellentchecked);
+      setgoodfilter(!goodfilter);
+    }
+
+    
     // Update the state with the new array
     setCheckboxes(newCheckboxes);
+
+   
     
   }
 
   useEffect(() => {
-    console.log("Excellent checked state:", excellentchecked);
-  }, [excellentchecked]);
- 
-
+    console.log("Excellent checked state:", filterexcellentchecked);
+    console.log("Good checked state:",goodcheckboxselected );
+    console.log("Label is", goodcheckboxselected);
+  }, [checkboxselected,goodcheckboxselected,checkboxes]);
  
 
 
@@ -140,7 +165,8 @@ function Rooms() {
 
   return (
 
-    <div className='parentdiv'>
+    
+          <div className='parentdiv'>
       <div className='navbar'>
         <div className='navbar-start'>
 
@@ -361,7 +387,7 @@ function Rooms() {
           </div>
         </div>
         <div className='child2'>
-          {hoteldata.data && !excellentchecked   ? (
+          {hoteldata.data && !filterexcellentchecked   ? (
             hoteldata.data.slice(page * 5 - 5, page * 5).map((hotel, index) => (
               <div key={index} className='roomviewsparent'>
                 <img src='./Hotel_Room.jpeg' className='roomimage' alt="Hotel room" />
@@ -400,8 +426,10 @@ function Rooms() {
                 </div>
               </div>
             ))
-          ) : excellentchecked ? (
-            <Filter_data/>
+          ) : filterexcellentchecked ? (
+             <Filter_data checkboxselected ={checkboxselected}/>
+          ):goodfilter ?(
+            <Filter_data checkboxselected={checkboxselected}></Filter_data>
           )
             :(
             <p>Loading ....</p>
@@ -415,7 +443,7 @@ function Rooms() {
       </div>
 
       {
-        !excellentchecked && (
+        !excellentchecked && !filterexcellentchecked &&(
           <div className='paginationparent'>
         <div className='pagination'>
           <span onClick={() => selectPageHandler(page - 1)}>&lt;</span>
@@ -432,6 +460,7 @@ function Rooms() {
 
   
     </div>
+    
 
 
   )

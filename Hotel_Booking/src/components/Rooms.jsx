@@ -13,15 +13,15 @@ function Rooms() {
   // Function for fetching the hotel data
   const [hoteldata, sethoteldata] = useState([]);
   const [excellentchecked,setexcellentchecked] = useState(false);
-  // const [goodchecked,setgoodchecked] = useState(false);
   
+ 
   const [checkboxselected,setcheckboxselected] = useState('');
-  const [goodcheckboxselected,setgoodheckboxselected] = useState('');
 
   const [filterexcellentchecked,setfilterexcellentchecked] = useState(false);
   const [goodfilter,setgoodfilter] = useState(false); 
-
-  // let goodcheckboxselected = "Good";
+  const [verygoodfilter,setverygoodfilter] = useState(false);
+  const [wonderfulfilter,setwonderfilter] = useState(false);
+ 
 
   async function fetchhoteldata() {
     
@@ -92,8 +92,8 @@ function Rooms() {
     // Find the currently toggled checkbox
     const currentCheckbox = newCheckboxes.find((checkbox) => checkbox.id === id);
 
+    //Handling the Excellent Condition
     if (id === 1 && currentCheckbox.checked) {
-      console.log("Excellent Checked");
       setcheckboxselected(checkboxes[id-1].label);  // This updates the selected filter label
       setfilterexcellentchecked(!filterexcellentchecked);
     }
@@ -101,19 +101,48 @@ function Rooms() {
       setcheckboxselected('');
       setfilterexcellentchecked(!filterexcellentchecked);
     }
-
+    
+    // Handling the Good Condition
      if (id===2 && currentCheckbox.checked){
-      console.log("Good Checked");
         setcheckboxselected(checkboxes[id-1].label);
         setfilterexcellentchecked(!filterexcellentchecked);
         setgoodfilter(!goodfilter);
-        console.log("The previous state is",filterexcellentchecked);
     }
     if (id===2 && !currentCheckbox.checked){
       setcheckboxselected('');
       setfilterexcellentchecked(!filterexcellentchecked);
       setgoodfilter(!goodfilter);
     }
+
+
+      // Handling the Very Good Condition
+      if (id===3 && currentCheckbox.checked){
+        setcheckboxselected(checkboxes[id-1].label);
+        setfilterexcellentchecked(!filterexcellentchecked);
+        setgoodfilter(!goodfilter);
+        setverygoodfilter(!verygoodfilter);
+      }
+      if (id===3 && !currentCheckbox.checked){
+        setcheckboxselected('');
+        setfilterexcellentchecked(!filterexcellentchecked);
+        setgoodfilter(!goodfilter);
+        setverygoodfilter(!verygoodfilter);
+      }
+
+      // Handling the Wonderful Condition
+      if (id===4 && currentCheckbox.checked){
+        setcheckboxselected(checkboxes[id-1].label);
+        setfilterexcellentchecked(!filterexcellentchecked);
+        setgoodfilter(!goodfilter);
+        setverygoodfilter(!verygoodfilter);
+      }
+      if (id===4 && !currentCheckbox.checked){
+        setcheckboxselected('');
+        setfilterexcellentchecked(!filterexcellentchecked);
+        setgoodfilter(!goodfilter);
+        setverygoodfilter(!verygoodfilter);
+      }
+
 
     
     // Update the state with the new array
@@ -125,9 +154,7 @@ function Rooms() {
 
   useEffect(() => {
     console.log("Excellent checked state:", filterexcellentchecked);
-    console.log("Good checked state:",goodcheckboxselected );
-    console.log("Label is", goodcheckboxselected);
-  }, [checkboxselected,goodcheckboxselected,checkboxes]);
+  }, [checkboxselected,checkboxes]);
  
 
 
@@ -429,6 +456,10 @@ function Rooms() {
           ) : filterexcellentchecked ? (
              <Filter_data checkboxselected ={checkboxselected}/>
           ):goodfilter ?(
+            <Filter_data checkboxselected={checkboxselected}></Filter_data>
+          ):verygoodfilter ?(
+            <Filter_data checkboxselected={checkboxselected}></Filter_data>
+          ):wonderfulfilter?(
             <Filter_data checkboxselected={checkboxselected}></Filter_data>
           )
             :(

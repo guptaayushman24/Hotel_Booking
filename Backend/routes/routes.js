@@ -7,7 +7,7 @@ const {filterOtherFacility} = require('../controller/Other_Facility')
 const {filterRoomViews} = require('../controller/Room_Views');
 router.get('/getalldata',getAlldata);
 router.post('/reviewscore',filterReviewScore);
-router.post('/reviewotherfacility',filterOtherFacility);
+router.post('/otherfacility',filterOtherFacility);
 router.post('/filterroomview',filterRoomViews);
 
 

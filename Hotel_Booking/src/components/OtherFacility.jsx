@@ -1,42 +1,59 @@
 import axios from "axios";
-import { useEffect, useState, useContext } from "react";
-import { CheckboxContext } from "./Context";
-import './Filter_Data.css'
-function Filter_data({ checkboxselected }) {
-    const [data, setdata] = useState([]);
-    const [page, setPage] = useState(1);
-    // var columnname = {};
-    console.log("The column name is", { checkboxselected });
-    function fetchAndActivate() {
-        axios.post("http://localhost:5000/reviewscore", {
-            ReviewScore: checkboxselected // If any how we pass the data here out lots of work can be simplified
-        }).then((res) => {
-            console.log("API Response:", res.data); // Log API response to check structure
-            console.log(typeof res.data);
-            setdata(res.data);  // Assuming `res.data.data` is correct, adjust if needed
+import { createContext, useContext, useEffect, useState } from "react";
+import './OtherFacility.css';
+import Rooms from "./Rooms";
+// import { UserContext } from "./Newcomponent";
+import { UserContext } from '../Context/Context';
+function OtherFacility() {
+    const checkboxselected = useContext(UserContext)
+    // console.log("The context data is",contextData);
 
-        }).catch((error) => {
-
-            console.error("Error fetching data:", error);
+    const [data, setData] = useState([]);  // Store the fetched data
+    const [page, setPage] = useState(1);   // Store the current page number
+    const [loading, setLoading] = useState(false);  // Add loading state
+    const [error, setError] = useState(null);  // Error state
 
 
-        });
+    // Fetch data when component mounts or checkboxselected changes
 
+    async function fetchAndActivate1() {
+        try {
+            setLoading(true);
+
+            const res = await axios.post("http://localhost:5000/otherfacility", {
+                OtherFacility: checkboxselected.checkboxSelected// Ensure `checkboxselected` is valid
+            });
+            console.log("API Response in other facility:", res?.data || "No data"); // Handle missing data
+            if (res?.data) {
+                setData(res.data); // Set the fetched data in state
+            } else {
+                setData([]); // Clear data if response is empty
+            }
+            setLoading(false);
+        } catch (error) {
+            console.error("Error fetching data:", error?.response?.data || error.message);
+            setError("Error fetching data");
+            setLoading(false);
+        }
     }
 
-    // Log data whenever it changes
+    // Use effect to fetch data when `checkboxselected` changes
     useEffect(() => {
-        fetchAndActivate();
-    }, [checkboxselected]);
+        console.log("useEffect triggered for otherfacility:", checkboxselected);
+        // alert("Other Facility component is called");
+        fetchAndActivate1();
+    }, [checkboxselected]);  // Include `checkboxselected` in the dependency array
 
     const itemsPerPage = 5;  // Number of items to display per page
-    const selectPageHandler = (selectedPage) => {
-        const totalPages = Math.ceil(data.filterd_data.length / 5); // Assuming 5 items per page
+    const totalPages = Math.ceil(data.filterd_data?.length / itemsPerPage) || 1;
 
+    const selectPageHandler = (selectedPage) => {
         if (selectedPage >= 1 && selectedPage <= totalPages && selectedPage !== page) {
             setPage(selectedPage);
         }
-    }
+    };
+
+    // Render data
 
     return (
 
@@ -48,7 +65,7 @@ function Filter_data({ checkboxselected }) {
                         <div key={index} className='roomviewsparent'>
                             <img src='./Hotel_Room.jpeg' className='roomimage' alt="Hotel room" />
 
-                            <div className=''>
+                            <div className='roomdetailparent'>
                                 <div className='roomdetail'>
                                     <span className='title'>Hotel Name: </span>
                                     <span className='sub-title'>{hotel.HotelName}</span>
@@ -123,7 +140,4 @@ function Filter_data({ checkboxselected }) {
 
 
 }
-export default Filter_data;
-
-
-
+export default OtherFacility;

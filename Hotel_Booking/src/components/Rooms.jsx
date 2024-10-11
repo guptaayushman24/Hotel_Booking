@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect ,createContext,useContext} from 'react'
+import React, { useState, useRef, useEffect, createContext, useContext } from 'react'
 import Calendar from "react-calendar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Slider } from 'primereact/slider';
@@ -9,28 +9,51 @@ import 'primeicons/primeicons.css';
 import './Rooms.css'
 import Filter_data from './Filter_Data'
 import { CheckboxContext } from './Context';
-function Rooms() {
-  // Function for fetching the hotel data
-  const [hoteldata, sethoteldata] = useState([]);
-  const [excellentchecked,setexcellentchecked] = useState(false);
-  
- 
-  const [checkboxselected,setcheckboxselected] = useState('');
+import OtherFacility from './OtherFacility';
+import Newfile from './Newfile';
+import Newcomponent from './Newcomponent';
 
-  const [filterexcellentchecked,setfilterexcellentchecked] = useState(false);
-  const [goodfilter,setgoodfilter] = useState(false); 
-  const [verygoodfilter,setverygoodfilter] = useState(false);
-  const [wonderfulfilter,setwonderfilter] = useState(false);
+function Rooms() {
+  
+  // Function for fetching the hotel data
  
+  
+  
+
+  const [hoteldata, sethoteldata] = useState([]);
+  const [excellentchecked, setexcellentchecked] = useState(false);
+
+
+  // Review Score
+  const [checkboxselected, setcheckboxselected] = useState('');
+
+  const [filterexcellentchecked, setfilterexcellentchecked] = useState(false);  // Push all the statements from 23 to 24 in useEffect
+  const [goodfilter, setgoodfilter] = useState(false);
+  const [verygoodfilter, setverygoodfilter] = useState(false);
+  const [wonderfulfilter, setwonderfilter] = useState(false);
+
+
+
+  
+
+   // Recieving the data from the NewComponent
+   const [otherfacility,setotherfacility] = useState(false);
+   const [checkboxdata,setcheckboxdata] = useState('');
+
+   // Callback function
+   const handleadatafromcomponent = (selecteddata) => {
+    setotherfacility(selecteddata); // Set the received data
+  };
+
 
   async function fetchhoteldata() {
-    
+
     try {
-   
+
       const data = await axios.get('http://localhost:5000/getalldata');
       sethoteldata(data.data);
 
-     
+
     }
     catch (err) {
       console.log(err);
@@ -72,15 +95,22 @@ function Rooms() {
 
 
 
-  
+
+
+
   // Handling the checkbox event
   const [checkboxes, setCheckboxes] = useState([
-    // {id:0,label:'No Filter',checked:false},
     { id: 1, label: 'Excellent', checked: false },
     { id: 2, label: 'Good', checked: false },
     { id: 3, label: 'Very Good', checked: false },
     { id: 4, label: 'Wonderful', checked: false },
   ]);
+
+
+
+
+
+
 
   const handleCheckboxChange = (id) => {
     const newCheckboxes = checkboxes.map((checkbox) =>
@@ -89,77 +119,89 @@ function Rooms() {
         : checkbox
     );
 
+
+
     // Find the currently toggled checkbox
     const currentCheckbox = newCheckboxes.find((checkbox) => checkbox.id === id);
 
+    // Conditions for the Review Score
+
     //Handling the Excellent Condition
     if (id === 1 && currentCheckbox.checked) {
-      setcheckboxselected(checkboxes[id-1].label);  // This updates the selected filter label
+      setcheckboxselected(checkboxes[id - 1].label);  // This updates the selected filter label
       setfilterexcellentchecked(!filterexcellentchecked);
     }
-    if (id===1 && !currentCheckbox.checked){
+    if (id === 1 && !currentCheckbox.checked) {
       setcheckboxselected('');
       setfilterexcellentchecked(!filterexcellentchecked);
     }
-    
+
     // Handling the Good Condition
-     if (id===2 && currentCheckbox.checked){
-        setcheckboxselected(checkboxes[id-1].label);
-        setfilterexcellentchecked(!filterexcellentchecked);
-        setgoodfilter(!goodfilter);
+    if (id === 2 && currentCheckbox.checked) {
+      setcheckboxselected(checkboxes[id - 1].label);
+      setfilterexcellentchecked(!filterexcellentchecked);
+      setgoodfilter(!goodfilter);
     }
-    if (id===2 && !currentCheckbox.checked){
+    if (id === 2 && !currentCheckbox.checked) {
       setcheckboxselected('');
       setfilterexcellentchecked(!filterexcellentchecked);
       setgoodfilter(!goodfilter);
     }
 
 
-      // Handling the Very Good Condition
-      if (id===3 && currentCheckbox.checked){
-        setcheckboxselected(checkboxes[id-1].label);
-        setfilterexcellentchecked(!filterexcellentchecked);
-        setgoodfilter(!goodfilter);
-        setverygoodfilter(!verygoodfilter);
-      }
-      if (id===3 && !currentCheckbox.checked){
-        setcheckboxselected('');
-        setfilterexcellentchecked(!filterexcellentchecked);
-        setgoodfilter(!goodfilter);
-        setverygoodfilter(!verygoodfilter);
-      }
+    // Handling the Very Good Condition
+    if (id === 3 && currentCheckbox.checked) {
+      setcheckboxselected(checkboxes[id - 1].label);
+      setfilterexcellentchecked(!filterexcellentchecked);
+      setgoodfilter(!goodfilter);
+      setverygoodfilter(!verygoodfilter);
+    }
+    if (id === 3 && !currentCheckbox.checked) {
+      setcheckboxselected('');
+      setfilterexcellentchecked(!filterexcellentchecked);
+      setgoodfilter(!goodfilter);
+      setverygoodfilter(!verygoodfilter);
+    }
 
-      // Handling the Wonderful Condition
-      if (id===4 && currentCheckbox.checked){
-        setcheckboxselected(checkboxes[id-1].label);
-        setfilterexcellentchecked(!filterexcellentchecked);
-        setgoodfilter(!goodfilter);
-        setverygoodfilter(!verygoodfilter);
-      }
-      if (id===4 && !currentCheckbox.checked){
-        setcheckboxselected('');
-        setfilterexcellentchecked(!filterexcellentchecked);
-        setgoodfilter(!goodfilter);
-        setverygoodfilter(!verygoodfilter);
-      }
-
-
-    
+    // Handling the Wonderful Condition
+    if (id === 4 && currentCheckbox.checked) {
+      setcheckboxselected(checkboxes[id - 1].label);
+      setfilterexcellentchecked(!filterexcellentchecked);
+      setgoodfilter(!goodfilter);
+      setverygoodfilter(!verygoodfilter);
+      setwonderfilter(!wonderfulfilter);
+    }
+    if (id === 4 && !currentCheckbox.checked) {
+      setcheckboxselected('');
+      setfilterexcellentchecked(!filterexcellentchecked);
+      setgoodfilter(!goodfilter);
+      setverygoodfilter(!verygoodfilter);
+      setwonderfilter(!wonderfulfilter);
+    }
     // Update the state with the new array
     setCheckboxes(newCheckboxes);
-
-   
-    
   }
 
-  useEffect(() => {
-    console.log("Excellent checked state:", filterexcellentchecked);
-  }, [checkboxselected,checkboxes]);
+  
  
 
+ 
+ 
+
+  useEffect(() => {
+    // Logs to help debug the state updates
+  }, [checkboxselected, checkboxes, otherfacility, checkboxdata]);
 
 
-  
+
+
+
+
+
+
+
+
+
 
   const changeValuecheckout = (selectedDate) => {
 
@@ -169,7 +211,6 @@ function Rooms() {
 
   };
   function toggle() {
-    console.log("Hello");
     setshowcalendar(!showcalendar);
   }
   function togglecheckout() {
@@ -190,10 +231,11 @@ function Rooms() {
 
 
 
+
   return (
 
-    
-          <div className='parentdiv'>
+
+    <div className='parentdiv'>
       <div className='navbar'>
         <div className='navbar-start'>
 
@@ -283,7 +325,9 @@ function Rooms() {
         </div>
 
       </div>
-      <div className='parent1'>
+  
+        
+       <div className='parent1'>
         <div className='child1'>
           <div className='filters'>
             <div className='filter-heading'>
@@ -323,45 +367,21 @@ function Rooms() {
                     />
                     <label>{checkbox.label}</label>
                   </div>
-                ))}
+                ))
+
+                }
 
 
-                <div className='otherfacility'>
+
+
+                <div className='otherfacility1'>
                   Other Facility
                 </div>
-                <div className='checkbox-parent'>
-                  {/* Spa */}
-                  <div className='checkbox-container'>
-                    <div className='checkbox'>
-                      <input type='checkbox' checked={checked} onChange={handleChange} />
-                    </div>
-                    <div className='reviewtext'>
-                      Spa
-                    </div>
 
-                  </div>
+                <Newcomponent handleadatafromcomponent={handleadatafromcomponent} />
 
-                </div>
-                {/* Swimming Pool */}
-                <div className='checkbox-container'>
-                  <div className='checkbox'>
-                    <input type='checkbox' checked={checked} onChange={handleChange} />
-                  </div>
-                  <div className='reviewtext'>
-                    Swimming Pool
-                  </div>
+               
 
-                </div>
-                {/* Wifi*/}
-                <div className='checkbox-container'>
-                  <div className='checkbox'>
-                    <input type='checkbox' checked={checked} onChange={handleChange} />
-                  </div>
-                  <div className='reviewtext'>
-                    Wifi
-                  </div>
-
-                </div>
 
                 <div className='roomviews'>
                   Room Views
@@ -414,7 +434,7 @@ function Rooms() {
           </div>
         </div>
         <div className='child2'>
-          {hoteldata.data && !filterexcellentchecked   ? (
+          {hoteldata.data && !filterexcellentchecked  && !otherfacility  ? (
             hoteldata.data.slice(page * 5 - 5, page * 5).map((hotel, index) => (
               <div key={index} className='roomviewsparent'>
                 <img src='./Hotel_Room.jpeg' className='roomimage' alt="Hotel room" />
@@ -428,6 +448,12 @@ function Rooms() {
                     <span className='title'>Location: </span>
                     <span className='sub-title'>{hotel.Location}</span>
                   </div>
+
+                  <div className='roomdetail'>
+                    <span className='title'>Other Facilty: </span>
+                    <span className='sub-title'>{hotel.OtherFacility}</span>
+                  </div>
+
                   <div className='roomdetail'>
                     <span className='title'>Room Type: </span>
                     <span className='sub-title'>{hotel.RoomType}</span>
@@ -453,45 +479,45 @@ function Rooms() {
                 </div>
               </div>
             ))
-          ) : filterexcellentchecked ? (
-             <Filter_data checkboxselected ={checkboxselected}/>
-          ):goodfilter ?(
+          ) :filterexcellentchecked  ? (
+            <Filter_data checkboxselected={checkboxselected} />
+          ) : goodfilter ? (
             <Filter_data checkboxselected={checkboxselected}></Filter_data>
-          ):verygoodfilter ?(
+          ) : verygoodfilter ? (
             <Filter_data checkboxselected={checkboxselected}></Filter_data>
-          ):wonderfulfilter?(
+          ) : wonderfulfilter ? (
             <Filter_data checkboxselected={checkboxselected}></Filter_data>
-          )
-            :(
-            <p>Loading ....</p>
-          )}
+          ): otherfacility ?(
+            <OtherFacility ></OtherFacility>
+          ):
+            
+             (
+              <p>Loading ....</p>
+            )}
         </div>
 
 
-      </div>
-
-      <div>
       </div>
 
       {
-        !excellentchecked && !filterexcellentchecked &&(
+        !excellentchecked && !filterexcellentchecked  && !otherfacility && (
           <div className='paginationparent'>
-        <div className='pagination'>
-          <span onClick={() => selectPageHandler(page - 1)}>&lt;</span>
-          {
-            hoteldata && hoteldata.data && Array.from({ length: Math.ceil(hoteldata.data.length / 5) }).map((_, i) => {
-              return <span className={page === i + 1 ? "pagination_selected" : ""} onClick={() => selectPageHandler(i + 1)} key={i}>{i + 1}</span>;
-            })
-          }
-          <span onClick={() => selectPageHandler(page + 1)}>&gt;</span>
-        </div>
-      </div> 
+            <div className='pagination'>
+              <span onClick={() => selectPageHandler(page - 1)}>&lt;</span>
+              {
+                hoteldata && hoteldata.data && Array.from({ length: Math.ceil(hoteldata.data.length / 5) }).map((_, i) => {
+                  return <span className={page === i + 1 ? "pagination_selected" : ""} onClick={() => selectPageHandler(i + 1)} key={i}>{i + 1}</span>;
+                })
+              }
+              <span onClick={() => selectPageHandler(page + 1)}>&gt;</span>
+            </div>
+          </div>
         )
       }
 
-  
+
     </div>
-    
+
 
 
   )

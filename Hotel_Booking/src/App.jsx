@@ -10,10 +10,17 @@ import About from './components/About'
 import Navbar from './components/Navbar'
 import NavBar from './components/Navbar'
 import Filter_data from './components/Filter_Data'
-import Newfile from './components/newfile'
+import OtherFacility from './components/OtherFacility'
+import Newfile from './components/Newfile'
+import Newcomponent from './components/Newcomponent'
+import UserProvider  from './Context/Context'
+
 const router = createBrowserRouter(
-  [
+  
+  [ 
+  
     {
+   
       path:'/', 
     
       element:
@@ -43,8 +50,12 @@ function App() {
      {/* <Login></Login> */}
      {/* <div> */}
       {/* <RouterProvider router={router}></RouterProvider> */}
-     <Rooms></Rooms> 
+      <UserProvider>
+         <Rooms></Rooms> 
+     </UserProvider>
+        {/* <Newcomponent></Newcomponent> */}
        {/* <Filter_data></Filter_data> */}
+       {/* <OtherFacility></OtherFacility> */}
        {/* <Newfile/> */}
     {/* </div> */}
     </>

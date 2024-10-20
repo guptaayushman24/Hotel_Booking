@@ -1,50 +1,49 @@
 import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react";
-import './OtherFacility.css';
-import Rooms from "./Rooms";
+import './RoomViewFilter.css'
 import { UserContext } from '../Context/Context';
-function OtherFacility() {
-    const checkboxselected = useContext(UserContext)
-    // console.log("The context data is",contextData);
-
-    const [data, setData] = useState([]);  // Store the fetched data
-    const [page, setPage] = useState(1);   // Store the current page number
-    const [loading, setLoading] = useState(false);  // Add loading state
-    const [error, setError] = useState(null);  // Error state
-
-    // Fetch data when component mounts or checkboxselected changes
-
-    
-    async function fetchAndActivate1() {
+import { useContext, useEffect, useState } from "react";
+function RoomViewFilter() {
+    // const view = useContext(UserContext);
+    const roomviewcheckboxselected = useContext(UserContext);
+    const roomviewfacility = useContext(UserContext);
+    console.log("State of the room view state is",roomviewfacility,"Name of the roomviewfilter is",roomviewcheckboxselected);
+    console.log("Type is",roomviewcheckboxselected.roomviewcheckboxselected);
+    const [data, setdata] = useState([]);
+    const [loading, setLoading] = useState(false); 
+    const [page,setPage] = useState(1);
+    // Fetching data
+    async function fetchdata() {
         try {
+            
             setLoading(true);
-
-            const res = await axios.post("http://localhost:5000/otherfacility", {
-                OtherFacility: checkboxselected.checkboxSelected// Ensure `checkboxselected` is valid
+          
+            const res = await axios.post("http://localhost:5000/filterroomview", {
+                RoomViews: roomviewcheckboxselected.roomviewcheckboxselected
             });
-            console.log("API Response in other facility:", res?.data || "No data"); // Handle missing data
+            console.log("API response in Room View is:", res?.data || "No data");
+            console.log("Type of data is",typeof(data));
+            console.log("Facility selected",roomviewcheckboxselected.roomviewcheckboxselected);
+            console.log("Response us",res.data.filterd_data);
+           
             if (res?.data) {
-                setData(res.data); // Set the fetched data in state
-               
-            } else {
-                setData([]); // Clear data if response is empty
+                setdata(res.data);
+            }
+            else {
+                setdata([]);
             }
             setLoading(false);
         } catch (error) {
-            console.error("Error fetching data:", error?.response?.data || error.message);
-            setError("Error fetching data");
-            setLoading(false);
+            console.log("Error fetching the data,", error?.response?.data || error.message);
         }
     }
-    
-
-    // Use effect to fetch data when `checkboxselected` changes
     useEffect(() => {
-        console.log("useEffect triggered for otherfacility:", checkboxselected);
-        // alert("Other Facility component is called");
-        fetchAndActivate1();
-    }, [checkboxselected]);  // Include `checkboxselected` in the dependency array
+        fetchdata();
+        console.log("Name of the room view is");
+        console.log("State of the room view us");
 
+    }, [roomviewcheckboxselected]);
+
+    // Pagination
     const itemsPerPage = 5;  // Number of items to display per page
     const totalPages = Math.ceil(data.filterd_data?.length / itemsPerPage) || 1;
 
@@ -53,8 +52,8 @@ function OtherFacility() {
             setPage(selectedPage);
         }
     };
+    console.log('Rendered data in Room View Filter:', data);  // Check if data is rendering
 
-    // Render data
 
     return (
 
@@ -89,6 +88,11 @@ function OtherFacility() {
                                     <span className='title'>Bed Type: </span>
                                     <span className='sub-title'>{hotel.BedType}</span>
                                 </div>
+
+                                <div className='roomdetail'>
+                                    <span className='title'>Room View: </span>
+                                    <span className='sub-title'>{hotel.RoomViews}</span>
+                                </div>
                             </div>
 
                             <div className='roompriceparent'>
@@ -107,7 +111,7 @@ function OtherFacility() {
                         </div>
                     ))
                 ) : (
-                    <p>Loading ....</p>
+                    <p>loading ....</p>
                 )}
             </div>
 
@@ -138,7 +142,5 @@ function OtherFacility() {
         </div>
 
     )
-
-
 }
-export default OtherFacility;
+export default RoomViewFilter;

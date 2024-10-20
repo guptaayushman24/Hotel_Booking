@@ -12,13 +12,18 @@ import { CheckboxContext } from './Context';
 import OtherFacility from './OtherFacility';
 import Newfile from './Newfile';
 import Newcomponent from './Newcomponent';
+import RoomsView from '../../Util/RoomsView';
+import RoomViewFilter from './RoomViewFilter';
 
+import { UserContext } from '../Context/Context';
 function Rooms() {
-  
   // Function for fetching the hotel data
- 
+  // const view = useContext(UserContext);
+  const roomviewcheckboxselected = useContext(UserContext);
+  const roomviewfacility = useContext(UserContext);
   
-  
+
+
 
   const [hoteldata, sethoteldata] = useState([]);
   const [excellentchecked, setexcellentchecked] = useState(false);
@@ -34,14 +39,14 @@ function Rooms() {
 
 
 
-  
 
-   // Recieving the data from the NewComponent
-   const [otherfacility,setotherfacility] = useState(false);
-   const [checkboxdata,setcheckboxdata] = useState('');
 
-   // Callback function
-   const handleadatafromcomponent = (selecteddata) => {
+  // Recieving the data from the NewComponent
+  const [otherfacility, setotherfacility] = useState(false);
+  const [checkboxdata, setcheckboxdata] = useState('');
+
+  // Callback function
+  const handleadatafromcomponent = (selecteddata) => {
     setotherfacility(selecteddata); // Set the received data
   };
 
@@ -182,15 +187,17 @@ function Rooms() {
     setCheckboxes(newCheckboxes);
   }
 
-  
- 
 
- 
- 
+
+
+
+
 
   useEffect(() => {
+    console.log("The state of the room view facility is",roomviewfacility);
+    // console.log("The name of the selected state of the room view is",view.roomviewcheckboxselected);
     // Logs to help debug the state updates
-  }, [checkboxselected, checkboxes, otherfacility, checkboxdata]);
+  }, [checkboxselected, checkboxes, otherfacility, checkboxdata,roomviewfacility]);
 
 
 
@@ -325,9 +332,9 @@ function Rooms() {
         </div>
 
       </div>
-  
-        
-       <div className='parent1'>
+
+
+      <div className='parent1'>
         <div className='child1'>
           <div className='filters'>
             <div className='filter-heading'>
@@ -380,61 +387,21 @@ function Rooms() {
 
                 <Newcomponent handleadatafromcomponent={handleadatafromcomponent} />
 
-               
+
 
 
                 <div className='roomviews'>
                   Room Views
                 </div>
-                {/* City View*/}
-                <div className='checkbox-container'>
-                  <div className='checkbox'>
-                    <input type='checkbox' checked={checked} onChange={handleChange} />
-                  </div>
-                  <div className='reviewtext'>
-                    City View
-                  </div>
-
-                </div>
-
-
-                {/* Garden View */}
-                <div className='checkbox-container'>
-                  <div className='checkbox'>
-                    <input type='checkbox' checked={checked} onChange={handleChange} />
-                  </div>
-                  <div className='reviewtext'>
-                    Garden View
-                  </div>
-
-                  {/* Pool View */}
-                </div>
-                <div className='checkbox-container'>
-                  <div className='checkbox'>
-                    <input type='checkbox' checked={checked} onChange={handleChange} />
-                  </div>
-                  <div className='reviewtext'>
-                    Pool View
-                  </div>
-
-                </div>
-
-                {/* Sea View*/}
-                <div className='checkbox-container'>
-                  <div className='checkbox'>
-                    <input type='checkbox' checked={checked} onChange={handleChange} />
-                  </div>
-                  <div className='reviewtext'>
-                    Sea View
-                  </div>
-
-                </div>
+                
+               <RoomsView></RoomsView>
+               
               </div>
             </div>
           </div>
         </div>
         <div className='child2'>
-          {hoteldata.data && !filterexcellentchecked  && !otherfacility  ? (
+          {hoteldata.data && !filterexcellentchecked && !otherfacility && !roomviewfacility ? (
             hoteldata.data.slice(page * 5 - 5, page * 5).map((hotel, index) => (
               <div key={index} className='roomviewsparent'>
                 <img src='./Hotel_Room.jpeg' className='roomimage' alt="Hotel room" />
@@ -452,6 +419,11 @@ function Rooms() {
                   <div className='roomdetail'>
                     <span className='title'>Other Facilty: </span>
                     <span className='sub-title'>{hotel.OtherFacility}</span>
+                  </div>
+
+                  <div className='roomdetail'>
+                    <span className='title'>Room View: </span>
+                    <span className='sub-title'>{hotel.RoomViews}</span>
                   </div>
 
                   <div className='roomdetail'>
@@ -479,7 +451,7 @@ function Rooms() {
                 </div>
               </div>
             ))
-          ) :filterexcellentchecked  ? (
+          ) : filterexcellentchecked ? (
             <Filter_data checkboxselected={checkboxselected} />
           ) : goodfilter ? (
             <Filter_data checkboxselected={checkboxselected}></Filter_data>
@@ -487,11 +459,13 @@ function Rooms() {
             <Filter_data checkboxselected={checkboxselected}></Filter_data>
           ) : wonderfulfilter ? (
             <Filter_data checkboxselected={checkboxselected}></Filter_data>
-          ): otherfacility ?(
+          ) : otherfacility ? (
             <OtherFacility ></OtherFacility>
+          ) : roomviewfacility ? (
+            <RoomViewFilter></RoomViewFilter>
           ):
-            
-             (
+
+            (
               <p>Loading ....</p>
             )}
         </div>
@@ -500,7 +474,7 @@ function Rooms() {
       </div>
 
       {
-        !excellentchecked && !filterexcellentchecked  && !otherfacility && (
+        !excellentchecked && !filterexcellentchecked && !otherfacility && ! roomviewfacility && (
           <div className='paginationparent'>
             <div className='pagination'>
               <span onClick={() => selectPageHandler(page - 1)}>&lt;</span>

@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import './NewComponent.css';
 import { UserContext } from '../Context/Context'; // Adjust the path
-import OtherFacility from './OtherFacility';
-import Rooms from './Rooms';
+
 
 const NewComponent = (props) => {
     // Access context values

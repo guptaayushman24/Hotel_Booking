@@ -1,0 +1,13 @@
+.checkbox-parent {
+    display: flex; 
+    flex-direction: column;
+}
+.checkbox-container {
+    display: flex;
+    /* Aligns items in a row */
+    align-items: center;
+    /* Ensures checkbox and text are vertically aligned */
+    gap: 10px;
+    /* Adds space between the checkbox and the text */
+    /* background-color: black; */
+}

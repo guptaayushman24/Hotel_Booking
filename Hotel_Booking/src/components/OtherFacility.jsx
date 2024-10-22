@@ -3,7 +3,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 import './OtherFacility.css';
 import Rooms from "./Rooms";
 import { UserContext } from '../Context/Context';
+import { Navigate, useNavigate } from "react-router-dom";
 function OtherFacility() {
+    const navigate = useNavigate();
     const checkboxselected = useContext(UserContext)
     // console.log("The context data is",contextData);
 
@@ -11,6 +13,10 @@ function OtherFacility() {
     const [page, setPage] = useState(1);   // Store the current page number
     const [loading, setLoading] = useState(false);  // Add loading state
     const [error, setError] = useState(null);  // Error state
+
+    const {sethotelprice} = useContext(UserContext);
+    const {sethotelname} = useContext(UserContext);
+    const {sethotelrating} = useContext(UserContext);
 
     // Fetch data when component mounts or checkboxselected changes
 
@@ -54,6 +60,24 @@ function OtherFacility() {
         }
     };
 
+    function bookhotel(e){
+        console.log("Div Clicked");
+        const hotelprice = e.target.closest('.roomviewsparent').querySelector('.roomprice-1').textContent;
+        sethotelprice(hotelprice);
+        // Hotel Price
+        console.log(hotelprice);
+        const hotelname = e.target.closest('.roomviewsparent').querySelector('.sub-title').textContent;
+        sethotelname(hotelname);
+        // Hotel Name
+        console.log(hotelname);
+        // Hotel Rating
+        const hotelrating = e.target.closest('.roomviewsparent').querySelector('.rating').textContent;
+        sethotelrating(hotelrating);
+        console.log(hotelrating);
+
+        navigate('/bookingpage');
+    }
+
     // Render data
 
     return (
@@ -63,7 +87,7 @@ function OtherFacility() {
             <div>
                 {data.filterd_data ? (
                     data.filterd_data.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((hotel, index) => (
-                        <div key={index} className='roomviewsparent'>
+                        <div key={index} className='roomviewsparent' onClick={bookhotel}>
                             <img src='./Hotel_Room.jpeg' className='roomimage' alt="Hotel room" />
 
                             <div className='roomdetailparent'>

@@ -1,15 +1,23 @@
 import axios from "axios";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import { CheckboxContext } from "./Context";
 import './Filter_Data.css'
+import { UserContext } from "../Context/Context";
+import { useNavigate } from 'react-router-dom';
 function Filter_data({ checkboxselected }) {
+    const navigate = useNavigate();
     const [data, setdata] = useState([]);
     const [page, setPage] = useState(1);
+    const {sethotelprice} = useContext(UserContext);
+    const {sethotelname} = useContext(UserContext);
+    const {sethotelrating} = useContext(UserContext);
+    const {sethotelotherfacility} = useContext(UserContext);
     // var columnname = {};
     console.log("The column name is", { checkboxselected });
     function fetchAndActivate() {
         axios.post("http://localhost:5000/reviewscore", {
             ReviewScore: checkboxselected // If any how we pass the data here out lots of work can be simplified
+      
         }).then((res) => {
             console.log("API Response:", res.data); // Log API response to check structure
             console.log(typeof res.data);
@@ -38,6 +46,27 @@ function Filter_data({ checkboxselected }) {
         }
     }
 
+        const bookhotel = (e) => {
+            console.log("Div Clicked");
+            const hotelprice = e.target.closest('.roomviewsparent').querySelector('.roomprice-1').textContent;
+            sethotelprice(hotelprice);
+            // Hotel Price
+            console.log(hotelprice);
+            const hotelname = e.target.closest('.roomviewsparent').querySelector('.sub-title').textContent;
+            sethotelname(hotelname);
+            // Hotel Name
+            console.log(hotelname);
+            // Hotel Rating
+            const hotelrating = e.target.closest('.roomviewsparent').querySelector('.rating').textContent;
+            sethotelrating(hotelrating);
+            console.log(hotelrating);
+
+            navigate('/bookingpage');
+
+          };
+        
+    
+
     return (
 
         <div style={{ backgroundColor: 'orange' }}>
@@ -45,7 +74,7 @@ function Filter_data({ checkboxselected }) {
             <div>
                 {data.filterd_data ? (
                     data.filterd_data.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((hotel, index) => (
-                        <div key={index} className='roomviewsparent'>
+                        <div key={index} className='roomviewsparent'  id={`hotel-${index}`} onClick={bookhotel}>
                             <img src='./Hotel_Room.jpeg' className='roomimage' alt="Hotel room" />
 
                             <div className=''>
@@ -60,7 +89,7 @@ function Filter_data({ checkboxselected }) {
 
                                 <div className='roomdetail'>
                                     <span className='title'>Other Facilty: </span>
-                                    <span className='sub-title'>{hotel.OtherFacility}</span>
+                                    <span className='sub-title' id="otherfacility">{hotel.OtherFacility}</span>
                                 </div>
 
                                 <div className='roomdetail'>

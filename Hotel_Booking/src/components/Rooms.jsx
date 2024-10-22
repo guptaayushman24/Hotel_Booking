@@ -16,6 +16,7 @@ import RoomsView from '../../Util/RoomsView';
 import RoomViewFilter from './RoomViewFilter';
 
 import { UserContext } from '../Context/Context';
+import Displayallrooms from './Displayallrooms';
 function Rooms() {
   // Function for fetching the hotel data
   // const view = useContext(UserContext);
@@ -191,6 +192,9 @@ function Rooms() {
 
 
 
+  useEffect(()=>{
+    
+  },[])
 
 
   useEffect(() => {
@@ -199,6 +203,7 @@ function Rooms() {
     // Logs to help debug the state updates
   }, [checkboxselected, checkboxes, otherfacility, checkboxdata,roomviewfacility]);
 
+ 
 
 
 
@@ -393,7 +398,8 @@ function Rooms() {
                 <div className='roomviews'>
                   Room Views
                 </div>
-                
+
+                {/* Rooms View checkbox component*/}
                <RoomsView></RoomsView>
                
               </div>

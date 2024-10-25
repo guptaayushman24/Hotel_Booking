@@ -26,7 +26,9 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
     "react-router-dom": "^6.27.0",
-    "react-toastify": "^10.0.5"
+    "react-stripe-checkout": "^2.6.3",
+    "react-toastify": "^10.0.5",
+    "stripe": "^17.2.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

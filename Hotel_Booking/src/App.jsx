@@ -56,6 +56,9 @@ function App() {
         </Routes>
       </BrowserRouter>
       </UserProvider>
+      {/* <UserProvider>
+      <Hotel_Booking></Hotel_Booking>
+      </UserProvider> */}
     </>
   )
 }

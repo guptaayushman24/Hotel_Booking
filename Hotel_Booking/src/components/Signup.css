@@ -51,6 +51,7 @@
 }
 .register{
     color: #0e6efe;
+    text-decoration: underline;
 }
 .continuewith{
     display: flex;

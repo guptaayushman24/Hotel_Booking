@@ -3,9 +3,9 @@ import './Signup.css'
 import { useForm } from 'react-hook-form';
 import { auth } from './Firebase';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { toast } from 'react-toastify'
-
-
+import { toast } from 'react-toastify';
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
     const [fname, Setfname] = useState('');
@@ -21,11 +21,14 @@ function Signup() {
     const invalidlname = useRef();
     const displaypasswordwarning = useRef();
     const invalidpassword = useRef();
+    
+    const navigate = useNavigate();
+
     var flag = 0;
 
     const emailregex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     const passwordregex = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
-    const nameregex  = /^[A-Z][a-zA-Z'’ -]{1,49}$/;
+    const nameregex = /^[A-Z][a-zA-Z'’ -]{1,49}$/;
     function googleLogin() {
 
         const provider = new GoogleAuthProvider();
@@ -43,68 +46,73 @@ function Signup() {
             })
 
     }
-    function validateandchceckforuser() {
+    async function validateandchceckforuser() {
         // FirstName Warning
-        if (fname.length==0){
+        let fnamecheck, lnamecheck, emailcheck, passwordcheck = false;
+        if (fname.length == 0) {
             displaynamewarning.current.style.display = 'block';
-            
+
             invalidfname.current.style.display = 'none';
-         }
-        
-         if (fname.length>0){
-            for (let i=0;i<fname.length;i++){
-                
-                if (fname.charAt(i)>='0' && fname.charAt(i)<='9'){
-                    flag=1;
+        }
+
+        if (fname.length > 0) {
+            for (let i = 0; i < fname.length; i++) {
+
+                if (fname.charAt(i) >= '0' && fname.charAt(i) <= '9') {
+                    flag = 1;
                     break;
                 }
             }
-            if (flag==0 && fname.length>0){
+            if (flag == 0 && fname.length > 0) {
                 displaynamewarning.current.style.display = 'none';
                 invalidfname.current.style.display = 'none';
+                console.log("Fname is correct");
+                fnamecheck = true;
             }
-            if (flag==1){
+            if (flag == 1) {
                 invalidfname.current.style.display = 'block';
                 displaynamewarning.current.style.display = 'none';
             }
-         }
-       
-         if (fname.length==0){
+        }
+
+        if (fname.length == 0) {
             displaynamewarning.current.style.display = 'block';
-            
+
             invalidfname.current.style.display = 'none';
-         }
-        
-         // LastName warning
-         if (lname.length==0){
+        }
+
+        // LastName warning
+        if (lname.length == 0) {
             diplaylnamewarning.current.style.display = 'block';
-            
+
             invalidlname.current.style.display = 'none';
-         }
-        
-         if (lname.length>0){
-            for (let i=0;i<lname.length;i++){
-                
-                if (lname.charAt(i)>='0' && lname.charAt(i)<='9'){
-                    flag=1;
+        }
+
+        if (lname.length > 0) {
+            for (let i = 0; i < lname.length; i++) {
+
+                if (lname.charAt(i) >= '0' && lname.charAt(i) <= '9') {
+                    flag = 1;
                     break;
                 }
             }
-            if (flag==0 && lname.length>0){
+            if (flag == 0 && lname.length > 0) {
                 diplaylnamewarning.current.style.display = 'none';
                 invalidlname.current.style.display = 'none';
+                lnamecheck = true;
+                console.log("Lname is correct");
             }
-            if (flag==1){
+            if (flag == 1) {
                 invalidlname.current.style.display = 'block';
                 diplaylnamewarning.current.style.display = 'none';
             }
-         }
-       
-         if (lname.length==0){
+        }
+
+        if (lname.length == 0) {
             diplaylnamewarning.current.style.display = 'block';
-            
+
             invalidlname.current.style.display = 'none';
-         }
+        }
 
 
 
@@ -120,6 +128,8 @@ function Signup() {
         else {
             displawarning.current.style.display = 'none';
             invalidemail.current.style.display = 'none';
+            emailcheck = true;
+            console.log("Email correct");
         }
         // Password Waring
         if (password.length == 0) {
@@ -132,14 +142,41 @@ function Signup() {
         else {
             invalidpassword.current.style.display = 'none';
             displaypasswordwarning.current.style.display = 'none'
+            passwordcheck = true;
+            console.log("Password Correct");
         }
 
+        
+
+        // If all user data is correct save into the mongodb
+        try {
+            if (fnamecheck == true && lnamecheck == true && emailcheck == true && passwordcheck == true) {
+                await axios.post('http://localhost:5000/signupapi', {
+                    FirstName:fname,
+                    LastName:lname,
+                    EmailAddress:email,
+                    Password:password
+                }
+            )};
+        }
+        catch(err){
+            if (err.response && err.response.status === 409){
+                alert(err.response.data.message);
+            }
+        }
+
+    }
+
+    // Sign in 
+    function signin(){
+        console.log("Signin Clicked");
+        navigate('/signin');
     }
     return (
         <div>
             <div className='parentdiv'>
 
-                <div className='formdiv' style={{height:'42rem'}}>
+                <div className='formdiv' style={{ height: '42rem' }}>
                     {/* div->heading */}
                     <div className='heading'>
                         <h2>Sign Up</h2>
@@ -218,7 +255,7 @@ function Signup() {
                         <button className='button' onClick={validateandchceckforuser}>Submit</button>
                     </div>
                     {/* div-> NewUser*/}
-                    <div className='newUser'>
+                    <div className='newUser' onClick={signin}>
                         <div>Already registered
                         </div>
                         <div className='register'>Login
@@ -227,14 +264,14 @@ function Signup() {
                     {/* continue with*/}
                     <div className='continuewith'>
                         -- Or continue with --
-                        
+
                     </div>
 
                     <div className='image'>
-                    <div className='imagestyle'>
-                    <img src={'/SigninwithGoogle.png'}  onClick={googleLogin}></img>
-                    </div>
-                        
+                        <div className='imagestyle'>
+                            <img src={'/SigninwithGoogle.png'} onClick={googleLogin}></img>
+                        </div>
+
                     </div>
 
                 </div>

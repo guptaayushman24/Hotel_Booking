@@ -54,6 +54,10 @@
     margin-left: 40rem;
     width: 20rem;
   }
+  .image{
+    height: 500px;
+    width: 200px;
+  }
   .seconddiv{
     background-color: white;
     display: flex;

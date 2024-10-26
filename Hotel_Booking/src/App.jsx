@@ -18,30 +18,30 @@ import RoomViewFilter from './components/RoomViewFilter'
 import Displayallrooms from './components/Displayallrooms'
 import Hotel_Booking from './components/Hotel_Booking'
 import {BrowserRouter, Routes,Route} from "react-router-dom"
-const router = createBrowserRouter(
+// const router = createBrowserRouter(
   
-  [ 
+//   [ 
   
-    {
+//     {
    
-      path:'/', 
+//       path:'/', 
     
-      element:
+//       element:
        
-      <Home></Home>
-    },
-    {
-      path:'/signup', 
-      element:
-        <Signup></Signup>
-    },
-    {
-      path:'/signin',
-      element:
-      <Login></Login>
-    }
-  ]
-)
+//       <Home></Home>
+//     },
+//     {
+//       path:'/signup', 
+//       element:
+//         <Signup></Signup>
+//     },
+//     {
+//       path:'/signin',
+//       element:
+//       <Login></Login>
+//     }
+//   ]
+// )
 function App() {
  
 
@@ -51,14 +51,14 @@ function App() {
       <UserProvider>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Rooms/>}></Route>
+        <Route path='/' element={<Home/>}></Route>
+          <Route path='/signup' element={<Signup/>}></Route>
+          <Route path='/signin' element={<Login/>}></Route>
+          <Route path='/rooms' element={<Rooms/>}></Route>
           <Route path='/bookingpage' element={<Hotel_Booking/>}></Route>
         </Routes>
       </BrowserRouter>
       </UserProvider>
-      {/* <UserProvider>
-      <Hotel_Booking></Hotel_Booking>
-      </UserProvider> */}
     </>
   )
 }

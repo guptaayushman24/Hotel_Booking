@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { auth } from './Firebase';
 import { GoogleAuthProvider ,signInWithPopup} from 'firebase/auth';
 import {toast} from 'react-toastify'
-
-
+import {useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 function Login() {
     const [email,Setemail] = useState('');
@@ -14,6 +14,9 @@ function Login() {
     const invalidemail = useRef();
     const displaypasswordwarning = useRef();
     const invalidpassword = useRef();
+
+    let emailcheck,passwordcheck = false;
+    const navigate = useNavigate();
     
     const emailregex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     const passwordregex = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
@@ -34,7 +37,7 @@ function Login() {
             })
 
     }
-    function validateandchceckforuser() {
+    async function validateandchceckforuser() {
         // Email Warning
         if (email.length==0){
             displawarning.current.style.display='block';
@@ -47,6 +50,7 @@ function Login() {
           else{
             displawarning.current.style.display = 'none';
             invalidemail.current.style.display = 'none';
+            emailcheck = true;
           }
           // Password Waring
           if (password.length==0){
@@ -59,8 +63,35 @@ function Login() {
           else{
             invalidpassword.current.style.display = 'none';
             displaypasswordwarning.current.style.display='none'
+            passwordcheck = true;
           }
 
+          try {
+            if (emailcheck === true && passwordcheck === true) {
+                const response = await axios.post('http://localhost:5000/signinapi', {
+                    EmailAddress: email,
+                    Password:password
+                });
+                if (response.status==200){
+                    navigate('/rooms')
+                }
+                else if (response.status==201){
+                    alert("Please check the password");
+                }
+                else if (response.status==202){
+                    alert("Account not found check email address or do the signup");
+                }
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+
+    }
+
+    // signup
+    function signup(){
+        navigate('/');
     }
     return (
         <div>
@@ -114,7 +145,7 @@ function Login() {
                     <div className='newUser'>
                         <div>New user
                         </div>
-                        <div className='register'>Register Here
+                        <div className='register' onClick={signup}>Register Here
                         </div>
                     </div>
                     {/* continue with*/}

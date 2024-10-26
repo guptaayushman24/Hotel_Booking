@@ -31,15 +31,16 @@ function Home() {
         </div>
         </div>
         <div className='imagediv'>
-            <img src={'./Hotel_Image.webp'}></img>
+            <img src={'./Hotel_Image.webp'} className='image'></img>
         </div>
       </div>
       <div className='centerdiv'>
         <div className='contentdiv'>
-         <img src={'./Hotel_Image2.jpeg'}></img>
+         <img src={'./Hotel_Image2.jpeg'} className='image'></img>
         </div>
         <div style={{display:'flex',flexDirection:'column'}}>
         <div className='imagediv2'>
+        
           About us<br/>
            The best holidays<br/> start here <br/>
         </div>

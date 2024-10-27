@@ -1,7 +1,7 @@
 const Hotel = require('../schema/Hotel_Data');
 async function getAlldata(req,res) {
     try{
-       const data  =  await Hotel.find({});
+       const data  =  await Hotel.find();
        return res.status(200).json({data});
     }
     catch(err){

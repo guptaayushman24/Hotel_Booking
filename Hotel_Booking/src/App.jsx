@@ -17,6 +17,7 @@ import UserProvider  from './Context/Context'
 import RoomViewFilter from './components/RoomViewFilter'
 import Displayallrooms from './components/Displayallrooms'
 import Hotel_Booking from './components/Hotel_Booking'
+import Allrooms from './components/All_rooms'
 import {BrowserRouter, Routes,Route} from "react-router-dom"
 // const router = createBrowserRouter(
   
@@ -59,6 +60,10 @@ function App() {
         </Routes>
       </BrowserRouter>
       </UserProvider>
+
+    {/* <UserProvider>
+      <Allrooms></Allrooms>
+    </UserProvider> */}
     </>
   )
 }

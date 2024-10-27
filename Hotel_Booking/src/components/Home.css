@@ -50,7 +50,6 @@
   }
   .imagediv{
     display: flex;
-    background-color: orange;
     margin-left: 40rem;
     width: 20rem;
   }

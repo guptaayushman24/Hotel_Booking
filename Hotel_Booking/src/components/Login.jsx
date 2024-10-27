@@ -91,7 +91,7 @@ function Login() {
 
     // signup
     function signup(){
-        navigate('/');
+        navigate('/signup');
     }
     return (
         <div>

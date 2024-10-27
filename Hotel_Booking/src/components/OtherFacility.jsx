@@ -14,9 +14,11 @@ function OtherFacility() {
     const [loading, setLoading] = useState(false);  // Add loading state
     const [error, setError] = useState(null);  // Error state
 
+    
     const {sethotelprice} = useContext(UserContext);
     const {sethotelname} = useContext(UserContext);
     const {sethotelrating} = useContext(UserContext);
+   
 
     // Fetch data when component mounts or checkboxselected changes
 

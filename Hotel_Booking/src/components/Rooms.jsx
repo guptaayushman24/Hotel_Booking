@@ -16,13 +16,13 @@ import RoomsView from '../../Util/RoomsView';
 import RoomViewFilter from './RoomViewFilter';
 
 import { UserContext } from '../Context/Context';
-import Displayallrooms from './Displayallrooms';
+import Allrooms from './All_rooms';
 function Rooms() {
   // Function for fetching the hotel data
   // const view = useContext(UserContext);
   const roomviewcheckboxselected = useContext(UserContext);
   const roomviewfacility = useContext(UserContext);
-  
+
 
 
 
@@ -38,6 +38,8 @@ function Rooms() {
   const [verygoodfilter, setverygoodfilter] = useState(false);
   const [wonderfulfilter, setwonderfilter] = useState(false);
 
+  const [displayalldata, setdisplayalldata] = useState(false);
+
 
 
 
@@ -52,22 +54,12 @@ function Rooms() {
   };
 
 
+
+
   async function fetchhoteldata() {
+    setdisplayalldata(true);
 
-    try {
-
-      const data = await axios.get('http://localhost:5000/getalldata');
-      sethoteldata(data.data);
-
-
-    }
-    catch (err) {
-      console.log(err);
-    }
   }
-  useEffect(() => {
-    fetchhoteldata();
-  }, [])
   // Creating state for the pagination
   const [page, setPage] = useState(1);
 
@@ -136,6 +128,7 @@ function Rooms() {
     if (id === 1 && currentCheckbox.checked) {
       setcheckboxselected(checkboxes[id - 1].label);  // This updates the selected filter label
       setfilterexcellentchecked(!filterexcellentchecked);
+      setdisplayalldata(false);
     }
     if (id === 1 && !currentCheckbox.checked) {
       setcheckboxselected('');
@@ -147,6 +140,7 @@ function Rooms() {
       setcheckboxselected(checkboxes[id - 1].label);
       setfilterexcellentchecked(!filterexcellentchecked);
       setgoodfilter(!goodfilter);
+      setdisplayalldata(false);
     }
     if (id === 2 && !currentCheckbox.checked) {
       setcheckboxselected('');
@@ -161,6 +155,7 @@ function Rooms() {
       setfilterexcellentchecked(!filterexcellentchecked);
       setgoodfilter(!goodfilter);
       setverygoodfilter(!verygoodfilter);
+      setdisplayalldata(false);
     }
     if (id === 3 && !currentCheckbox.checked) {
       setcheckboxselected('');
@@ -176,6 +171,7 @@ function Rooms() {
       setgoodfilter(!goodfilter);
       setverygoodfilter(!verygoodfilter);
       setwonderfilter(!wonderfulfilter);
+      setdisplayalldata(false);
     }
     if (id === 4 && !currentCheckbox.checked) {
       setcheckboxselected('');
@@ -192,27 +188,17 @@ function Rooms() {
 
 
 
-  useEffect(()=>{
-    
-  },[])
+  useEffect(() => {
+    console.log("Component renders")
+    setdisplayalldata(true);
+  }, []);
+
+  useEffect(() => {
+  }, [hoteldata]); // Runs only when `hoteldata` updates
 
 
   useEffect(() => {
-    console.log("The state of the room view facility is",roomviewfacility);
-    // console.log("The name of the selected state of the room view is",view.roomviewcheckboxselected);
-    // Logs to help debug the state updates
-  }, [checkboxselected, checkboxes, otherfacility, checkboxdata,roomviewfacility]);
-
- 
-
-
-
-
-
-
-
-
-
+  }, [checkboxselected, checkboxes, otherfacility, checkboxdata, roomviewfacility]);
 
 
   const changeValuecheckout = (selectedDate) => {
@@ -400,87 +386,40 @@ function Rooms() {
                 </div>
 
                 {/* Rooms View checkbox component*/}
-               <RoomsView></RoomsView>
-               
+                <RoomsView></RoomsView>
+
               </div>
             </div>
           </div>
         </div>
         <div className='child2'>
-          {hoteldata.data && !filterexcellentchecked && !otherfacility && !roomviewfacility ? (
-            hoteldata.data.slice(page * 5 - 5, page * 5).map((hotel, index) => (
-              <div key={index} className='roomviewsparent'>
-                <img src='./Hotel_Room.jpeg' className='roomimage' alt="Hotel room" />
+          {displayalldata ? (
+            <Allrooms></Allrooms>
+          ) :
+            filterexcellentchecked ? (
+              <Filter_data checkboxselected={checkboxselected} />
+            ) : goodfilter ? (
+              <Filter_data checkboxselected={checkboxselected}></Filter_data>
+            ) : verygoodfilter ? (
+              <Filter_data checkboxselected={checkboxselected}></Filter_data>
+            ) : wonderfulfilter ? (
+              <Filter_data checkboxselected={checkboxselected}></Filter_data>
+            ) : otherfacility ? (
+              <OtherFacility ></OtherFacility>
+            ) : roomviewfacility ? (
+              <RoomViewFilter></RoomViewFilter>
+            ) :
 
-                <div className='roomdetailparent'>
-                  <div className='roomdetail'>
-                    <span className='title'>Hotel Name: </span>
-                    <span className='sub-title'>{hotel.HotelName}</span>
-                  </div>
-                  <div className='roomdetail'>
-                    <span className='title'>Location: </span>
-                    <span className='sub-title'>{hotel.Location}</span>
-                  </div>
-
-                  <div className='roomdetail'>
-                    <span className='title'>Other Facilty: </span>
-                    <span className='sub-title'>{hotel.OtherFacility}</span>
-                  </div>
-
-                  <div className='roomdetail'>
-                    <span className='title'>Room View: </span>
-                    <span className='sub-title'>{hotel.RoomViews}</span>
-                  </div>
-
-                  <div className='roomdetail'>
-                    <span className='title'>Room Type: </span>
-                    <span className='sub-title'>{hotel.RoomType}</span>
-                  </div>
-                  <div className='roomdetail'>
-                    <span className='title'>Bed Type: </span>
-                    <span className='sub-title'>{hotel.BedType}</span>
-                  </div>
-                </div>
-
-                <div className='roompriceparent'>
-                  <div className='roomprice'>
-                    <div className='reviewscore'>
-                      {hotel.ReviewScore}
-                    </div>
-                    <div className='rating'>
-                      {hotel.Rating}
-                    </div>
-                  </div>
-                  <div className='roomprice-1'>
-                    Rs. {hotel.RoomPrice}
-                  </div>
-                </div>
-              </div>
-            ))
-          ) : filterexcellentchecked ? (
-            <Filter_data checkboxselected={checkboxselected} />
-          ) : goodfilter ? (
-            <Filter_data checkboxselected={checkboxselected}></Filter_data>
-          ) : verygoodfilter ? (
-            <Filter_data checkboxselected={checkboxselected}></Filter_data>
-          ) : wonderfulfilter ? (
-            <Filter_data checkboxselected={checkboxselected}></Filter_data>
-          ) : otherfacility ? (
-            <OtherFacility ></OtherFacility>
-          ) : roomviewfacility ? (
-            <RoomViewFilter></RoomViewFilter>
-          ):
-
-            (
-              <p>Loading ....</p>
-            )}
+              (
+                <p>Loading ....</p>
+              )}
         </div>
 
 
       </div>
 
       {
-        !excellentchecked && !filterexcellentchecked && !otherfacility && ! roomviewfacility && (
+        !excellentchecked && !filterexcellentchecked && !otherfacility && !roomviewfacility && (
           <div className='paginationparent'>
             <div className='pagination'>
               <span onClick={() => selectPageHandler(page - 1)}>&lt;</span>

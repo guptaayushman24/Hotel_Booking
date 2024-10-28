@@ -74,13 +74,17 @@ function Rooms() {
   const [datecheckout, setDatecheckout] = useState(null);
   const [showcalendarcheckout, setshowcalendarcheckout] = useState(false);
 
-  // Error state for the date
-  const [error, setError] = useState("");
+ 
 
   // Slider State
   const [value, setValue] = useState(null);
   // Checbox for the review score
   const [checked, setChecked] = React.useState(false);
+
+  // Setting the user who has done the login
+  const data = useContext(UserContext);
+  
+  
 
   const changeValue = (selectedDate) => {
     setDate(selectedDate);      // Set the selected date
@@ -261,7 +265,7 @@ function Rooms() {
         </div>
         <div className='navbar-end'>
           <div className='customerProfile'>
-            Hello Alice
+            Hello {data.username+" "+data.userlastname}
           </div>
 
 

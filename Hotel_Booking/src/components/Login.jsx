@@ -1,10 +1,11 @@
-import React, {useState ,useRef} from 'react'
+import React, {useState ,useRef, useContext} from 'react'
 import './Login.css'
 import { useForm } from 'react-hook-form';
 import { auth } from './Firebase';
 import { GoogleAuthProvider ,signInWithPopup} from 'firebase/auth';
 import {toast} from 'react-toastify'
 import {useNavigate } from 'react-router-dom';
+import { UserContext } from '../Context/Context';
 import axios from "axios";
 
 function Login() {
@@ -14,6 +15,8 @@ function Login() {
     const invalidemail = useRef();
     const displaypasswordwarning = useRef();
     const invalidpassword = useRef();
+    const {setusername} = useContext(UserContext);
+    const {setuserlastname} = useContext(UserContext);
 
     let emailcheck,passwordcheck = false;
     const navigate = useNavigate();
@@ -73,6 +76,8 @@ function Login() {
                     Password:password
                 });
                 if (response.status==200){
+                    setusername(response.data.username);
+                    setuserlastname(response.data.userlastname);
                     navigate('/rooms')
                 }
                 else if (response.status==201){

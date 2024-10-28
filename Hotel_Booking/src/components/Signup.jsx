@@ -158,6 +158,13 @@ function Signup() {
                     Password:password
                 }
             )};
+            if (fnamecheck == true && lnamecheck == true && emailcheck == true && passwordcheck == true){
+                alert("Signup successfull do the signin");
+                navigate('/signin');
+            }
+            else{
+                alert("Check all the information");
+            }
         }
         catch(err){
             if (err.response && err.response.status === 409){

@@ -1,16 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import axios from 'axios';  // Ensure axios is imported
 import './All_rooms.css';
+import { UserContext } from "../Context/Context";
+import { useNavigate } from 'react-router-dom';
 function Allrooms() {
   const [hoteldata, sethoteldata] = useState([]);
   const [page, setPage] = useState(1);
   const itemsPerPage = 5;
+  const {sethotelprice} = useContext(UserContext);
+  const {sethotelname} = useContext(UserContext);
+  const {sethotelrating} = useContext(UserContext);
 
   // Fetching data
   async function fetchhoteldata() {
     try {
       const data = await axios.get('http://localhost:5000/getalldata');
       console.log("Data is", data);
+    
       sethoteldata(data.data);
     } catch (err) {
       console.log(err);
@@ -33,81 +39,105 @@ function Allrooms() {
     }
   };
 
+  const bookhotel = (e) => {
+    console.log("Div Clicked");
+    const hotelprice = e.target.closest('.roomviewsparent').querySelector('.roomprice-1').textContent;
+    sethotelprice(hotelprice);
+    // Hotel Price
+    console.log(hotelprice);
+    const hotelname = e.target.closest('.roomviewsparent').querySelector('.sub-title').textContent;
+    sethotelname(hotelname);
+    // Hotel Name
+    console.log(hotelname);
+    // Hotel Rating
+    const hotelrating = e.target.closest('.roomviewsparent').querySelector('.rating').textContent;
+    sethotelrating(hotelrating);
+    console.log(hotelrating);
+
+    navigate('/bookingpage');
+
+  };
+
   return (
     
-      <div>
-        {hoteldata.data && hoteldata.data.slice(page * 5 - 5, page * 5).map((hotel, index) => (
-          <div key={index} className='roomviewsparent'>
-            <img src='./Hotel_Room.jpeg' className='roomimage' alt="Hotel room" />
+    <div style={{ backgroundColor: 'orange' }}>
 
-            <div className='roomdetailparent'>
-              <div className='roomdetail'>
-                <span className='title'>Hotel Name: </span>
-                <span className='sub-title'>{hotel.HotelName}</span>
-              </div>
-              <div className='roomdetail'>
-                <span className='title'>Location: </span>
-                <span className='sub-title'>{hotel.Location}</span>
-              </div>
-              <div className='roomdetail'>
-                <span className='title'>Other Facility: </span>
-                <span className='sub-title'>{hotel.OtherFacility}</span>
-              </div>
-              <div className='roomdetail'>
-                <span className='title'>Room View: </span>
-                <span className='sub-title'>{hotel.RoomViews}</span>
-              </div>
-              <div className='roomdetail'>
-                <span className='title'>Room Type: </span>
-                <span className='sub-title'>{hotel.RoomType}</span>
-              </div>
-              <div className='roomdetail'>
-                <span className='title'>Bed Type: </span>
-                <span className='sub-title'>{hotel.BedType}</span>
-              </div>
-            </div>
+    <div>
+        {hoteldata.data ? (
+            hoteldata.data.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((hotel, index) => (
+                <div key={index} className='roomviewsparent'  id={`hotel-${index}`} onClick={bookhotel}>
+                    <img src='./Hotel_Room.jpeg' className='roomimage' alt="Hotel room" />
 
-            <div className='roompriceparent'>
-              <div className='roomprice'>
-                <div className='reviewscore'>
-                  {hotel.ReviewScore}
-                </div>
-                <div className='rating'>
-                  {hotel.Rating}
-                </div>
-              </div>
-              <div className='roomprice-1'>
-                Rs. {hotel.RoomPrice}
-              </div>
-            </div>
-          </div>
-        ))}
+                    <div className=''>
+                        <div className='roomdetail'>
+                            <span className='title'>Hotel Name: </span>
+                            <span className='sub-title'>{hotel.HotelName}</span>
+                        </div>
+                        <div className='roomdetail'>
+                            <span className='title'>Location: </span>
+                            <span className='sub-title'>{hotel.Location}</span>
+                        </div>
 
-        {/* Pagination */}
-        <div className='paginationparent'>
-                <div className='pagination'>
-                    <span onClick={() => selectPageHandler(page - 1)}>&lt;</span>
-                    {
-                        hoteldata.data && hoteldata.data.length > 0 ? (
-                            Array.from({ length: Math.ceil(hoteldata.data.length / itemsPerPage) }).map((_, i) => {
-                                return (
-                                    <span
-                                        className={page === i + 1 ? "pagination_selected" : ""}
-                                        onClick={() => selectPageHandler(i + 1)}
-                                        key={i}
-                                    >
-                                        {i + 1}
-                                    </span>
-                                );
-                            })
-                        ) : (
-                            <p>No Data to Paginate</p> // This helps detect if the array is empty
-                        )
-                    }
-                    <span onClick={() => selectPageHandler(page + 1)}>&gt;</span>
+                        <div className='roomdetail'>
+                            <span className='title'>Other Facilty: </span>
+                            <span className='sub-title' id="otherfacility">{hotel.OtherFacility}</span>
+                        </div>
+
+                        <div className='roomdetail'>
+                            <span className='title'>Room Type: </span>
+                            <span className='sub-title'>{hotel.RoomType}</span>
+                        </div>
+                        <div className='roomdetail'>
+                            <span className='title'>Bed Type: </span>
+                            <span className='sub-title'>{hotel.BedType}</span>
+                        </div>
+                    </div>
+
+                    <div className='roompriceparent'>
+                        <div className='roomprice'>
+                            <div className='reviewscore'>
+                                {hotel.ReviewScore}
+                            </div>
+                            <div className='rating'>
+                                {hotel.Rating}
+                            </div>
+                        </div>
+                        <div className='roomprice-1'>
+                            Rs. {hotel.RoomPrice}
+                        </div>
+                    </div>
                 </div>
-            </div>
-      </div>
+            ))
+        ) : (
+            <p>Loading ....</p>
+        )}
+    </div>
+
+    <div className='paginationparent'>
+        <div className='pagination'>
+            <span onClick={() => selectPageHandler(page - 1)}>&lt;</span>
+            {
+                hoteldata.data && hoteldata.data.length > 0 ? (
+                    Array.from({ length: Math.ceil(hoteldata.data.length / itemsPerPage) }).map((_, i) => {
+                        return (
+                            <span
+                                className={page === i + 1 ? "pagination_selected" : ""}
+                                onClick={() => selectPageHandler(i + 1)}
+                                key={i}
+                            >
+                                {i + 1}
+                            </span>
+                        );
+                    })
+                ) : (
+                    <p>No Data to Paginate</p> // This helps detect if the array is empty
+                )
+            }
+            <span onClick={() => selectPageHandler(page + 1)}>&gt;</span>
+        </div>
+    </div>
+
+</div>
     )
 }
 

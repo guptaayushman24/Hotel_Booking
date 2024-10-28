@@ -14,9 +14,9 @@
     margin-top: 0.5rem;
     height: 14.5rem;
     width: 24rem;
+   
     margin-left: 1rem;
 }
-
 .roomdetailparent {
     display: flex;
     flex-direction: column;
@@ -65,24 +65,25 @@
     font-weight: bold;
 }
 .paginationparent{
-   margin-left: 10rem;
-   
-}
-.pagination {
-    padding: 10px;
-    margin: 15px;
-    display: flex;
-    justify-content: center;
-    background-color: green;
+    margin-left: 10rem;
     
+ }
+ .pagination {
+     padding: 10px;
+     margin: 15px;
+     display: flex;
+     justify-content: center;
+     background-color: green;
+     
+ 
+ }
+ 
+ .pagination>span {
+     padding: 15px;
+     border: 15px solid gray;
+     cursor: pointer;
+ }
+ .pagination_selected{
+     background-color: rgb(220,220,220);
+ }
 
-}
-
-.pagination>span {
-    padding: 15px;
-    border: 15px solid gray;
-    cursor: pointer;
-}
-.pagination_selected{
-    background-color: rgb(220,220,220);
-}

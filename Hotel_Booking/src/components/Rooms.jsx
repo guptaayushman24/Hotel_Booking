@@ -57,6 +57,7 @@ function Rooms() {
 
 
   async function fetchhoteldata() {
+    CompareDate();
     setdisplayalldata(true);
 
   }
@@ -73,6 +74,8 @@ function Rooms() {
   const [datecheckout, setDatecheckout] = useState(null);
   const [showcalendarcheckout, setshowcalendarcheckout] = useState(false);
 
+  // Error state for the date
+  const [error, setError] = useState("");
 
   // Slider State
   const [value, setValue] = useState(null);
@@ -224,7 +227,15 @@ function Rooms() {
     }
   }
 
+    // Handling the checkin date and checkout date
 
+    function CompareDate(){
+      console.log(date);
+      console.log(datecheckout);
+      if (datecheckout<date){
+        alert("Check-out date cannot be earlier than check-in date");
+      }
+    }
 
 
 

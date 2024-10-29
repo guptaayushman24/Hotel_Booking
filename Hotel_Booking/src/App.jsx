@@ -49,7 +49,7 @@ function App() {
   return (
     <>
 
-      {/* <UserProvider>
+      <UserProvider>
       <BrowserRouter>
         <Routes>
         <Route path='/' element={<Home/>}></Route>
@@ -57,13 +57,14 @@ function App() {
           <Route path='/signin' element={<Login/>}></Route>
           <Route path='/rooms' element={<Rooms/>}></Route>
           <Route path='/bookingpage' element={<Hotel_Booking/>}></Route>
+          <Route path='/orderhistory' element={<Order_History/>}></Route>
         </Routes>
       </BrowserRouter>
-      </UserProvider> */}
+      </UserProvider>
 
-    <UserProvider>
+    {/* <UserProvider>
         <Order_History></Order_History>
-    </UserProvider>
+    </UserProvider> */}
     </>
   )
 }

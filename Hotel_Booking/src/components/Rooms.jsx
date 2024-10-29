@@ -17,9 +17,10 @@ import RoomViewFilter from './RoomViewFilter';
 
 import { UserContext } from '../Context/Context';
 import Allrooms from './All_rooms';
+import {useNavigate } from 'react-router-dom';
 function Rooms() {
   // Function for fetching the hotel data
-  // const view = useContext(UserContext);
+  const navigate = useNavigate();
   const roomviewcheckboxselected = useContext(UserContext);
   const roomviewfacility = useContext(UserContext);
 
@@ -58,12 +59,7 @@ function Rooms() {
 
   async function fetchhoteldata() {
     CompareDate();
-    if (roomviewfacility.date!=null && roomviewfacility.checkoutdate!=null){
-       setdisplayalldata(true);
-    }
-    else{
-      setdisplayalldata(false);
-    }
+    setdisplayalldata(true);
 
   }
   // Creating state for the pagination
@@ -204,7 +200,7 @@ function Rooms() {
 
   useEffect(() => {
     console.log("Component renders")
-    setdisplayalldata(false);
+    setdisplayalldata(true);
   }, []);
 
   useEffect(() => {
@@ -250,6 +246,12 @@ function Rooms() {
       }
     }
 
+    // Navigating to the Order History Page
+    function showorderhistory(){
+      navigate('/orderhistory');
+    }
+    
+
 
 
 
@@ -267,7 +269,7 @@ function Rooms() {
           <div className='rooms'>
             Rooms
           </div>
-          <div className='orderhistpry'>
+          <div className='orderhistpry' onClick={showorderhistory}>
             Order History
           </div>
 

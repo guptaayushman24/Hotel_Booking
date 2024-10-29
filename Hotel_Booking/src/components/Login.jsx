@@ -17,6 +17,7 @@ function Login() {
     const invalidpassword = useRef();
     const {setusername} = useContext(UserContext);
     const {setuserlastname} = useContext(UserContext);
+    const {setuseremail} = useContext(UserContext);
 
     let emailcheck,passwordcheck = false;
     const navigate = useNavigate();
@@ -78,6 +79,7 @@ function Login() {
                 if (response.status==200){
                     setusername(response.data.username);
                     setuserlastname(response.data.userlastname);
+                    setuseremail(response.data.useremail);
                     navigate('/rooms')
                 }
                 else if (response.status==201){

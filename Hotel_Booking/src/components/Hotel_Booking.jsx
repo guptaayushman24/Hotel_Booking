@@ -14,6 +14,8 @@ function Hotel_Booking() {
             HotelName:data.hotelname,
             Price:data.hotelprice,
             UserName:data.username,
+
+            Email:data.useremail,
             CheckinDate:data.date,
             CheckoutDate:data.checkoutdate
            })

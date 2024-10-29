@@ -12,6 +12,11 @@ const orderhistory = new mongoose.Schema({
         type:String,
         require:true
     },
+    Email:{
+        type:String,
+        
+        require:true
+    },
     CheckinDate:{
         type:String,
         

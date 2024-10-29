@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const OrderHistoryschema = require('../schema/Order_History');
+// Function to save the Order History
 async function orderhistory(req, res) {
     try {
         const orderhistorydata = req.body;
@@ -12,6 +13,20 @@ async function orderhistory(req, res) {
     }
 
 }
+
+
+// Function to display the hotel details booked by the user
+async function displayorderhistory(req,res){
+    try{
+        const body = req.body.Email;
+        const data = await OrderHistoryschema.find({'Email':body})
+        return res.json({data});
+    }
+    catch(err){
+       return res.status(500).json({message:err.message});
+    }
+}
 module.exports = {
-    orderhistory
+    orderhistory,
+    displayorderhistory
 }

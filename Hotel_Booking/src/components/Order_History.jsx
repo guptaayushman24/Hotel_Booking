@@ -1,32 +1,63 @@
-import React from 'react'
-import { useEffect,useState } from 'react'
+import { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import { UserContext } from '../Context/Context';
 import './Order_History.css'
 function Order_History() {
-  return (
-    <div class="box">
-   
-    <div class="heading">Booking Detail</div>
+  const data = useContext(UserContext);
+  const [orderhistorydata, setorderhistorydata] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-   
-    <div class="details">
-    <div class="detail-item">Hotel Name
-    <div class="detail-content">Grand Palace Hotel</div>
-    </div>
-    <div class="detail-item">Price
-    <div class="detail-content">Rs10005454</div></div>
+  async function fetchorderhistory() {
+    try {
+      const response = await axios.post('http://localhost:5000/orderhistorydetail', {
+        Email: data.useremail
+      });
+      setorderhistorydata(response.data);
+      console.log(response.data);
+      setLoading(false); // Data is loaded
+    } catch (err) {
+      console.error("Error fetching order history:", err);
+      setLoading(false); // Stop loading even if there's an error
+    }
+  }
+
+  useEffect(() => {
+    console.log(typeof(orderhistorydata));
+    fetchorderhistory();
+  },[]);
+ 
+
+  return (
+    <>
+            <div className="heading">Booking Detail</div>
+      {orderhistorydata && orderhistorydata.data && orderhistorydata.data.length > 0 ? (
+        orderhistorydata.data.map((order, index) => (
+          <div className="box" key={order._id}>
         
-    <div class="detail-item">Name
-    <div class="detail-content">Alice</div>
-    </div>
-    <div class="detail-item">ChecinDate
-    <div class="detail-content">Thu 26Feb 2024</div>
-    </div>
-    <div class="detail-item">ChecoutDate
-    <div class="detail-content">Thu 28May 2024</div>
-    </div>
-    </div>
-</div>
-  )
+            <div className="details">
+              <div className="detail-item">Hotel Name
+                <div className="detail-content">{order.HotelName || "No data"}</div>
+              </div>
+              <div className="detail-item">Price
+                <div className="detail-content">{order.Price || "No data"}</div>
+              </div>
+              <div className="detail-item">Name
+                <div className="detail-content">{order.UserName || "No data"}</div>
+              </div>
+              <div className="detail-item">Checkin Date
+                <div className="detail-content">{order.CheckinDate || "No data"}</div>
+              </div>
+              <div className="detail-item">Checkout Date
+                <div className="detail-content">{order.CheckoutDate || "No data"}</div>
+              </div>
+            </div>
+          </div>
+        ))
+      ) : (
+        <div>Loading...</div>
+      )}
+    </>
+  );
 }
 
-export default Order_History
+export default Order_History;

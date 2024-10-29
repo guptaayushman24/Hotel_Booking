@@ -42,6 +42,7 @@ function Allrooms() {
   // Storing the checkin and checkout date
   const data = useContext(UserContext);
 
+
   const bookhotel = (e) => {
     console.log("Div Clicked");
     const hotelprice = e.target.closest('.roomviewsparent').querySelector('.roomprice-1').textContent;
@@ -57,7 +58,9 @@ function Allrooms() {
     sethotelrating(hotelrating);
     console.log(hotelrating);
 
-    navigate('/bookingpage')
+    
+    // These function is checking that CheckIn Date and CheckOut Date are selected and in the right order
+    
 
   };
 

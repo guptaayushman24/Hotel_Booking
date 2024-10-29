@@ -58,7 +58,12 @@ function Rooms() {
 
   async function fetchhoteldata() {
     CompareDate();
-    setdisplayalldata(true);
+    if (roomviewfacility.date!=null && roomviewfacility.checkoutdate!=null){
+       setdisplayalldata(true);
+    }
+    else{
+      setdisplayalldata(false);
+    }
 
   }
   // Creating state for the pagination
@@ -66,12 +71,14 @@ function Rooms() {
 
   const [selectedValue, SetselectedValue] = useState('');
   // Checkin
-  const [date, setDate] = useState(null);
+  const {setdate} = useContext(UserContext);
+  // Checkout
+  const {setcheckoutdate} = useContext(UserContext);
   const [showcalendar, setshowcalendar] = useState(false);
   const [calendarstate, setCalendarState] = useState(false);
 
   // Checkout
-  const [datecheckout, setDatecheckout] = useState(null);
+  // const [datecheckout, setDatecheckout] = useState(null);
   const [showcalendarcheckout, setshowcalendarcheckout] = useState(false);
 
  
@@ -87,7 +94,7 @@ function Rooms() {
   
 
   const changeValue = (selectedDate) => {
-    setDate(selectedDate);      // Set the selected date
+    setdate(selectedDate);      // Set the selected date
 
     setCalendarState(false);    // Close the calendar
 
@@ -197,7 +204,7 @@ function Rooms() {
 
   useEffect(() => {
     console.log("Component renders")
-    setdisplayalldata(true);
+    setdisplayalldata(false);
   }, []);
 
   useEffect(() => {
@@ -210,7 +217,7 @@ function Rooms() {
 
   const changeValuecheckout = (selectedDate) => {
 
-    setDatecheckout(selectedDate);      // Set the selected date
+    setcheckoutdate(selectedDate);      // Set the selected date
 
     setshowcalendarcheckout(false);    // Close the calendar
 
@@ -234,10 +241,12 @@ function Rooms() {
     // Handling the checkin date and checkout date
 
     function CompareDate(){
-      console.log(date);
-      console.log(datecheckout);
-      if (datecheckout<date){
+      if (roomviewfacility.checkoutdate<roomviewfacility.date){
         alert("Check-out date cannot be earlier than check-in date");
+        setdisplayalldata(false);
+      }
+      else{
+        setdisplayalldata(true);
       }
     }
 
@@ -300,14 +309,14 @@ function Rooms() {
               <button className='togglebtn' onClick={toggle}><svg xmlns="http://www.w3.org/2000/svg" height="15px" width="15px" viewBox="0 0 320 512"><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" /></svg></button>
               {
                 showcalendar && (
-                  <Calendar onChange={changeValue} value={date} />
+                  <Calendar onChange={changeValue} value={roomviewfacility.date} />
                 )
               }
 
             </div>
           </div>
           <div className='showdate'>
-            Check-In Date:-  {date ? date.toDateString() : 'No date selected'}
+            Check-In Date:-  {roomviewfacility.date ? roomviewfacility.date.toDateString() : 'No date selected'}
           </div>
         </div>
 
@@ -323,14 +332,14 @@ function Rooms() {
               <button className='togglebtn' onClick={togglecheckout}><svg xmlns="http://www.w3.org/2000/svg" height="15px" width="15px" viewBox="0 0 320 512"><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" /></svg></button>
               {
                 showcalendarcheckout && (
-                  <Calendar onChange={changeValuecheckout} value={datecheckout} />
+                  <Calendar onChange={changeValuecheckout} value={roomviewfacility.checkoutdate} />
                 )
               }
 
             </div>
           </div>
           <div className='showdate'>
-            Check-OUT Date:-  {datecheckout ? datecheckout.toDateString() : 'No date selected'}
+            Check-OUT Date:-  {roomviewfacility.checkoutdate ? roomviewfacility.checkoutdate.toDateString() : 'No date selected'}
           </div>
         </div>
         <div className='search'>

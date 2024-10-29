@@ -1,0 +1,47 @@
+/* Outer box styling */
+.box {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center the heading */
+    margin: 0 auto; /* Center the box on the page */
+}
+
+/* Heading styling */
+.heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px; /* Space between heading and detail divs */
+}
+
+/* Detail items container styling */
+.details {
+    display: flex;
+    justify-content: flex-start; /* Align items to the left */
+    gap: 10px; /* Space between each item */
+    flex-wrap: wrap; /* Wrap items to a new line if needed */
+    flex-direction: column;
+}
+
+/* Individual detail item styling */
+.detail-item {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex: 1 1 80px; /* Responsive width for each item */
+    text-align: center;
+}
+/* Title styling */
+.detail-title {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+/* Content styling */
+.detail-content {
+    background-color: f5f5f5;
+    margin-top: 0.5rem;
+}

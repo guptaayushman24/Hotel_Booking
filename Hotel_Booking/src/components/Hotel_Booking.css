@@ -7,7 +7,7 @@
 .hoteldetail {
     box-shadow: 10px 10px 5px 12px rgb(178, 33, 218);
     margin-top: 1rem;
-    height: 35rem;
+    height: 38rem;
     width: 50rem;
     margin-top: 5rem;
 }
@@ -31,6 +31,7 @@
     flex-direction: row;
     background-color: green;
     margin-top: 0.2rem;
+    margin-top: 1rem;
 }
 
 .hotelimage {
@@ -77,4 +78,5 @@
     border: none;
     width: 16rem;
     border-radius: 0.5rem;
+    margin-top: 2rem;
 }

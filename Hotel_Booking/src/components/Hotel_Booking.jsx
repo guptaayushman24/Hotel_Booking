@@ -2,18 +2,37 @@ import React, { useContext, useDeferredValue, useEffect, useState } from 'react'
 import './Hotel_Booking.css'
 import { UserContext } from '../Context/Context'
 import StripeCheckout from "react-stripe-checkout"
+import axios from 'axios'
 function Hotel_Booking() {
     const data = useContext(UserContext);
-    // const [product, setProduct] = useState({
-    //     name: "React from FB",
-    //     price: 10,
-    //     productBy: "facebook",
-    // })
+    console.log(data);
+
+    // Post the data in the Order History of the user
+    async function orderhistory(){
+        try{
+            await axios.post('http://localhost:5000/orderhistory',{
+            HotelName:data.hotelname,
+            Price:data.hotelprice,
+            UserName:data.username,
+            CheckinDate:data.date,
+            CheckoutDate:data.checkoutdate
+           })
+      }
+      catch(err){
+        console.log(err.message);
+      }
+
+    }
+    const [product, setProduct] = useState({
+        name: "React from FB",
+        price: 10,
+        productBy: "facebook",
+    })
     useEffect(() => {
         console.log("Price in the hotel booking is", data.hotelprice);
         console.log("Name of the hotel is", data.hotelname);
+        
         console.log("Rating of the hotel is ", data.hotelrating);
-
         console.log("Other Facility in hotel is", data.checkboxSelected);
 
     })
@@ -29,7 +48,7 @@ function Hotel_Booking() {
         }
 
         try {
-            const response = await fetch(`http://localhost5000/payment`, {
+            const response = await fetch('http://localhost:5000/payment', {
                 method: "POST",
                 header,
                 body: JSON.stringify(body)
@@ -37,6 +56,9 @@ function Hotel_Booking() {
             console.log(response);
             const { status } = response;
             console.log(status);
+            if (status==200){
+                orderhistory();
+            }
         } catch (err) {
             return console.log(err);
         }
@@ -66,6 +88,12 @@ function Hotel_Booking() {
                             </div>
                             <div className='roomtype'>
                                 {data.checkboxSelected}
+                            </div>
+                            <div className='roomtype'>
+                                CheckIn Data:- {data.date ? data.date.toDateString():'No date'}
+                            </div>
+                            <div className='roomtype'>
+                                CheckOut Data:- {data.checkoutdate ? data.checkoutdate.toDateString():'No date'}
                             </div>
                         </div>
                     </div>

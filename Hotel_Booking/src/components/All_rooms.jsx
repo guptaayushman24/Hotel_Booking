@@ -10,7 +10,7 @@ function Allrooms() {
   const {sethotelprice} = useContext(UserContext);
   const {sethotelname} = useContext(UserContext);
   const {sethotelrating} = useContext(UserContext);
-
+  const navigate = useNavigate();
   // Fetching data
   async function fetchhoteldata() {
     try {
@@ -39,6 +39,9 @@ function Allrooms() {
     }
   };
 
+  // Storing the checkin and checkout date
+  const data = useContext(UserContext);
+
   const bookhotel = (e) => {
     console.log("Div Clicked");
     const hotelprice = e.target.closest('.roomviewsparent').querySelector('.roomprice-1').textContent;
@@ -54,7 +57,7 @@ function Allrooms() {
     sethotelrating(hotelrating);
     console.log(hotelrating);
 
-    navigate('/bookingpage');
+    navigate('/bookingpage')
 
   };
 

@@ -1,0 +1,90 @@
+.spanadd{
+    color: black;
+    font-size: 6rem;
+}
+.blogparent{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: red;
+}
+.spanblog{
+    color: #146fef;
+    font-size: 6rem;
+    margin-inline: 1.5rem;
+}
+.parenttitle{
+    
+    margin-left: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.title{
+    font-size: 1.5rem;
+    
+    font-weight: normal;
+}
+.titlecontent{
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+}
+.titleinput{
+    border-radius: 0.5rem;
+    width: 20rem;
+    height: 2rem;
+    margin-bottom: 0.5rem;
+    border: black;
+}
+/* Add a permanent border around the input */
+#myblog {
+    width: 20rem;
+    padding: 10px;
+    border: 2px solid black; /* Permanent border color */
+    border-radius: 5px; /* Optional, to make rounded corners */
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Style the placeholder text */
+#myblog::placeholder {
+    color: #999; /* Color for the placeholder text */
+    opacity: 1; /* Ensures the placeholder is fully visible */
+}
+.titleinput::placeholder {
+    color: #999;
+}
+#textarea{
+    width: 20rem;
+    padding: 10px;
+    border: 2px solid black; /* Permanent border color */
+    border-radius: 5px; /* Optional, to make rounded corners */
+    box-sizing: border-box;
+    font-size: 16px;
+}
+#textarea::placeholder {
+    color: #999; /* Color for the placeholder text */
+    opacity: 1; /* Ensures the placeholder is fully visible */
+}
+.postblogbutton{
+    display: flex;
+    justify-content: center;
+}
+.postblog{
+    margin-left: 10rem;
+    margin-top: 1rem;
+}
+.postblogbutton{
+    width: 12rem;
+    height: 2rem;
+    align-items: center;
+    color: white;
+    background-color: #1570ef;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+}
+

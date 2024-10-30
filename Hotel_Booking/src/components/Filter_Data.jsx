@@ -4,7 +4,6 @@ import { CheckboxContext } from "./Context";
 import './Filter_Data.css'
 import { UserContext } from "../Context/Context";
 import { useNavigate } from 'react-router-dom';
-const Compare = require('../Functions/Compare')
 function Filter_data({ checkboxselected }) {
     const navigate = useNavigate();
     const [data, setdata] = useState([]);
@@ -15,6 +14,7 @@ function Filter_data({ checkboxselected }) {
     const { sethotelotherfacility } = useContext(UserContext);
     // var columnname = {};
     console.log("The column name is", { checkboxselected });
+   
     function fetchAndActivate() {
         axios.post("http://localhost:5000/reviewscore", {
             ReviewScore: checkboxselected // If any how we pass the data here out lots of work can be simplified
@@ -63,7 +63,7 @@ function Filter_data({ checkboxselected }) {
         console.log(hotelrating);
 
         // These function is checking that CheckIn Date and CheckOut Date are selected and in the right order
-        Compare();
+        
 
     };
 

@@ -18,6 +18,7 @@ import RoomViewFilter from './components/RoomViewFilter'
 import Hotel_Booking from './components/Hotel_Booking'
 import Allrooms from './components/All_rooms'
 import Order_History from './components/Order_History'
+import Blog from './components/Blog'
 import {BrowserRouter, Routes,Route} from "react-router-dom"
 // const router = createBrowserRouter(
   
@@ -49,7 +50,7 @@ function App() {
   return (
     <>
 
-      <UserProvider>
+      {/* <UserProvider>
       <BrowserRouter>
         <Routes>
         <Route path='/' element={<Home/>}></Route>
@@ -60,11 +61,11 @@ function App() {
           <Route path='/orderhistory' element={<Order_History/>}></Route>
         </Routes>
       </BrowserRouter>
-      </UserProvider>
+      </UserProvider> */}
 
-    {/* <UserProvider>
-        <Order_History></Order_History>
-    </UserProvider> */}
+    <UserProvider>
+     <Blog></Blog>
+    </UserProvider>
     </>
   )
 }

@@ -19,6 +19,7 @@ import Hotel_Booking from './components/Hotel_Booking'
 import Allrooms from './components/All_rooms'
 import Order_History from './components/Order_History'
 import Blog from './components/Blog'
+import SeeBlog from './components/SeeBlog'
 import {BrowserRouter, Routes,Route} from "react-router-dom"
 // const router = createBrowserRouter(
   
@@ -50,7 +51,7 @@ function App() {
   return (
     <>
 
-      {/* <UserProvider>
+      <UserProvider>
       <BrowserRouter>
         <Routes>
         <Route path='/' element={<Home/>}></Route>
@@ -59,13 +60,11 @@ function App() {
           <Route path='/rooms' element={<Rooms/>}></Route>
           <Route path='/bookingpage' element={<Hotel_Booking/>}></Route>
           <Route path='/orderhistory' element={<Order_History/>}></Route>
+          <Route path='/postblog' element={<Blog/>}></Route>
+          <Route path='/seeallblog' element={<SeeBlog/>}></Route>
         </Routes>
       </BrowserRouter>
-      </UserProvider> */}
-
-    <UserProvider>
-     <Blog></Blog>
-    </UserProvider>
+      </UserProvider>
     </>
   )
 }

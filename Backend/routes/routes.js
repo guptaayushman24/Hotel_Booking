@@ -8,7 +8,7 @@ const {stripepayment} = require('../controller/stripe');
 const {signup} = require('../controller/User_Signup');
 const {usersignin} = require('../controller/User_Signin');
 const {orderhistory,displayorderhistory} = require('../controller/Order_History');
-const {postblog} = require('../controller/Blog_Controller')
+const {postblog,displayallblog} = require('../controller/Blog_Controller')
 router.get('/getalldata',getAlldata);
 router.post('/reviewscore',filterReviewScore);
 router.post('/otherfacility',filterOtherFacility);
@@ -20,4 +20,5 @@ router.post('/signinapi',usersignin);
 router.post('/orderhistory',orderhistory);
 router.post('/orderhistorydetail',displayorderhistory);
 router.post('/blogpost',postblog);
+router.get('/allblogs',displayallblog)
 module.exports = router;

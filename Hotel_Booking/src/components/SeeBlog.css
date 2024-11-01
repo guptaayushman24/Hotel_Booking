@@ -1,0 +1,58 @@
+.mainheading{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.blogdesign{
+    margin-top: 1rem;
+    width: 100%;
+    height: 20rem;
+    background-color: red;
+}
+.blogheading{
+    background-color: green;
+    height: 2rem;
+
+}
+.blogheadingparent{
+    display: flex;
+    flex-direction: column;
+}
+.blogtitile{
+    margin-left: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.createdby{
+    margin-left: 1rem;
+    color: #327bf0;
+}
+.blogdescription{
+    margin-top: 1rem;
+    margin-left: 1rem;
+    font-size: 1.2rem;
+}
+.buttons{
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+.editbutton{
+   margin-inline: 0.5rem;
+   width: 5rem;
+   height: 1.5rem;
+   color: white;
+   background-color: #327bf0;
+   border: none;
+}
+.deletebutton{
+    margin-right: 0.5rem;
+    width: 5rem;
+    height: 1.5rem;
+    color: white;
+    background-color: red;
+    border: none;
+}
+

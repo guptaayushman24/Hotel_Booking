@@ -16,6 +16,9 @@ function Home() {
     navigate('/roomservice');
   
   }
+  function contactus(){
+    navigate('/contactus');
+  }
   return (
     <div className='parentdiv'>
     
@@ -23,7 +26,7 @@ function Home() {
         <div className='services' onClick={service}>Services</div>
         <div className='services' onClick={postblog}>Blog</div>
     
-        <div className='services' onClick={service}>Contact Us</div>
+        <div className='services' onClick={contactus}>Contact Us</div>
         <div className='services'><button id='signup' onClick={opensignup}>SingUp</button></div>
        
        

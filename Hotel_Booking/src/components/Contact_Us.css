@@ -1,0 +1,23 @@
+.contactusparent{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.contactusparenttext{
+    font-size: 2rem;
+}
+.mobileparent{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+.mobile{
+    width: 18rem;
+    height: 5rem;
+   
+    background-color: rgb(149, 161, 161);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2rem;
+}

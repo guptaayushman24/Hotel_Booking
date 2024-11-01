@@ -22,6 +22,7 @@ import Blog from './components/Blog'
 import SeeBlog from './components/SeeBlog'
 import {BrowserRouter, Routes,Route} from "react-router-dom"
 import Services from './components/Services'
+import Contact_Us from './components/Contact_Us'
 // const router = createBrowserRouter(
   
 //   [ 
@@ -64,9 +65,11 @@ function App() {
           <Route path='/postblog' element={<Blog/>}></Route>
           <Route path='/seeallblog' element={<SeeBlog/>}></Route>
           <Route path='/roomservice' element={<Services/>}></Route>
+          <Route path='/contactus' element={<Contact_Us/>}></Route>
         </Routes>
       </BrowserRouter>
       </UserProvider>
+     
     </>
   )
 }

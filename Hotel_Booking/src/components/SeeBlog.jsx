@@ -27,7 +27,7 @@ function SeeBlog() {
             <div className='blogdesign' key={order._id}>
               <div className='blogheadingparent'>
                 <div className='blogtitle'>{order.Title || "No data"}</div>
-                <div className='createdby'>Created By:- Alice</div>
+                <div className='createdby'>Created By:- {order.WritterName || "No data"}</div>
               </div>
               <div className='blogdescription'>
                 {order.Blog || "No data"}

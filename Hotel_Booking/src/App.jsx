@@ -21,6 +21,7 @@ import Order_History from './components/Order_History'
 import Blog from './components/Blog'
 import SeeBlog from './components/SeeBlog'
 import {BrowserRouter, Routes,Route} from "react-router-dom"
+import Services from './components/Services'
 // const router = createBrowserRouter(
   
 //   [ 
@@ -62,6 +63,7 @@ function App() {
           <Route path='/orderhistory' element={<Order_History/>}></Route>
           <Route path='/postblog' element={<Blog/>}></Route>
           <Route path='/seeallblog' element={<SeeBlog/>}></Route>
+          <Route path='/roomservice' element={<Services/>}></Route>
         </Routes>
       </BrowserRouter>
       </UserProvider>

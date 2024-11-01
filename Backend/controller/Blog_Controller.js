@@ -4,13 +4,17 @@ const BlogSchema = require('../schema/Blogs_Schema');
 async function postblog(req, res) {
     try {
         const userblog = req.body;
-        if (userblog.Title == '' && userblog.Blog == '') {
-            return res.status(203).json({ 'msg': 'Both Title and Blog is required' });
+        if (userblog.Title == '' && userblog.Blog == '' && userblog.WritterName=='') {
+            return res.status(203).json({ 'msg': 'Writter Name,Title and Author is required' });
+        }
+        if (userblog.WritterName==''){
+            return res.status(204).json({'msg':'Writter Name is required'});
         }
         if (userblog.Title == '') {
             return res.status(201).json({ 'msg': 'Title is required' });
         }
         if (userblog.Blog == '') {
+            
             return res.status(202).json({ 'msg': 'Blog is required' });
         }
         const user = await BlogSchema(userblog).save();

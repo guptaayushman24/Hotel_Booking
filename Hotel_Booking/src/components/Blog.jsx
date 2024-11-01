@@ -4,17 +4,22 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 function Blog() {
   const navigate = useNavigate();
+  const [writtername,setwritternmae] = useState('');
   const [title, setitle] = useState('');
   const [blog, setblog] = useState('');
   async function postblog() {
     try {
       const response = await axios.post('http://localhost:5000/blogpost', {
+        WritterName:writtername,
         Title: title,
         Blog: blog
       })
       if (response.status == 203) {
-        return alert('Both Title and Blog is required');
-      
+        
+        return alert('Writter Name,Title and Author is required');
+      }
+      if (response.status==204){
+        return alert('Writter Name is required');
       }
       if (response.status == 201) {
 
@@ -37,6 +42,12 @@ function Blog() {
         <span className='spanadd'>Add</span> <span className='spanblog'>Blog</span>
       </div>
       <div className='parenttitle'>
+      <div className='title'>
+          Writter Name
+        </div>
+        <div className='titlecontent'>
+          <input type='text' className='titleinput' placeholder='My Blog' id='myblog' onChange={(e) => setwritternmae(e.target.value)}></input>
+        </div>
         <div className='title'>
           Title
         </div>

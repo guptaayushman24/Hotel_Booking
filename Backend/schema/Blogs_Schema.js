@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 const blogschema = new mongoose.Schema({
+    WritterName:{
+        type:String,
+        require:true,
+    },
     Title:{
         type:String,
         require:true  

@@ -12,14 +12,18 @@ function Home() {
   function postblog(){
     navigate('/postblog')
   }
+  function service(){
+    navigate('/roomservice');
+  
+  }
   return (
     <div className='parentdiv'>
     
       <div className='navbar'>
-        <div className='services'>Services</div>
+        <div className='services' onClick={service}>Services</div>
         <div className='services' onClick={postblog}>Blog</div>
     
-        <div className='services'>Contact Us</div>
+        <div className='services' onClick={service}>Contact Us</div>
         <div className='services'><button id='signup' onClick={opensignup}>SingUp</button></div>
        
        

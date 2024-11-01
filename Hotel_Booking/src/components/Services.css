@@ -1,0 +1,30 @@
+.hotelserviceparent{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    
+}
+.roomheading{
+    font-size: 2rem;
+    font-weight: bold;
+}
+.roomservice{
+    height: 4rem;
+    width: 16rem;
+    border-radius: 1rem;
+    
+    background-color: #8b1bd1;
+    margin-top: 2rem;
+    
+}
+
+
+.roomservicetxt{
+    display: flex;
+    justify-content: center;    
+    margin-top: 1rem;
+    font-size: 1.6rem;
+   
+}

@@ -14,7 +14,8 @@ function Filter_data({ checkboxselected }) {
     const { sethotelotherfacility } = useContext(UserContext);
     // var columnname = {};
     console.log("The column name is", { checkboxselected });
-   
+
+    const contextdata = useContext(UserContext);
     function fetchAndActivate() {
         axios.post("http://localhost:5000/reviewscore", {
             ReviewScore: checkboxselected // If any how we pass the data here out lots of work can be simplified
@@ -63,6 +64,19 @@ function Filter_data({ checkboxselected }) {
         console.log(hotelrating);
 
         // These function is checking that CheckIn Date and CheckOut Date are selected and in the right order
+
+         // Handling the checkin date and checkout date
+
+         if (contextdata.checkoutdate==null && contextdata.date==null){
+            alert("Please select the checkin and checkout date before booking")
+        }
+        // These else if is checking that CheckIn Date and CheckOut Date are selected and in the right order
+        else if (contextdata.checkoutdate<contextdata.date){
+          alert("Check-out date cannot be earlier than check-in date");
+        }
+        else{
+           navigate('/bookingpage');
+        }
         
 
     };

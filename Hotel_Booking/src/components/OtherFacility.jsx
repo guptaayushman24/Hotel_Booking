@@ -77,7 +77,20 @@ function OtherFacility() {
         sethotelrating(hotelrating);
         console.log(hotelrating);
 
-        navigate('/bookingpage');
+        
+
+         // Handling the checkin date and checkout date
+
+         if (checkboxselected.checkoutdate==null && checkboxselected.date==null){
+            alert("Please select the checkin and checkout date before booking")
+        }
+        // These else if is checking that CheckIn Date and CheckOut Date are selected and in the right order
+        else if (checkboxselected.checkoutdate<checkboxselected.date){
+          alert("Check-out date cannot be earlier than check-in date");
+        }
+        else{
+           navigate('/bookingpage');
+        }
     }
 
     // Render data

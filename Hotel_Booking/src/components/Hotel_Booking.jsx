@@ -3,14 +3,16 @@ import './Hotel_Booking.css'
 import { UserContext } from '../Context/Context'
 import StripeCheckout from "react-stripe-checkout"
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 function Hotel_Booking() {
     const data = useContext(UserContext);
+    const navigate = useNavigate();
     console.log(data);
 
     // Post the data in the Order History of the user
     async function orderhistory(){
         try{
-            await axios.post('http://localhost:5000/orderhistory',{
+           const response =  await axios.post('http://localhost:5000/orderhistory',{
             HotelName:data.hotelname,
             Price:data.hotelprice,
             UserName:data.username,
@@ -19,6 +21,9 @@ function Hotel_Booking() {
             CheckinDate:data.date,
             CheckoutDate:data.checkoutdate
            })
+           if (response.status==200){
+             navigate('/orderhistory');
+           }
       }
       catch(err){
         console.log(err.message);

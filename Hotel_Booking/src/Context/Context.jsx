@@ -14,10 +14,10 @@ const UserProvider = ({ children }) => {
     const [date,setdate] = useState(null);
     const [checkoutdate,setcheckoutdate] = useState(null);
     const [useremail,setuseremail] = useState('');
-   
+    const [displayalldata,setdisplayalldata] = useState(false);
     return (
         <UserContext.Provider value={{ checkboxSelected, setCheckboxSelected,roomviewcheckboxselected,setroomviewcheckboxselected 
-        ,roomviewfacility,setroomviewfacility,hotelprice,sethotelprice,hotelname,sethotelname,hotelrating,sethotelrating,username,setusername,userlastname,setuserlastname,date,setdate,checkoutdate,setcheckoutdate,useremail,setuseremail}}>
+        ,roomviewfacility,setroomviewfacility,hotelprice,sethotelprice,hotelname,sethotelname,hotelrating,sethotelrating,username,setusername,userlastname,setuserlastname,date,setdate,checkoutdate,setcheckoutdate,useremail,setuseremail,displayalldata,setdisplayalldata}}>
             {children}
         </UserContext.Provider>
     

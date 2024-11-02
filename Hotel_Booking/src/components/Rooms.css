@@ -137,6 +137,7 @@ img {
     width: 100%;
     flex-direction: row;
     margin-top: 6rem;
+    padding-bottom: 60px;
 
 }
 
@@ -279,7 +280,7 @@ img {
     font-size: 1rem;
     font-weight: bold;
 }
-.paginationparent{
+/* .paginationparent{
    margin-left: 10rem;
    
 }
@@ -287,8 +288,12 @@ img {
     padding: 10px;
     margin: 15px;
     display: flex;
+    position: fixed;
     justify-content: center;
-    background-color: green;
+    bottom: 0;
+    width: 100%;
+    margin-left: 2rem;
+    
     
 
 }
@@ -300,4 +305,19 @@ img {
 }
 .pagination_selected{
     background-color: rgb(220,220,220);
+} */
+
+.pagination-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: white; /* Background to make pagination stand out */
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow for emphasis */
+  }
+  .pagination {
+   background-color: orange;
 }
+

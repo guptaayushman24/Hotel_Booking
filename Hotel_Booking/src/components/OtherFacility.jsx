@@ -7,6 +7,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 function OtherFacility() {
     const navigate = useNavigate();
     const checkboxselected = useContext(UserContext)
+    // const {setdisplayalldata} = useContext(UserContext);
     // console.log("The context data is",contextData);
 
     const [data, setData] = useState([]);  // Store the fetched data
@@ -39,7 +40,7 @@ function OtherFacility() {
             }
             setLoading(false);
         } catch (error) {
-            console.error("Error fetching data:", error?.response?.data || error.message);
+            // console.error("Error fetching data:", error?.response?.data || error.message);
             setError("Error fetching data");
             setLoading(false);
         }
@@ -49,7 +50,6 @@ function OtherFacility() {
     // Use effect to fetch data when `checkboxselected` changes
     useEffect(() => {
         console.log("useEffect triggered for otherfacility:", checkboxselected);
-        // alert("Other Facility component is called");
         fetchAndActivate1();
     }, [checkboxselected]);  // Include `checkboxselected` in the dependency array
 

@@ -40,6 +40,7 @@ function Rooms() {
   const [wonderfulfilter, setwonderfilter] = useState(false);
 
   const [displayalldata, setdisplayalldata] = useState(false);
+  // const {setdisplayalldata} = useContext(UserContext);
 
 
 
@@ -143,6 +144,7 @@ function Rooms() {
     if (id === 1 && !currentCheckbox.checked) {
       setcheckboxselected('');
       setfilterexcellentchecked(!filterexcellentchecked);
+      setdisplayalldata(true);
     }
 
     // Handling the Good Condition
@@ -156,6 +158,7 @@ function Rooms() {
       setcheckboxselected('');
       setfilterexcellentchecked(!filterexcellentchecked);
       setgoodfilter(!goodfilter);
+      setdisplayalldata(true);
     }
 
 
@@ -172,6 +175,7 @@ function Rooms() {
       setfilterexcellentchecked(!filterexcellentchecked);
       setgoodfilter(!goodfilter);
       setverygoodfilter(!verygoodfilter);
+      setdisplayalldata(true);
     }
 
     // Handling the Wonderful Condition
@@ -189,10 +193,15 @@ function Rooms() {
       setgoodfilter(!goodfilter);
       setverygoodfilter(!verygoodfilter);
       setwonderfilter(!wonderfulfilter);
+      setdisplayalldata(true);
     }
     // Update the state with the new array
     setCheckboxes(newCheckboxes);
   }
+
+  
+
+
 
 
 
@@ -201,13 +210,30 @@ function Rooms() {
   useEffect(() => {
     console.log("Component renders")
     setdisplayalldata(true);
-  }, []);
+    if (roomviewfacility.checkboxSelected!=''){
+      setdisplayalldata(false);
+    }
+    else if (roomviewfacility.roomviewcheckboxselected!=''){
+      setdisplayalldata(false);
+    }
+    else{
+      setdisplayalldata(true);
+    }
+  }, [roomviewfacility.checkboxSelected,roomviewfacility.roomviewcheckboxselected]);
 
   useEffect(() => {
   }, [hoteldata]); // Runs only when `hoteldata` updates
 
 
   useEffect(() => {
+    console.log("Displaydata",displayalldata);
+    console.log("filterexcellentchecked",filterexcellentchecked);
+    console.log("goodfilter",goodfilter);
+    console.log("verygoodfilter",verygoodfilter);
+    console.log("otherfacility",otherfacility);
+    console.log("wonderfulfilter",wonderfulfilter)
+    console.log("roomviewfacility",roomviewfacility);
+
   }, [checkboxselected, checkboxes, otherfacility, checkboxdata, roomviewfacility]);
 
 
@@ -430,7 +456,7 @@ function Rooms() {
               <Filter_data checkboxselected={checkboxselected}></Filter_data>
             ) : wonderfulfilter ? (
               <Filter_data checkboxselected={checkboxselected}></Filter_data>
-            ) : otherfacility ? (
+            ) : otherfacility  ? (
               <OtherFacility ></OtherFacility>
             ) : roomviewfacility ? (
               <RoomViewFilter></RoomViewFilter>
@@ -441,12 +467,12 @@ function Rooms() {
               )}
         </div>
 
-
+         
       </div>
 
       {
         !excellentchecked && !filterexcellentchecked && !otherfacility && !roomviewfacility && (
-          <div className='paginationparent'>
+          <div className='paginationcontainer'>
             <div className='pagination'>
               <span onClick={() => selectPageHandler(page - 1)}>&lt;</span>
               {
@@ -456,8 +482,12 @@ function Rooms() {
               }
               <span onClick={() => selectPageHandler(page + 1)}>&gt;</span>
             </div>
+            
           </div>
+          
         )
+
+
       }
 
 

@@ -10,6 +10,7 @@ function Allrooms() {
   const {sethotelprice} = useContext(UserContext);
   const {sethotelname} = useContext(UserContext);
   const {sethotelrating} = useContext(UserContext);
+  const {setimageurl} = useContext(UserContext);
   const navigate = useNavigate();
   // Fetching data
   async function fetchhoteldata() {
@@ -43,7 +44,7 @@ function Allrooms() {
   const data = useContext(UserContext);
 
 
-  const bookhotel = (e) => {
+  const bookhotel = (e,hotel_image_url) => {
     console.log("Div Clicked");
     const hotelprice = e.target.closest('.roomviewsparent').querySelector('.roomprice-1').textContent;
     sethotelprice(hotelprice);
@@ -57,6 +58,11 @@ function Allrooms() {
     const hotelrating = e.target.closest('.roomviewsparent').querySelector('.rating').textContent;
     sethotelrating(hotelrating);
     console.log(hotelrating);
+
+    // Hotel Image
+    setimageurl(hotel_image_url);
+    console.log(hotel_image_url);
+
 
     
     
@@ -78,13 +84,14 @@ function Allrooms() {
 
   return (
     
-    <div style={{ backgroundColor: 'orange' }}>
+    <div>
 
     <div>
         {hoteldata.data ? (
             hoteldata.data.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((hotel, index) => (
-                <div key={index} className='roomviewsparent'  id={`hotel-${index}`} onClick={bookhotel}>
-                    <img src='./Hotel_Room.jpeg' className='roomimage' alt="Hotel room" />
+                <div key={index} className='roomviewsparent'  id={`hotel-${index}`} onClick={(e) => bookhotel(e,hotel.Hotel_Image_URLS)}>
+                    <img src={hotel.Hotel_Image_URLS} className="roomimage" alt="Hotel room"></img>
+
 
                     <div className=''>
                         <div className='roomdetail'>

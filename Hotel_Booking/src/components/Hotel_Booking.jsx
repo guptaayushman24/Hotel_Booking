@@ -48,7 +48,7 @@ function Hotel_Booking() {
     const makePayment = async token => {
         const body = {
             token,
-            product
+            product,
         }
         const header = {
             "Content-Type": "application/json"
@@ -87,7 +87,7 @@ function Hotel_Booking() {
                     <div className='hotelimageandprice'>
 
                         <div className='hotelimage'>
-                            <img src='./Hotel_Room.jpeg' className='roomimage' alt="Hotel room" />
+                            <img src={data.imageurl} className='roomimage' alt="Hotel room" />
                         </div>
                         <div className='priceandroomparent'>
                             <div className='hotelprice'>

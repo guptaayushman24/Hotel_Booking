@@ -19,6 +19,9 @@ function Home() {
   function contactus(){
     navigate('/contactus');
   }
+  function openblog(){
+    navigate('/seeallblog');
+  }
   return (
     <div className='parentdiv'>
     
@@ -57,7 +60,7 @@ function Home() {
         </div>
         <div style={{marginLeft:'40rem'}}>
          <p>Staying in a hotel offers a unique blend of comfort, luxury, and convenience. From the moment you step in, you're greeted by a warm atmosphere designed to make you feel at home while escaping the everyday routine. Plush beds, elegant interiors, and world-class amenities await, ensuring that relaxation comes naturally.</p>
-          <button className='readblogs'>Read Blogs</button>
+          <button className='readblogs' onClick={openblog}>Read Blogs</button>
         </div>
         </div>
       </div>

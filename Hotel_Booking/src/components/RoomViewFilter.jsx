@@ -92,13 +92,13 @@ function RoomViewFilter() {
 
     return (
 
-        <div style={{ backgroundColor: 'orange' }}>
+        <div>
 
             <div>
                 {data.filterd_data ? (
                     data.filterd_data.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((hotel, index) => (
                         <div key={index} className='roomviewsparent' onClick={bookhotel}>
-                            <img src='./Hotel_Room.jpeg' className='roomimage' alt="Hotel room" />
+                        <img src={hotel.Hotel_Image_URLS} className="roomimage" alt="Hotel room"></img>
 
                             <div className='roomdetailparent'>
                                 <div className='roomdetail'>

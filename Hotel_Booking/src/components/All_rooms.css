@@ -1,7 +1,7 @@
 .roomviewsparent {
     display: flex;
     flex-direction: row;
-    background-color: brown;
+    background-color: #ffff;
     width: 80rem;
     height: 15rem;
     margin: 10px;
@@ -38,7 +38,7 @@
 }
 
 .roomprice {
-    background-color: green;
+    background-color: #ffff;
     margin-left: 10rem;
     width: 14rem;
     display: flex;
@@ -73,14 +73,14 @@
      margin: 15px;
      display: flex;
      justify-content: center;
-     background-color: green;
+     background-color: gray;
      
  
  }
  
  .pagination>span {
      padding: 15px;
-     border: 15px solid gray;
+     border: 15px solid grey;
      cursor: pointer;
  }
  .pagination_selected{

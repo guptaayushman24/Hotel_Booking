@@ -132,7 +132,6 @@ img {
 
 .parent1 {
     display: flex;
-    background-color: red;
     height: 80rem;
     width: 100%;
     flex-direction: row;
@@ -143,7 +142,7 @@ img {
 
 .child1 {
     display: flex;
-    background-color: green;
+    background-color: whitesmoke;
     width: 20%;
     flex-direction: column;
 }
@@ -280,32 +279,7 @@ img {
     font-size: 1rem;
     font-weight: bold;
 }
-/* .paginationparent{
-   margin-left: 10rem;
-   
-}
-.pagination {
-    padding: 10px;
-    margin: 15px;
-    display: flex;
-    position: fixed;
-    justify-content: center;
-    bottom: 0;
-    width: 100%;
-    margin-left: 2rem;
-    
-    
 
-}
-
-.pagination>span {
-    padding: 15px;
-    border: 15px solid gray;
-    cursor: pointer;
-}
-.pagination_selected{
-    background-color: rgb(220,220,220);
-} */
 
 .pagination-container {
     position: fixed;

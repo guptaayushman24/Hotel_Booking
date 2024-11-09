@@ -26,6 +26,7 @@ function Home() {
     <div className='parentdiv'>
     
       <div className='navbar'>
+      <button class="menu-icon" onclick="toggleMenu()">☰</button>
         <div className='services' onClick={service}>Services</div>
         <div className='services' onClick={postblog}>Blog</div>
     
@@ -48,17 +49,17 @@ function Home() {
             <img src={'./Hotel_Image.webp'} className='image'></img>
         </div>
       </div>
-      <div className='centerdiv'>
-        <div className='contentdiv'>
-         <img src={'./Hotel_Image2.jpeg'} className='image'></img>
+      <div className='centerdivmid'>
+        <div className='contentdivmid'>
+         <img src={'./Hotel_Image2.jpeg'} className='imagemid'></img>
         </div>
-        <div style={{display:'flex',flexDirection:'column'}}>
+        <div className='.contentdivimage2'>
         <div className='imagediv2'>
         
           About us<br/>
            The best holidays<br/> start here <br/>
         </div>
-        <div style={{marginLeft:'40rem'}}>
+        <div className='divpara'>
          <p>Staying in a hotel offers a unique blend of comfort, luxury, and convenience. From the moment you step in, you're greeted by a warm atmosphere designed to make you feel at home while escaping the everyday routine. Plush beds, elegant interiors, and world-class amenities await, ensuring that relaxation comes naturally.</p>
           <button className='readblogs' onClick={openblog}>Read Blogs</button>
         </div>

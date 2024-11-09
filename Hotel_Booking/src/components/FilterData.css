@@ -25,6 +25,8 @@
     margin-left: auto;
 }
 
+
+
 .paginationparent{
     margin-left: 10rem;
     
@@ -47,3 +49,9 @@
      background-color: rgb(220,220,220);
  }
 
+
+
+ .imageclass{
+    width: 20rem;
+    height: 20rem;
+}

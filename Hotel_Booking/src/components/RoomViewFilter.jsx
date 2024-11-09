@@ -1,5 +1,5 @@
 import axios from "axios";
-import './RoomViewFilter.css'
+import "./RoomViewFilter.css"
 import { UserContext } from '../Context/Context';
 import { useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -8,30 +8,30 @@ function RoomViewFilter() {
     // const view = useContext(UserContext);
     const roomviewcheckboxselected = useContext(UserContext);
     const roomviewfacility = useContext(UserContext);
-    console.log("State of the room view state is",roomviewfacility,"Name of the roomviewfilter is",roomviewcheckboxselected);
-    console.log("Type is",roomviewcheckboxselected.roomviewcheckboxselected);
+    console.log("State of the room view state is", roomviewfacility, "Name of the roomviewfilter is", roomviewcheckboxselected);
+    console.log("Type is", roomviewcheckboxselected.roomviewcheckboxselected);
     const [data, setdata] = useState([]);
-    const [loading, setLoading] = useState(false); 
-    const [page,setPage] = useState(1);
+    const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(1);
 
-    const {sethotelprice} = useContext(UserContext);
-    const {sethotelname} = useContext(UserContext);
-   
-    const {sethotelrating} = useContext(UserContext);
+    const { sethotelprice } = useContext(UserContext);
+    const { sethotelname } = useContext(UserContext);
+
+    const { sethotelrating } = useContext(UserContext);
     // Fetching data
     async function fetchdata() {
         try {
-            
+
             setLoading(true);
-          
+
             const res = await axios.post("http://localhost:5000/filterroomview", {
                 RoomViews: roomviewcheckboxselected.roomviewcheckboxselected
             });
             console.log("API response in Room View is:", res?.data || "No data");
-            console.log("Type of data is",typeof(data));
-            console.log("Facility selected",roomviewcheckboxselected.roomviewcheckboxselected);
-            console.log("Response us",res.data.filterd_data);
-           
+            console.log("Type of data is", typeof (data));
+            console.log("Facility selected", roomviewcheckboxselected.roomviewcheckboxselected);
+            console.log("Response us", res.data.filterd_data);
+
             if (res?.data) {
                 setdata(res.data);
             }
@@ -61,34 +61,39 @@ function RoomViewFilter() {
     };
     console.log('Rendered data in Room View Filter:', data);  // Check if data is rendering
 
-    function bookhotel(e){
-        console.log("Div is clicked on the Room Views");
-        const hotelprice = e.target.closest('.roomviewsparent').querySelector('.roomprice-1').textContent;
+    const bookhotel = (e) => {
+        console.log("Div Clicked");
+        const hotelprice = e.target.closest('.roomviewsparent').querySelector('.hotelcost').textContent;
         sethotelprice(hotelprice);
         // Hotel Price
         console.log(hotelprice);
-        const hotelname = e.target.closest('.roomviewsparent').querySelector('.sub-title').textContent;
+        const hotelname = e.target.closest('.roomviewsparent').querySelector('.hotelname').textContent;
         sethotelname(hotelname);
         // Hotel Name
         console.log(hotelname);
         // Hotel Rating
-        const hotelrating = e.target.closest('.roomviewsparent').querySelector('.rating').textContent;
+        const hotelrating = e.target.closest('.roomviewsparent').querySelector('.hotelrating').textContent;
         sethotelrating(hotelrating);
         console.log(hotelrating);
 
+        // These function is checking that CheckIn Date and CheckOut Date are selected and in the right order
+
         // Handling the checkin date and checkout date
 
-        if (roomviewcheckboxselected.checkoutdate==null && roomviewcheckboxselected.date==null){
+        if (roomviewcheckboxselected.checkoutdate == null && roomviewcheckboxselected.date == null) {
             alert("Please select the checkin and checkout date before booking")
         }
         // These else if is checking that CheckIn Date and CheckOut Date are selected and in the right order
-        else if (roomviewcheckboxselected.checkoutdate<roomviewcheckboxselected.date){
-          alert("Check-out date cannot be earlier than check-in date");
+        else if (roomviewcheckboxselected.checkoutdate < roomviewcheckboxselected.date) {
+            alert("Check-out date cannot be earlier than check-in date");
         }
-        else{
-           navigate('/bookingpage');
+        else {
+            navigate('/bookingpage');
         }
-    }
+
+
+    };
+
 
     return (
 
@@ -98,49 +103,42 @@ function RoomViewFilter() {
                 {data.filterd_data ? (
                     data.filterd_data.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((hotel, index) => (
                         <div key={index} className='roomviewsparent' onClick={bookhotel}>
-                        <img src={hotel.Hotel_Image_URLS} className="roomimage" alt="Hotel room"></img>
+                            <div className='hotelimage'>
+                                <img src={hotel.
+                                    Hotel_Image_URLS} alt="Hotel_Image" className='imageclass' />
 
-                            <div className='roomdetailparent'>
-                                <div className='roomdetail'>
-                                    <span className='title'>Hotel Name: </span>
-                                    <span className='sub-title'>{hotel.HotelName}</span>
-                                </div>
-                                <div className='roomdetail'>
-                                    <span className='title'>Location: </span>
-                                    <span className='sub-title'>{hotel.Location}</span>
-                                </div>
+                            </div>
 
-                                <div className='roomdetail'>
-                                    <span className='title'>Other Facilty: </span>
-                                    <span className='sub-title'>{hotel.OtherFacility}</span>
-                                </div>
 
-                                <div className='roomdetail'>
-                                    <span className='title'>Room Type: </span>
-                                    <span className='sub-title'>{hotel.RoomType}</span>
-                                </div>
-                                <div className='roomdetail'>
-                                    <span className='title'>Bed Type: </span>
-                                    <span className='sub-title'>{hotel.BedType}</span>
-                                </div>
+                            <div className="hotelinfo">
+                                <div className='hotelname'>
+                                    Hotel Name :- {hotel.HotelName}
 
-                                <div className='roomdetail'>
-                                    <span className='title'>Room View: </span>
-                                    <span className='sub-title'>{hotel.RoomViews}</span>
+                                </div>
+                                <div className='hotellocation'>
+                                    Location :- {hotel.
+                                        Location
+                                    }
+                                </div>
+                                <div className='hotelotherfacility'>
+                                    Other Facility :- {hotel.OtherFacility}
+                                </div>
+                                <div className='hotelroomtype'>
+                                    Room Type :- {hotel.RoomType}
+                                </div>
+                                <div className='hotelbedtype'>Bed Type :- {hotel.BedType}
                                 </div>
                             </div>
 
-                            <div className='roompriceparent'>
-                                <div className='roomprice'>
-                                    <div className='reviewscore'>
-                                        {hotel.ReviewScore}
-                                    </div>
-                                    <div className='rating'>
-                                        {hotel.Rating}
-                                    </div>
+                            <div className='hotelprice'>
+                                <div className='hotelrating'>
+                                    Hotel Rating :- {hotel.Rating}
                                 </div>
-                                <div className='roomprice-1'>
-                                    Rs. {hotel.RoomPrice}
+                                <div className='hotelreviewscore'>
+                                    Hotel Review :- {hotel.ReviewScore}
+                                </div>
+                                <div className='hotelcost'>
+                                    Hotel Price :- {hotel.RoomPrice}
                                 </div>
                             </div>
                         </div>

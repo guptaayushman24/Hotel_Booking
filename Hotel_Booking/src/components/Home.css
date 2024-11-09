@@ -27,19 +27,82 @@
    font-weight: bold;
   }
 
-.centerdiv {
+  .centerdiv {
     background-color: #f2f9ff;
-    display: flex; 
+    display: flex;
     width: 100%;
-    height: 16rem;
+    height: auto; /* Set to auto to allow height to adjust with content */
     padding: 20px;
     flex-direction: row;
     margin-top: 1rem;
-  }
-  .contentdiv{
+}
+.centerdivmid {
+  background-color: #f2f9ff;
+  display: flex;
+  width: 100%;
+  height: auto; /* Set to auto to allow height to adjust with content */
+  padding: 20px;
+  flex-direction: row;
+  margin-top: 1rem;
+}
+.contentdivmid{
     font-size: 25px;
     font-weight: bold;
-  }
+}
+
+.contentdiv {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+ .imagemid{
+  width: 300px;
+  height: auto;
+ }
+
+.imagediv2 {
+    font-size: 20px;
+}
+.divpara{
+  margin-left: 40rem;
+}
+.divpara p{
+  font-size: 16px;
+}
+
+
+
+/* Media query for screen sizes below 600px */
+@media only screen and (max-width: 600px) {
+    .centerdiv {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center;
+    }
+
+    .contentdiv {
+        font-size: 20px; /* Adjust font size for smaller screens */
+        text-align: center; /* Center-align for better appearance on small screens */
+    }
+
+    .contentdivimage2, .imagediv2 {
+        align-items: center;
+        margin: 0; /* Reset margin to align elements within the centered layout */
+    }
+
+    /* Optional: Adjust button styling for smaller screens */
+    .readblogs {
+        margin-top: 10px;
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    /* Remove any fixed margin-left in inline styles */
+    .centerdiv div[style] {
+        margin-left: 0 !important;
+        text-align: center; /* Center-align text to keep it responsive */
+    }
+}
+
   .spantag{
     color: darkorange;
   }
@@ -73,37 +136,56 @@
     display: flex;
     flex-direction: row;
   }
-  .lastdiv{
+  .lastdiv {
     background-color: #f2f9ff;
     width: 100%;
     height: 20rem;
     display: flex;
     flex-direction: column;
     margin-top: 20px;
-  }
-  .lastdivheading{
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 20px;
-  }
-  .roomsdiv {
+}
+
+.roomsdiv {
     display: flex;
-    justify-content: space-between; /* Ensures images have some space between them */
-    gap: 10px; /* Optional: adds spacing between images */
+    justify-content: space-between;
+    gap: 10px;
     margin-top: 20px;
-  }
-  
-  .image {
-    flex: 1; /* Makes each image div take up equal space */
-    height: 200px; /* Set a fixed height or adjust as per your needs */
-  }
-  
+}
+
+.image {
+    flex: 1;
+    height: 200px;
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    .lastdiv {
+        background-color: #f2f9ff; /* Change as needed */
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+    .roomsdiv {
+        flex-direction: column; /* Stack images vertically */
+        align-items: center;
+    }
+    .image {
+        width: 100%; /* Make each image take full width */
+        margin-bottom: 10px; /* Add space between images */
+    }
+}  
   .image img {
-    width: 100%; /* Ensures image takes full width of the container */
-    height: 100%; /* Ensures image takes full height of the container */
-    object-fit: cover; /* Ensures image covers the entire div without stretching */
-    border-radius: 10px; /* Optional: adds rounded corners to the image */
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    border-radius: 10px; 
   }
   .readblogs{
    background-color: #6db3f9;

@@ -1,13 +1,22 @@
-.checkbox-parent {
+.checkbox-parentotherfacility {
     display: flex; 
     flex-direction: column;
 }
-.checkbox-container {
+.checkbox-containerotherfacility {
     display: flex;
     /* Aligns items in a row */
     align-items: center;
+    flex-direction: row;
     /* Ensures checkbox and text are vertically aligned */
     gap: 10px;
     /* Adds space between the checkbox and the text */
     /* background-color: black; */
+}
+@media only screen and (max-width:600px){
+    .classlabel{
+        font-size: 0.6rem;
+
+        word-wrap: break-word;
+    
+    }
 }

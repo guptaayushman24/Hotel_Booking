@@ -1,12 +1,9 @@
+import axios from 'axios';
+import {useNavigate } from 'react-router-dom';
 import React, { useState, useRef, useEffect, createContext, useContext } from 'react'
 import Calendar from "react-calendar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Slider } from 'primereact/slider';
-import axios from 'axios';
-import 'primereact/resources/themes/lara-light-indigo/theme.css';  // Choose your theme
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
-import './Rooms.css'
 import Filter_data from './Filter_Data'
 import { CheckboxContext } from './Context';
 import OtherFacility from './OtherFacility';
@@ -17,7 +14,10 @@ import RoomViewFilter from './RoomViewFilter';
 
 import { UserContext } from '../Context/Context';
 import Allrooms from './All_rooms';
-import {useNavigate } from 'react-router-dom';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';  // Choose your theme
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+import './Rooms.css'
 function Rooms() {
   // Function for fetching the hotel data
   const navigate = useNavigate();
@@ -381,7 +381,7 @@ function Rooms() {
         <div className='child1'>
           <div className='filters'>
             <div className='filter-heading'>
-              <h2 className='filter-heading-text'>Selet Filters</h2>
+              <h2 className='filter-heading-text'>Select Filters</h2>
             </div>
             <div className='filter'>
               <h2 className='filter-heading-text'>Suggested For You</h2>
@@ -392,7 +392,7 @@ function Rooms() {
               <div className='slider'>
                 {
                   value == null ? (
-                    <p className='ratingfont'>Selected Rating:- Drag Slider</p>
+                    <p className='ratingfont'><p className='ratingfontpara'>Selected Rating:- Drag Slider</p></p>
                   ) : (
                     <p className='ratingfont'>Selected Rating:- {value}</p>
                   )
@@ -401,7 +401,7 @@ function Rooms() {
 
               </div>
               <div className='reviewScore'>
-                Review Score
+                <p>Review Score</p>
               </div>
 
               <div className='chackbox-parent'>
@@ -415,7 +415,7 @@ function Rooms() {
                       checked={checkbox.checked}
                       onChange={() => handleCheckboxChange(checkbox.id)}
                     />
-                    <label>{checkbox.label}</label>
+                    <label className='classlabel'>{checkbox.label}</label>
                   </div>
                 ))
 

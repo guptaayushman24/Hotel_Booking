@@ -38,16 +38,16 @@ const RoomsView = ()=>{
 
 
     return (
-        <div className='checkbox-parent'>
+        <div className='checkbox-parentroomviews'>
             {
                 roomviewcheckbox.map((checkbox) => (
-                    <div key={checkbox.id} className='checkbox-container'>
+                    <div key={checkbox.id} className='checkbox-containerroomviews'>
                         <input
                             type='checkbox'
                             checked={checkbox.checked}
                             onChange={() => handleroomviewcheckboxchange(checkbox.id)}
                         />
-                        <label>{checkbox.label}</label>
+                        <label className='classlabel'>{checkbox.label}</label>
                     </div>
                 ))
             }

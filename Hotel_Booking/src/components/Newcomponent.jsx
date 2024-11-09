@@ -40,15 +40,15 @@ const NewComponent = (props) => {
     }, [checkboxfacility, setCheckboxSelected, checkboxotherfacility]);
 
     return (
-        <div className='checkbox-parent'>
+        <div className='checkbox-parentotherfacility'>
             {checkboxfacility.map((checkbox) => (
-                <div key={checkbox.id} className='checkbox-container'>
+                <div key={checkbox.id} className='checkbox-containerotherfacility'>
                     <input
                         type="checkbox"
                         checked={checkbox.checked}
                         onChange={() => handleCheckboxChange(checkbox.id)}
                     />
-                    <label>{checkbox.label}</label>
+                    <label className='classlabel'>{checkbox.label}</label>
                 </div>
             ))}
         </div>

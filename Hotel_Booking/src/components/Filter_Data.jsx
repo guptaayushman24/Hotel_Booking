@@ -6,16 +6,20 @@ import { useNavigate } from 'react-router-dom';
 import './FilterData.css'
 function Filter_data({ checkboxselected }) {
     const navigate = useNavigate();
+    const contextdata = useContext(UserContext);
     const [data, setdata] = useState([]);
     const [page, setPage] = useState(1);
     const { sethotelprice } = useContext(UserContext);
     const { sethotelname } = useContext(UserContext);
     const { sethotelrating } = useContext(UserContext);
     const { sethotelotherfacility } = useContext(UserContext);
-    // var columnname = {};
+    const {setimageurl} = useContext(UserContext);
+   
+    
+   
     console.log("The column name is", { checkboxselected });
 
-    const contextdata = useContext(UserContext);
+   
     function fetchAndActivate() {
         axios.post("http://localhost:5000/reviewscore", {
             ReviewScore: checkboxselected // If any how we pass the data here out lots of work can be simplified
@@ -48,7 +52,7 @@ function Filter_data({ checkboxselected }) {
         }
     }
 
-    const bookhotel = (e) => {
+    const bookhotel = (e,hotel_image_url) => {
         console.log("Div Clicked");
         const hotelprice = e.target.closest('.roomviewsparent').querySelector('.hotelcost').textContent;
         sethotelprice(hotelprice);
@@ -62,6 +66,9 @@ function Filter_data({ checkboxselected }) {
         const hotelrating = e.target.closest('.roomviewsparent').querySelector('.hotelrating').textContent;
         sethotelrating(hotelrating);
         console.log(hotelrating);
+
+        console.log(hotel_image_url);
+        setimageurl(hotel_image_url);
 
         // These function is checking that CheckIn Date and CheckOut Date are selected and in the right order
 
@@ -90,7 +97,7 @@ function Filter_data({ checkboxselected }) {
             <div>
                 {data.filterd_data ? (
                     data.filterd_data.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((hotel, index) => (
-                        <div key={index} className='roomviewsparent' id={`hotel-${index}`} onClick={bookhotel}>
+                        <div key={index} className='roomviewsparent' id={`hotel-${index}`} onClick={(e) => bookhotel(e, hotel.Hotel_Image_URLS)}>
                             <div className='hotelimage'>
                                 <img src={hotel.
                                     Hotel_Image_URLS} alt="Hotel_Image" className='imageclass' />

@@ -18,6 +18,7 @@ function RoomViewFilter() {
     const { sethotelname } = useContext(UserContext);
 
     const { sethotelrating } = useContext(UserContext);
+    const {setimageurl} = useContext(UserContext);
     // Fetching data
     async function fetchdata() {
         try {
@@ -61,7 +62,7 @@ function RoomViewFilter() {
     };
     console.log('Rendered data in Room View Filter:', data);  // Check if data is rendering
 
-    const bookhotel = (e) => {
+    const bookhotel = (e,hotel_image_url) => {
         console.log("Div Clicked");
         const hotelprice = e.target.closest('.roomviewsparent').querySelector('.hotelcost').textContent;
         sethotelprice(hotelprice);
@@ -75,6 +76,10 @@ function RoomViewFilter() {
         const hotelrating = e.target.closest('.roomviewsparent').querySelector('.hotelrating').textContent;
         sethotelrating(hotelrating);
         console.log(hotelrating);
+
+        console.log(hotel_image_url);
+        setimageurl(hotel_image_url);
+        
 
         // These function is checking that CheckIn Date and CheckOut Date are selected and in the right order
 
@@ -102,7 +107,7 @@ function RoomViewFilter() {
             <div>
                 {data.filterd_data ? (
                     data.filterd_data.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((hotel, index) => (
-                        <div key={index} className='roomviewsparent' onClick={bookhotel}>
+                        <div key={index} className='roomviewsparent' onClick={(e)=>bookhotel(e,hotel.Hotel_Image_URLS)}>
                             <div className='hotelimage'>
                                 <img src={hotel.
                                     Hotel_Image_URLS} alt="Hotel_Image" className='imageclass' />

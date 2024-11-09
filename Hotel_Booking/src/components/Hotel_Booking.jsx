@@ -6,28 +6,28 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 function Hotel_Booking() {
     const data = useContext(UserContext);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     console.log(data);
 
     // Post the data in the Order History of the user
-    async function orderhistory(){
-        try{
-           const response =  await axios.post('http://localhost:5000/orderhistory',{
-            HotelName:data.hotelname,
-            Price:data.hotelprice,
-            UserName:data.username,
+    async function orderhistory() {
+        try {
+            const response = await axios.post('http://localhost:5000/orderhistory', {
+                HotelName: data.hotelname,
+                Price: data.hotelprice,
+                UserName: data.username,
 
-            Email:data.useremail,
-            CheckinDate:data.date,
-            CheckoutDate:data.checkoutdate
-           })
-           if (response.status==200){
-             navigate('/orderhistory');
-           }
-      }
-      catch(err){
-        console.log(err.message);
-      }
+                Email: data.useremail,
+                CheckinDate: data.date,
+                CheckoutDate: data.checkoutdate
+            })
+            if (response.status == 200) {
+                navigate('/orderhistory');
+            }
+        }
+        catch (err) {
+            console.log(err.message);
+        }
 
     }
     const [product, setProduct] = useState({
@@ -38,13 +38,13 @@ function Hotel_Booking() {
     useEffect(() => {
         console.log("Price in the hotel booking is", data.hotelprice);
         console.log("Name of the hotel is", data.hotelname);
-        
+
         console.log("Rating of the hotel is ", data.hotelrating);
         console.log("Other Facility in hotel is", data.checkboxSelected);
 
     })
     let price = data.hotelprice;
-    console.log("The price is ",typeof(Number(price)));
+    console.log("The price is ", typeof (Number(price)));
     const makePayment = async token => {
         const body = {
             token,
@@ -63,7 +63,7 @@ function Hotel_Booking() {
             console.log(response);
             const { status } = response;
             console.log(status);
-            if (status==200){
+            if (status == 200) {
                 orderhistory();
             }
         } catch (err) {
@@ -73,52 +73,44 @@ function Hotel_Booking() {
 
     return (
         <div>
-            <div className='parentdiv'>
-                <div className='hoteldetail'>
-                    <div className='hotelnameandrating'>
+            <div className='parent'>
+                <div className='bookingparent'>
+                    <div className='imagediv'>
+                        <img src={data.imageurl} alt="Hotel_Image" className='imageclass' />
+                    </div>
+                    <div className='detaildiv'>
+                        <div className='hotelname'>
+                            HotelName :- {data.hotelname}
+                        </div>
+                        <div className='hotelname'>
+                            Hotel Rating :- {data.hotelrating}
+                        </div>
 
                         <div className='hotelname'>
-                            {data.hotelname}
+                            Hotel Review :- {data.checkboxSelected?data.checkboxSelected:"No review selected"}
                         </div>
-                        <div className='rating'>
-                            {data.hotelrating}
+                        <div className='hotelname'>
+                            CheckIn Date :- {data.date ? data.date.toDateString() : 'No date'}
                         </div>
-                    </div>
-                    <div className='hotelimageandprice'>
-
-                        <div className='hotelimage'>
-                            <img src={data.imageurl} className='roomimage' alt="Hotel room" />
-                        </div>
-                        <div className='priceandroomparent'>
-                            <div className='hotelprice'>
-                                {data.hotelprice}
-                            </div>
-                            <div className='roomtype'>
-                                {data.checkboxSelected}
-                            </div>
-                            <div className='roomtype'>
-                                CheckIn Data:- {data.date ? data.date.toDateString():'No date'}
-                            </div>
-                            <div className='roomtype'>
-                                CheckOut Data:- {data.checkoutdate ? data.checkoutdate.toDateString():'No date'}
-                            </div>
+                        <div className='hotelname'>
+                            CheckOut Date :- {data.checkoutdate ? data.checkoutdate.toDateString() : 'No date'}
                         </div>
                     </div>
 
-                    <div className='bookbuttondiv'>
-                            <StripeCheckout
-                                stripeKey="pk_test_51BTUDGJAJfZb9HEBwDg86TN1KNprHjkfipXmEDMb0gSCassK5T3ZfxsAbcgKVmAIXF7oZ6ItlZZbXO6idTHE67IM007EwQ4uN3"
-                                token={makePayment}
-                                name='Make Payment'
-                                amount= {(Number)(price)} // Multiply by 100 to convert to paise for INR
-                            >
-                                <button className='bookbutton'>Book Hotel {price}</button>
-                            </StripeCheckout>
-                        
-                    </div>
                 </div>
 
+                <div className='buttondiv'>
+                    <StripeCheckout
+                        stripeKey="pk_test_51BTUDGJAJfZb9HEBwDg86TN1KNprHjkfipXmEDMb0gSCassK5T3ZfxsAbcgKVmAIXF7oZ6ItlZZbXO6idTHE67IM007EwQ4uN3"
+                        token={makePayment}
+                        name='Make Payment'
+                        amount={(Number)(price)} // Multiply by 100 to convert to paise for INR
+                    >
+                        <button className='paynow'>Pay {price}</button>
+                    </StripeCheckout>
+                </div>
             </div>
+
         </div>
     )
 }

@@ -223,8 +223,6 @@ function Rooms() {
 
   useEffect(() => {
   }, [hoteldata]); // Runs only when `hoteldata` updates
-
-
   useEffect(() => {
     console.log("Displaydata",displayalldata);
     console.log("filterexcellentchecked",filterexcellentchecked);

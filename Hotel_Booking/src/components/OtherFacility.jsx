@@ -19,7 +19,7 @@ function OtherFacility() {
     const { sethotelprice } = useContext(UserContext);
     const { sethotelname } = useContext(UserContext);
     const { sethotelrating } = useContext(UserContext);
-
+    const {setimageurl} = useContext(UserContext);
 
     // Fetch data when component mounts or checkboxselected changes
 
@@ -62,7 +62,7 @@ function OtherFacility() {
         }
     };
 
-    const bookhotel = (e) => {
+    const bookhotel = (e,hotelimageurl) => {
         console.log("Div Clicked");
         const hotelprice = e.target.closest('.roomviewsparent').querySelector('.hotelcost').textContent;
         sethotelprice(hotelprice);
@@ -77,6 +77,9 @@ function OtherFacility() {
         sethotelrating(hotelrating);
         console.log(hotelrating);
 
+        console.log(hotelimageurl);
+        setimageurl(hotelimageurl);
+        
         // These function is checking that CheckIn Date and CheckOut Date are selected and in the right order
 
         // Handling the checkin date and checkout date
@@ -105,7 +108,8 @@ function OtherFacility() {
             <div>
                 {data.filterd_data ? (
                     data.filterd_data.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((hotel, index) => (
-                        <div key={index} className='roomviewsparent' onClick={bookhotel}>
+                        <div key={index} className='roomviewsparent' onClick={(e) => bookhotel(e, hotel.Hotel_Image_URLS)}>
+                                   
 
                             <div className='hotelimage'>
                                 <img src={hotel.

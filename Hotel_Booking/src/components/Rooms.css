@@ -143,42 +143,22 @@ img {
 .child1 {
     display: flex;
     background-color: whitesmoke;
-    width: 20%;
+    width: 20rem;
     flex-direction: column;
 }
+
 
 .filters {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 20rem;
 }
 
 .filter-heading-text {
     text-align: center;
 }
-@media only screen and (max-width:600px){
-    .filter-heading-text{
-        font-size: 0.5rem;
-    }
-    .selectRating{
-        font-size: 0.5rem;
-    }
-    .ratingfontpara{
-        font-size: 0.5rem;
-    }
-    .reviewScore p{
-        font-size: 0.5rem;
-    }
-    .classlabel{
-        font-size: 0.6rem;
-    }
-    .otherfacility1{
-        font-size: 0.5rem;
-    }
-    .roomviews{
-        font-size: 0.5rem;
-    }
-}
+
 
 .selectRating {
     text-align: center;

@@ -3,7 +3,7 @@ import './RoomView.css';
 import { UserContext } from '../src/Context/Context';
 const RoomsView = ()=>{
     // Extracting the setroomviewcheckboxselected from the Context
-    const {setroomviewcheckboxselected,setroomviewfacility,roomviewcheckboxselected} = useContext(UserContext);
+    const {setroomviewcheckboxselected,setroomviewfacility,roomviewcheckboxselected,setcheckboxmobile} = useContext(UserContext);
     // const [roomviewfacility,setroomviewfacility] = useState(false);
     const [roomviewcheckbox,setroomviewcheckbox] = useState([
         {id:1,label:'City View',checked:false},
@@ -22,6 +22,7 @@ const RoomsView = ()=>{
         const currentroomcheckbox = roomcheckbox.find((checkbox)=>checkbox.id===id);
         if (currentroomcheckbox.checked){
             setroomviewcheckboxselected(currentroomcheckbox.label);
+            setcheckboxmobile(currentroomcheckbox.label);
             setroomviewfacility(true);
         }
         else{

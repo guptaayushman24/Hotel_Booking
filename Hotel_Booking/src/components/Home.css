@@ -1,42 +1,33 @@
 .parentdiv{
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .navbar{
-    background-color: white;
-    width: 100%;
-    height: 2rem;
-    display: flex;
-    justify-content: flex-end;
-    gap: 2rem;
-    align-items: center;
+  background-color: white;
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  align-items: center;
 }
 #login{
-    margin-inline: 0.5rem;
-    background-color:  #6db3f9;;
+  margin-inline: 0.5rem;
+  background-color:  #6db3f9;;
 
-    border: none;
-    color: white;
-    font-weight: bold;
-  }
-  #signup{
-   background-color: #6db3f9;
-   border: none;
-   height: 20px;
-   color: white;
-   font-weight: bold;
-  }
-
-  .centerdiv {
-    background-color: #f2f9ff;
-    display: flex;
-    width: 100%;
-    height: auto; /* Set to auto to allow height to adjust with content */
-    padding: 20px;
-    flex-direction: row;
-    margin-top: 1rem;
+  border: none;
+  color: white;
+  font-weight: bold;
 }
-.centerdivmid {
+#signup{
+ background-color: #6db3f9;
+ border: none;
+ height: 20px;
+ color: white;
+ font-weight: bold;
+}
+
+.centerdiv {
   background-color: #f2f9ff;
   display: flex;
   width: 100%;
@@ -44,153 +35,154 @@
   padding: 20px;
   flex-direction: row;
   margin-top: 1rem;
+  /* background-color: red; */
 }
-.contentdivmid{
-    font-size: 25px;
-    font-weight: bold;
-}
-
+/* Media Query for the above div*/
 .contentdiv {
-    font-size: 25px;
-    font-weight: bold;
+  font-size: 25px;
+  font-weight: bold;
 }
 
- .imagemid{
-  width: 300px;
-  height: auto;
- }
+.imageroomsmid{
+width: 300px;
+height: auto;
+}
 
-.imagediv2 {
-    font-size: 20px;
+.imageroomsdiv2 {
+  font-size: 20px;
 }
 .divpara{
-  margin-left: 40rem;
+margin-left: 40rem;
 }
 .divpara p{
-  font-size: 16px;
+font-size: 16px;
 }
+
+/* Media Query for the mid div */
+@media only screen and (max-width:600px){
+  .centerdivmid{
+    background-color: #f2f9ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: scroll;
+
+  }
+  .imageroomsdiv2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 35rem;
+    font-size: 2rem;
+  }
+  .divpara{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 35rem;
+    font-size: 5rem;
+  }
+  .divparap{
+    font-size: 0.5rem;
+  }
+
+}
+
 
 
 
 /* Media query for screen sizes below 600px */
-@media only screen and (max-width: 600px) {
-    .centerdiv {
-        flex-direction: column; /* Stack elements vertically */
-        align-items: center;
-    }
 
-    .contentdiv {
-        font-size: 20px; /* Adjust font size for smaller screens */
-        text-align: center; /* Center-align for better appearance on small screens */
-    }
-
-    .contentdivimage2, .imagediv2 {
-        align-items: center;
-        margin: 0; /* Reset margin to align elements within the centered layout */
-    }
-
-    /* Optional: Adjust button styling for smaller screens */
-    .readblogs {
-        margin-top: 10px;
-        padding: 10px 20px;
-        font-size: 14px;
-    }
-
-    /* Remove any fixed margin-left in inline styles */
-    .centerdiv div[style] {
-        margin-left: 0 !important;
-        text-align: center; /* Center-align text to keep it responsive */
-    }
+.spantag{
+  color: darkorange;
 }
 
-  .spantag{
-    color: darkorange;
-  }
-  .spancontent{
-    margin-top: 20px;
-    font-size: 15px;
-    font-weight: normal;
-  }
-  .imagediv{
-    display: flex;
-    margin-left: 40rem;
-    width: 20rem;
-  }
-  .image{
-    height: 500px;
-    width: 200px;
-  }
-  .seconddiv{
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-  }
-  .imagediv2{
-    display: flex;
-    margin-left: 40rem;
-    width: 20rem;
-    font-size: 20px;
-  }
-  .paradiv{
-    display: flex;
-    flex-direction: row;
-  }
-  .lastdiv {
-    background-color: #f2f9ff;
-    width: 100%;
-    height: 20rem;
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
+.imageroomsdiv{
+  display: flex;
+  margin-left: 40rem;
+  width: 20rem;
+}
+.imagerooms{
+  height: 500px;
+  width: 200px;
+}
+.seconddiv{
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.imageroomsdiv2{
+  display: flex;
+  margin-left: 40rem;
+  width: 20rem;
+  font-size: 20px;
+}
+.paradiv{
+  display: flex;
+  flex-direction: row;
+}
+.lastdiv {
+  background-color: #f2f9ff;
+  width: 100%;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
 }
 
 .roomsdiv {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-.image {
-    flex: 1;
-    height: 200px;
+.imagerooms {
+  flex: 1;
+  height: 200px;
 }
 
-.image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
+.imagerooms img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 @media only screen and (max-width: 600px) {
-    .lastdiv {
-        background-color: #f2f9ff; /* Change as needed */
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        margin-top: 20px;
-    }
-    .roomsdiv {
-        flex-direction: column; /* Stack images vertically */
-        align-items: center;
-    }
-    .image {
-        width: 100%; /* Make each image take full width */
-        margin-bottom: 10px; /* Add space between images */
-    }
+  .lastdiv {
+      background-color: #f2f9ff; /* Change as needed */
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+  }
+  .roomsdiv {
+      flex-direction: column; /* Stack imageroomss vertically */
+      align-items: center;
+  }
+  .imagerooms {
+      width: 100%; /* Make each imagerooms take full width */
+      margin-bottom: 10px; /* Add space between imageroomss */
+  }
+  .lastdivheading{
+    text-align: center;
+  }
 }  
-  .image img {
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    border-radius: 10px; 
-  }
-  .readblogs{
-   background-color: #6db3f9;
-  border: none;
-  height: 20px;
-  color: white;
-  font-weight: bold;
-  }
+.imagerooms img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  border-radius: 10px; 
+}
+.readblogs{
+ background-color: #6db3f9;
+border: none;
+height: 20px;
+color: white;
+font-weight: bold;
+} 
+.lastdivheading{
+  text-align: center;
+}

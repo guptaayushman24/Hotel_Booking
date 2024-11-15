@@ -47,3 +47,43 @@
      background-color: rgb(220,220,220);
  }
 
+ .mobileviewparent{
+    width: 600px;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    gap: 0.5rem;
+    display: none;
+  }
+  .mobileparent::-webkit-scrollbar {
+    display: none;
+  }
+  .mobilehotelname{
+    font-size: 1rem;
+
+  }
+/* Media Query for the responsiveness*/
+@media only screen and (max-width:600px){
+    div.roomviewsparent{
+        display: none;
+        background-color: red;
+    }
+    div.mobileviewparent{
+        display: flex;
+        flex-direction: column;
+        width: 600px;
+        height: 20rem;
+    }
+   
+    .mobilehotelname{
+        display: inline;
+    }
+    .mobilehotelimage{
+        height: 5rem;
+        width: 10rem;
+    }
+}
+
+

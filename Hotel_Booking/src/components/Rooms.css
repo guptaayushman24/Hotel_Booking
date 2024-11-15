@@ -1,15 +1,19 @@
+.parentnavbar{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
 .parentdiv {
     display: flex;
     flex-direction: column;
 }
 
 .navbar {
-    /* background-color: #00BCAD; */
-    box-shadow: 10px 10px 5px 12px rgb(178, 33, 218);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
+    background-color: red;
 }
 
 .navbar-start {
@@ -29,6 +33,16 @@ img {
     width: 32px;
     height: 32px;
 }
+.searchdivparent{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.dashicon{
+    margin-top: 5rem;
+    margin-inline: 1rem;
+    display: none;
+}
 
 .searchdiv {
     height: 100px;
@@ -37,6 +51,7 @@ img {
     display: flex;
     margin-top: 40px;
     gap: 50px;
+    flex-direction: row;
 }
 
 .city {
@@ -142,9 +157,22 @@ img {
 
 .child1 {
     display: flex;
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
     width: 20rem;
     flex-direction: column;
+    display: inline;
+}
+/* Media Query for the Child1*/
+@media only screen  and (max-width:600px){
+    .child1{
+        display: none;
+    }
+    .searchdiv{
+        display: none;
+    }
+    .dashicon{
+        display: inline;
+    }
 }
 
 
@@ -280,6 +308,51 @@ img {
     font-size: 1rem;
     font-weight: bold;
 }
+.icon{
+    height: 2rem;
+    width: 2rem;
+    display: none;
+  }
+
+.sidenavigation{
+    width: 15rem;
+    height: 20rem;
+    background-color: brown;
+    display: flex;
+    flex-direction: column;
+    display: none;
+  }
+  .sidenavbaritems{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    display: none;
+  }
+  .profile{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bolder;
+  }
+  .profileitem{
+    text-align: center;
+    font-size: 1.5rem;
+  }
+  @media only screen  and (max-width:600px){
+    .parentnavbar{
+      display: none;
+    }
+    .icon {
+        display: inline;
+        margin-left: auto;
+      }
+      .sidenavigation{
+        display: inline;
+      }
+      .sidenavbaritems{
+        display: inline;
+      }
+  
+  }
 
 
 .pagination-container {
@@ -295,4 +368,104 @@ img {
   .pagination {
    background-color: orange;
 }
+.mobileviewparent{
+    width: 600px;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    gap: 0.5rem;
+    display: none;
+  }
+  .mobileparent::-webkit-scrollbar {
+    display: none;
+  }
+  .mobilehotelname{
+    font-size: 1rem;
+
+  }
+/* Media Query for the responsiveness*/
+@media only screen and (max-width:600px){
+    div.roomviewsparent{
+        display: none;
+        background-color: red;
+    }
+    div.mobileviewparent{
+        display: flex;
+        flex-direction: column;
+        width: 600px;
+        height: 20rem;
+    }
+   
+    .mobilehotelname{
+        display: inline;
+    }
+    .mobilehotelimage{
+        height: 5rem;
+        width: 10rem;
+    }
+    div.checkincheckout{
+        display: flex;
+    }
+    div.citynamemobile{
+        margin-right: 0.2rem;
+     }
+    div.checkindatamobile{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap:2rem;
+        margin-top: 0.5rem;
+    }
+    div.searchmobile{
+        margin-top: 2rem;
+        display: inline-block;
+    }
+    div.searchmobilebutton{
+        width: 10rem;
+        height: 2rem;
+        text-align: center;
+        background-color: #0084ff;
+        border: none;
+        border-radius: 1rem;
+        display: inline-block;
+    }
+}
+
+.checkincheckout{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.5rem;
+    display: none;
+}
+.citynamemobile{
+   margin-right: 0.2rem;
+}
+.checkindatamobile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:2rem;
+    margin-top: 0.5rem;
+    display: none;
+}
+.searchmobile{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    display: none;
+}
+.searchmobilebutton{
+    width: 10rem;
+    height: 2rem;
+    text-align: center;
+    background-color: #0084ff;
+    border: none;
+    border-radius: 1rem;
+    display: none;
+}
+
+
 

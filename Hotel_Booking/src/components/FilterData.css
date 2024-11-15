@@ -8,6 +8,7 @@
     overflow: auto;
     padding: 20px;
     box-sizing: border-box;
+    display: inline;
 }
 .hotelinfo{
     display: flex;
@@ -55,3 +56,49 @@
     width: 20rem;
     height: 20rem;
 }
+.mobileviewparent{
+    width: 600px;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    gap: 0.5rem;
+    margin:1rem;
+    border: 0.2rem solid #7862be;
+    display: none;
+
+  }
+  .mobileparent::-webkit-scrollbar {
+    display: none;
+  }
+  .mobilehotelname{
+    font-size: 1rem;
+
+  }
+/* Media Query for the responsiveness*/
+@media only screen and (max-width:600px){
+    div.roomviewsparent{
+        display: none;
+        background-color: red;
+    }
+    div.mobileviewparent{
+        display: flex;
+        flex-direction: column;
+        width: 600px;
+        height: 20rem;
+    }
+   
+    .mobilehotelname{
+        display: inline;
+    }
+    .mobilehotelimage{
+        height: 5rem;
+        width: 10rem;
+    }
+}
+
+  
+  
+
+

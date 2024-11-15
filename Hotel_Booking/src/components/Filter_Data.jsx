@@ -13,16 +13,17 @@ function Filter_data({ checkboxselected }) {
     const { sethotelname } = useContext(UserContext);
     const { sethotelrating } = useContext(UserContext);
     const { sethotelotherfacility } = useContext(UserContext);
-    const {setimageurl} = useContext(UserContext);
-   
-    
-   
-    console.log("The column name is", { checkboxselected });
+    const { setimageurl } = useContext(UserContext);
 
-   
+
+
+    console.log("The column name is", { checkboxselected });
+    const userfacility =  useContext(UserContext);
+
+
     function fetchAndActivate() {
         axios.post("http://localhost:5000/reviewscore", {
-            ReviewScore: checkboxselected // If any how we pass the data here out lots of work can be simplified
+            ReviewScore: userfacility.checkboxSelected // If any how we pass the data here out lots of work can be simplified
 
         }).then((res) => {
             console.log("API Response:", res.data); // Log API response to check structure
@@ -52,7 +53,7 @@ function Filter_data({ checkboxselected }) {
         }
     }
 
-    const bookhotel = (e,hotel_image_url) => {
+    const bookhotel = (e, hotel_image_url) => {
         console.log("Div Clicked");
         const hotelprice = e.target.closest('.roomviewsparent').querySelector('.hotelcost').textContent;
         sethotelprice(hotelprice);
@@ -67,6 +68,7 @@ function Filter_data({ checkboxselected }) {
         sethotelrating(hotelrating);
         console.log(hotelrating);
 
+        // Hotel Image
         console.log(hotel_image_url);
         setimageurl(hotel_image_url);
 
@@ -88,62 +90,132 @@ function Filter_data({ checkboxselected }) {
 
     };
 
+    const bookhotelmobile = (e,hotel_image_url)=>{
+        console.log("Mobile div clicked");
+        // Hotel Price
+        const hotelprice = e.target.closest('.mobileviewparent').querySelector('#hotelpricemobile').textContent;
+        sethotelprice(hotelprice);
+        console.log("Hotel Price mobile is",hotelprice);
+
+        // Hotel Name
+        const hotelname = e.target.closest('.mobileviewparent').querySelector('#hotelnamemobile').textContent;
+        sethotelname(hotelname);
+        console.log(hotelname);
+
+        // Hotel Rating
+        const hotelrating = e.target.closest('.mobileviewparent').querySelector('#hotelratingmobile').textContent;
+        sethotelrating(hotelrating);
+        console.log(hotelrating);
+
+        // Hotel Image
+        setimageurl(hotel_image_url);
+        console.log(hotel_image_url);
+
+        if (contextdata.checkoutdatemobile == null && contextdata.checkindatemobile == null) {
+            alert("Please select the checkin and checkout date before booking")
+        }
+        // These else if is checking that CheckIn Date and CheckOut Date are selected and in the right order
+        else if (contextdata.checkoutdatemobile < contextdata.checkindatemobile) {
+            alert("Check-out date cannot be earlier than check-in date");
+        }
+        else {
+            navigate('/bookingpage');
+        }
+        
+    }
+
 
 
     return (
 
         <div>
-
             <div>
                 {data.filterd_data ? (
                     data.filterd_data.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((hotel, index) => (
-                        <div key={index} className='roomviewsparent' id={`hotel-${index}`} onClick={(e) => bookhotel(e, hotel.Hotel_Image_URLS)}>
-                            <div className='hotelimage'>
-                                <img src={hotel.
-                                    Hotel_Image_URLS} alt="Hotel_Image" className='imageclass' />
+                        <div key={index}>
 
+                            {/* Desktop View */}
+                            <div className='roomviewsparent' id={`hotel-${index}`} onClick={(e) => bookhotel(e, hotel.Hotel_Image_URLS)}>
+                                <div className='hotelimage'>
+                                    <img src={hotel.Hotel_Image_URLS} alt="Hotel_Image" className='imageclass' />
+                                </div>
+
+                                <div className="hotelinfo">
+                                    <div className='hotelname'>
+                                        Hotel Name :- {hotel.HotelName}
+                                    </div>
+                                    <div className='hotellocation'>
+                                        Location :- {hotel.Location}
+                                    </div>
+                                    <div className='hotelotherfacility'>
+                                        Other Facility :- {hotel.OtherFacility}
+                                    </div>
+                                    <div className='hotelroomtype'>
+                                        Room Type :- {hotel.RoomType}
+                                    </div>
+                                    <div className='hotelbedtype'>
+                                        Bed Type :- {hotel.BedType}
+                                    </div>
+                                </div>
+
+                                <div className='hotelprice'>
+                                    <div className='hotelrating'>
+                                        Hotel Rating :- {hotel. ReviewScore}
+                                           
+                                    </div>
+                                    <div className='hotelrating'>
+                                        Hotel Rating :- {hotel.Rating}
+                                    </div>
+                                    <div className='hotelreviewscore'>
+                                        Room View :- {hotel.RoomViews}
+                                    </div>
+                                    <div className='hotelcost'>
+                                        Hotel Price :- {hotel.RoomPrice}
+                                    </div>
+                                </div>
                             </div>
 
-
-                            <div className="hotelinfo">
-                                <div className='hotelname'>
-                                    Hotel Name :- {hotel. HotelName}
-                                       
+                            {/* Mobile View */}
+                            
+                         
+                         <div className='mobileviewparent' onClick={(e)=>bookhotelmobile(e,hotel.Hotel_Image_URLS)}>
+                                <div className='mobilehotelimage'>
+                                    <img src={hotel.Hotel_Image_URLS} alt="Hotel_Image" className='mobilehotelimage' />
                                 </div>
-                                <div className='hotellocation'>
-                                    Location :- {hotel.
-                                        Location
-                                    }
+                                <div className='mobilehotelname' id="hotelnamemobile">
+                                    HotelName :- {hotel.HotelName}
                                 </div>
-                                <div className='hotelotherfacility'>
+                                <div className='mobilehotelname' id='hotelnamelocationmobile'>
+                                    Location :- {hotel.Location}
+                                </div>
+                                <div className='mobilehotelname' id="hotelotherfacilitymobile">
                                     Other Facility :- {hotel.OtherFacility}
                                 </div>
-                                <div className='hotelroomtype'>
+                                <div className='mobilehotelname' id="hotelroomtypemobile">
                                     Room Type :- {hotel.RoomType}
                                 </div>
-                                <div className='hotelbedtype'>Bed Type :- {hotel.BedType}
-                                </div>
-                            </div>
-
-                            <div className='hotelprice'>
-                                <div className='hotelrating'>
+                                <div className='mobilehotelname' id="hotelratingmobile">
                                     Hotel Rating :- {hotel.Rating}
                                 </div>
-                                <div className='hotelreviewscore'>
+                                <div className='mobilehotelname' id="hotelratingreviewmobile">
+                                    Room View :- {hotel.RoomViews}
+                                </div>
+                                <div className='mobilehotelname' id="hotelreviewmobile">
                                     Hotel Review :- {hotel.ReviewScore}
                                 </div>
-                                <div className='hotelcost'>
+                                <div className='mobilehotelname' id="hotelpricemobile">
                                     Hotel Price :- {hotel.RoomPrice}
                                 </div>
                             </div>
+                        
 
                         </div>
-
                     ))
                 ) : (
                     <p>Loading ....</p>
                 )}
             </div>
+
 
             <div className='paginationparent'>
                 <div className='pagination'>
@@ -175,6 +247,7 @@ function Filter_data({ checkboxselected }) {
 
 
 }
+
 export default Filter_data;
 
 

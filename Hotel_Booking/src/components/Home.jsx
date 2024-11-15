@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import './Home.css'
 import { useNavigate } from 'react-router-dom';
+import './Home.css'
 function Home() {
   const navigate = useNavigate();
   function opensignup(){
@@ -40,27 +40,27 @@ function Home() {
 
       <div className='centerdiv'>
         <div className='contentdiv'>Make yourself at home in <span className='spantag'>Our</span> <br/>hotel.
+        <div id='spancontent'>Simple -Unique -Friendly</div>
         <div>
             
-           <span className='spancontent'>Simple -Unique -Friendly</span>
+         
         </div>
         </div>
-        <div className='imagediv'>
-            <img src={'./Hotel_Image.webp'} className='image'></img>
+        <div className='imageroomsdiv'>
+       
+            <img src={'./Hotel_Image.webp'} className='imagerooms'></img>
         </div>
       </div>
       <div className='centerdivmid'>
-        <div className='contentdivmid'>
-         <img src={'./Hotel_Image2.jpeg'} className='imagemid'></img>
-        </div>
-        <div className='.contentdivimage2'>
-        <div className='imagediv2'>
+        <img src={'./Hotel_Image2.jpeg'} className='imageroomsmid'></img>
+        <div className='contentdivimagerooms2'>
+        <div className='imageroomsdiv2'>
         
           About us<br/>
            The best holidays<br/> start here <br/>
         </div>
         <div className='divpara'>
-         <p>Staying in a hotel offers a unique blend of comfort, luxury, and convenience. From the moment you step in, you're greeted by a warm atmosphere designed to make you feel at home while escaping the everyday routine. Plush beds, elegant interiors, and world-class amenities await, ensuring that relaxation comes naturally.</p>
+         <p className='divparap'>Staying in a hotel offers a unique blend of comfort, luxury, and convenience. From the moment you step in, you're greeted by a warm atmosphere designed to make you feel at home while escaping the everyday routine. Plush beds, elegant interiors, and world-class amenities await, ensuring that relaxation comes naturally.</p>
           <button className='readblogs' onClick={openblog}>Read Blogs</button>
         </div>
         </div>
@@ -70,9 +70,9 @@ function Home() {
                 Our Rooms
             </div>
             <div className='roomsdiv'>
-                <div className='image'><img src={'./Hotel_Image3.jpg'}></img></div>
-                <div className='image'><img src={'./Hotel_Image4.jpg'}></img></div>
-                <div className='image'><img src={'./Hotel_Image5.jpg'}></img></div>
+                <div className='imagerooms'><img src={'./Hotel_Room.jpeg'}></img></div>
+                <div className='imagerooms'><img src={'./Hotel_Image5.jpg'}></img></div>
+                <div className='imagerooms'><img src={'./Hotel_Image4.jpg'}></img></div>
             </div>
         </div>
     </div>

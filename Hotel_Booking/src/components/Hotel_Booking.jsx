@@ -41,6 +41,7 @@ function Hotel_Booking() {
 
         console.log("Rating of the hotel is ", data.hotelrating);
         console.log("Other Facility in hotel is", data.checkboxSelected);
+        console.log("The context is",data);
 
     })
     let price = data.hotelprice;
@@ -87,13 +88,13 @@ function Hotel_Booking() {
                         </div>
 
                         <div className='hotelname'>
-                            Hotel Review :- {data.checkboxSelected?data.checkboxSelected:"No review selected"}
+                            Hotel Review :- {data.checkboxSelected?data.checkboxSelected:data.checkboxmobile || "You have not selected any facility"}
                         </div>
                         <div className='hotelname'>
-                            CheckIn Date :- {data.date ? data.date.toDateString() : 'No date'}
+                            CheckIn Date :- {data.date ? data.date.toDateString() : data.checkindatemobile.toString() || "No date"}
                         </div>
                         <div className='hotelname'>
-                            CheckOut Date :- {data.checkoutdate ? data.checkoutdate.toDateString() : 'No date'}
+                            CheckOut Date :- {data.checkoutdate ? data.checkoutdate.toDateString() : data.checkoutdatemobile.toString() || "No date"}
                         </div>
                     </div>
 

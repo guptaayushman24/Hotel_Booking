@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import React, { useState, useRef, useEffect, createContext, useContext } from 'react'
 import Calendar from "react-calendar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -17,8 +17,31 @@ import Allrooms from './All_rooms';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';  // Choose your theme
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
+import { faBars, faXmark, faUser,faCalendar } from '@fortawesome/free-solid-svg-icons';
 import './Rooms.css'
 function Rooms() {
+  const [sidenavigationstatus, setsidenavigationstatus] = useState(false);
+  const [filterdiv, setfilterdiv] = useState(false);
+  const showsidenavbar = useRef(null);
+  const showfilterdiv = useRef(null);
+  function opensidenavbar() {
+    setsidenavigationstatus(!sidenavigationstatus);
+    showsidenavbar.current.style.display = 'inline';
+  }
+  function closesidenavbar() {
+    setsidenavigationstatus(!sidenavigationstatus);
+    showsidenavbar.current.style.display = 'none';
+  }
+
+  function openfilterdiv() {
+    showfilterdiv.current.style.display = 'inline';
+    setfilterdiv(!filterdiv);
+  }
+  function closefilterdiv() {
+    showfilterdiv.current.style.display = 'none';
+    setfilterdiv(!filterdiv);
+  }
+
   // Function for fetching the hotel data
   const navigate = useNavigate();
   const roomviewcheckboxselected = useContext(UserContext);
@@ -68,9 +91,9 @@ function Rooms() {
 
   const [selectedValue, SetselectedValue] = useState('');
   // Checkin
-  const {setdate} = useContext(UserContext);
+  const { setdate } = useContext(UserContext);
   // Checkout
-  const {setcheckoutdate} = useContext(UserContext);
+  const { setcheckoutdate } = useContext(UserContext);
   const [showcalendar, setshowcalendar] = useState(false);
   const [calendarstate, setCalendarState] = useState(false);
 
@@ -78,7 +101,7 @@ function Rooms() {
   // const [datecheckout, setDatecheckout] = useState(null);
   const [showcalendarcheckout, setshowcalendarcheckout] = useState(false);
 
- 
+
 
   // Slider State
   const [value, setValue] = useState(null);
@@ -87,8 +110,11 @@ function Rooms() {
 
   // Setting the user who has done the login
   const data = useContext(UserContext);
-  
-  
+
+  const {setCheckboxSelected} = useContext(UserContext);
+  const {setcheckboxmobile} = useContext(UserContext);
+
+
 
   const changeValue = (selectedDate) => {
     setdate(selectedDate);      // Set the selected date
@@ -137,7 +163,9 @@ function Rooms() {
 
     //Handling the Excellent Condition
     if (id === 1 && currentCheckbox.checked) {
-      setcheckboxselected(checkboxes[id - 1].label);  // This updates the selected filter label
+    //  setcheckboxselected(checkboxes[id - 1].label);  // This updates the selected filter label
+      setCheckboxSelected(checkboxes[id - 1].label)
+      setcheckboxmobile(checkboxes[id - 1].label)
       setfilterexcellentchecked(!filterexcellentchecked);
       setdisplayalldata(false);
     }
@@ -149,7 +177,9 @@ function Rooms() {
 
     // Handling the Good Condition
     if (id === 2 && currentCheckbox.checked) {
-      setcheckboxselected(checkboxes[id - 1].label);
+     // setcheckboxselected(checkboxes[id - 1].label);
+      setCheckboxSelected(checkboxes[id - 1].label)
+      setcheckboxmobile(checkboxes[id - 1].label)
       setfilterexcellentchecked(!filterexcellentchecked);
       setgoodfilter(!goodfilter);
       setdisplayalldata(false);
@@ -164,7 +194,9 @@ function Rooms() {
 
     // Handling the Very Good Condition
     if (id === 3 && currentCheckbox.checked) {
-      setcheckboxselected(checkboxes[id - 1].label);
+     // setcheckboxselected(checkboxes[id - 1].label);
+      setCheckboxSelected(checkboxes[id - 1].label)
+      setcheckboxmobile(checkboxes[id - 1].label)
       setfilterexcellentchecked(!filterexcellentchecked);
       setgoodfilter(!goodfilter);
       setverygoodfilter(!verygoodfilter);
@@ -180,7 +212,9 @@ function Rooms() {
 
     // Handling the Wonderful Condition
     if (id === 4 && currentCheckbox.checked) {
-      setcheckboxselected(checkboxes[id - 1].label);
+     // setcheckboxselected(checkboxes[id - 1].label);
+      setCheckboxSelected(checkboxes[id - 1].label)
+      setcheckboxmobile(checkboxes[id - 1].label)
       setfilterexcellentchecked(!filterexcellentchecked);
       setgoodfilter(!goodfilter);
       setverygoodfilter(!verygoodfilter);
@@ -188,7 +222,7 @@ function Rooms() {
       setdisplayalldata(false);
     }
     if (id === 4 && !currentCheckbox.checked) {
-      setcheckboxselected('');
+     // setcheckboxselected('');
       setfilterexcellentchecked(!filterexcellentchecked);
       setgoodfilter(!goodfilter);
       setverygoodfilter(!verygoodfilter);
@@ -199,7 +233,11 @@ function Rooms() {
     setCheckboxes(newCheckboxes);
   }
 
-  
+
+
+ 
+
+
 
 
 
@@ -210,27 +248,28 @@ function Rooms() {
   useEffect(() => {
     console.log("Component renders")
     setdisplayalldata(true);
-    if (roomviewfacility.checkboxSelected!=''){
+    console.log(displayalldata);
+    if (roomviewfacility.checkboxSelected != '') {
       setdisplayalldata(false);
     }
-    else if (roomviewfacility.roomviewcheckboxselected!=''){
+    else if (roomviewfacility.roomviewcheckboxselected != '') {
       setdisplayalldata(false);
     }
-    else{
+    else {
       setdisplayalldata(true);
     }
-  }, [roomviewfacility.checkboxSelected,roomviewfacility.roomviewcheckboxselected]);
+  }, [roomviewfacility.checkboxSelected, roomviewfacility.roomviewcheckboxselected]);
 
   useEffect(() => {
   }, [hoteldata]); // Runs only when `hoteldata` updates
   useEffect(() => {
-    console.log("Displaydata",displayalldata);
-    console.log("filterexcellentchecked",filterexcellentchecked);
-    console.log("goodfilter",goodfilter);
-    console.log("verygoodfilter",verygoodfilter);
-    console.log("otherfacility",otherfacility);
-    console.log("wonderfulfilter",wonderfulfilter)
-    console.log("roomviewfacility",roomviewfacility);
+    console.log("Displaydata", displayalldata);
+    console.log("filterexcellentchecked", filterexcellentchecked);
+    console.log("goodfilter", goodfilter);
+    console.log("verygoodfilter", verygoodfilter);
+    console.log("otherfacility", otherfacility);
+    console.log("wonderfulfilter", wonderfulfilter)
+    console.log("roomviewfacility", roomviewfacility);
 
   }, [checkboxselected, checkboxes, otherfacility, checkboxdata, roomviewfacility]);
 
@@ -258,125 +297,163 @@ function Rooms() {
     }
   }
 
-    // Handling the checkin date and checkout date
+  // Handling the checkin date and checkout date
 
-    function CompareDate(){
-      if (roomviewfacility.checkoutdate<roomviewfacility.date){
-        alert("Check-out date cannot be earlier than check-in date");
-        setdisplayalldata(false);
-      }
-      else{
-        setdisplayalldata(true);
-      }
+  function CompareDate() {
+    if (roomviewfacility.checkoutdate < roomviewfacility.date) {
+      alert("Check-out date cannot be earlier than check-in date");
+      setdisplayalldata(false);
     }
-
-    // Navigating to the Order History Page
-    function showorderhistory(){
-      navigate('/orderhistory');
+    else {
+      setdisplayalldata(true);
     }
-    
+  }
+  
+  // Checkin and Checkout for the mobile view
+//  const [checkindatemobile,setcheckindatemobile] = useState('');
+//  const [checkoutdatemobile,setcheckoutdatemobile] = useState('');
+ const {setcheckindatemobile} = useContext(UserContext);
+ const {setcheckoutdatemobile} = useContext(UserContext);
+ let chooseCity = "Select City"
 
-
-
-
+  // Navigating to the Order History Page
+  function showorderhistory() {
+    navigate('/orderhistory');
+  }
 
   return (
 
 
     <div className='parentdiv'>
-      <div className='navbar'>
-        <div className='navbar-start'>
 
-          <div className='logo'>
-            <img src='/Hotel_Logo.png'></img>
-          </div>
-          <div className='rooms'>
-            Rooms
-          </div>
-          <div className='orderhistpry' onClick={showorderhistory}>
-            Order History
-          </div>
+      <div className='parentnavbar'>
+        <div className='navbar'>
+          <div className='navbar-start'>
 
-        </div>
-        <div className='navbar-end'>
-          <div className='customerProfile'>
-            Hello {data.username+" "+data.userlastname}
-          </div>
-
-
-        </div>
-      </div>
-      <div className='searchdiv'>
-        <div className='city'>
-          <div className='city-div'>
-            <div className='city-div1'>
-              Select City
+            <div className='logo'>
+              <img src='/Hotel_Logo.png'></img>
             </div>
-            <div className='city-div2'>
-              <select className='custom-select' value={selectedValue} onChange={(e) => SetselectedValue(e.target.value)}>
-                <option></option>
-                <option value="USA">United States</option>
-                <option value="Canada">Canada</option>
-                <option value="UK">United Kingdom</option>
-                <option value="Bangkok">Bangkok</option>
-              </select>
+            <div className='rooms'>
+              Rooms
             </div>
-          </div>
-          <div className='cityname'>Selected City:-{selectedValue}</div>
-        </div>
-        {/* Check-indate*/}
-        <div className='checkinparent'>
-          <div className='checkin'>
-
-            <div className='checkindiv1'>
-              Check-IN
+            <div className='orderhistpry' onClick={showorderhistory}>
+              Order History
             </div>
-            <div className='checkindivicon'>
-              <button className='togglebtn' onClick={toggle}><svg xmlns="http://www.w3.org/2000/svg" height="15px" width="15px" viewBox="0 0 320 512"><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" /></svg></button>
-              {
-                showcalendar && (
-                  <Calendar onChange={changeValue} value={roomviewfacility.date} />
-                )
-              }
 
+          </div>
+          <div className='navbar-end'>
+            <div className='customerProfile'>
+              Hello {data.username + " " + data.userlastname}
             </div>
-          </div>
-          <div className='showdate'>
-            Check-In Date:-  {roomviewfacility.date ? roomviewfacility.date.toDateString() : 'No date selected'}
-          </div>
-        </div>
 
 
-        {/* Check-out date*/}
-        <div className='checkinparent'>
-          <div className='checkin'>
-
-            <div className='checkindiv1'>
-              Check-OUT
-            </div>
-            <div className='checkindivicon'>
-              <button className='togglebtn' onClick={togglecheckout}><svg xmlns="http://www.w3.org/2000/svg" height="15px" width="15px" viewBox="0 0 320 512"><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" /></svg></button>
-              {
-                showcalendarcheckout && (
-                  <Calendar onChange={changeValuecheckout} value={roomviewfacility.checkoutdate} />
-                )
-              }
-
-            </div>
           </div>
-          <div className='showdate'>
-            Check-OUT Date:-  {roomviewfacility.checkoutdate ? roomviewfacility.checkoutdate.toDateString() : 'No date selected'}
-          </div>
-        </div>
-        <div className='search'>
-          <button className='btn' onClick={fetchhoteldata}>Search</button>
         </div>
 
       </div>
+      <div className='mobileview'>
+        {
 
+          sidenavigationstatus ? (
+            <FontAwesomeIcon icon={faXmark} onClick={closesidenavbar} className='icon' />
+          ) : (
+            <FontAwesomeIcon icon={faUser} onClick={opensidenavbar} className='icon' />
+
+          )
+        }
+        <div className='sidenavigation' ref={showsidenavbar}>
+          <div className='sidenavbaritems' >
+            <div className='profile'>Hello</div>
+            <div className='profileitem'>{roomviewcheckboxselected.username + " " + roomviewcheckboxselected.userlastname}</div>
+            <div className='profileitem'>Rooms</div>
+            <div className='profileitem' onClick={showorderhistory}>Order History</div>
+          </div>
+        </div>
+      </div>
+
+      <div className='searchdivparent'>
+        {/* <div className='dashicon' onClick={showfilter} ><FontAwesomeIcon icon={faBars} /></div> */}
+        {
+
+          filterdiv ? (
+           <div className='dashicon' onClick={closefilterdiv}><FontAwesomeIcon icon={faXmark} onClick={closefilterdiv} className='icon' /></div>
+          ) : (
+            <div className='dashicon' onClick={openfilterdiv}><FontAwesomeIcon icon={faBars} onClick={closefilterdiv} className='icon' /></div>
+
+          )
+        }
+        <div className='searchdiv'>
+          <div className='city'>
+            <div className='city-div'>
+              <div className='city-div1'>
+                Select City
+              </div>
+              <div className='city-div2'>
+                <select className='custom-select' value={selectedValue} onChange={(e) => SetselectedValue(e.target.value)}>
+                  <option></option>
+                  <option value="USA">United States</option>
+                  <option value="Canada">Canada</option>
+                  <option value="UK">United Kingdom</option>
+                  <option value="Bangkok">Bangkok</option>
+                </select>
+              </div>
+            </div>
+            <div className='cityname'>Selected City:-{selectedValue}</div>
+          </div>
+          {/* Check-indate*/}
+          <div className='checkinparent'>
+            <div className='checkin'>
+
+              <div className='checkindiv1'>
+                Check-IN
+              </div>
+              <div className='checkindivicon'>
+                <button className='togglebtn' onClick={toggle}><svg xmlns="http://www.w3.org/2000/svg" height="15px" width="15px" viewBox="0 0 320 512"><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" /></svg></button>
+                {
+                  showcalendar && (
+                    <Calendar onChange={changeValue} value={roomviewfacility.date} />
+                  )
+                }
+
+              </div>
+            </div>
+            <div className='showdate'>
+              Check-In Date:-  {roomviewfacility.date ? roomviewfacility.date.toDateString() : 'No date selected'}
+            </div>
+          </div>
+
+
+          {/* Check-out date*/}
+          <div className='checkinparent'>
+            <div className='checkin'>
+
+              <div className='checkindiv1'>
+                Check-OUT
+              </div>
+              <div className='checkindivicon'>
+                <button className='togglebtn' onClick={togglecheckout}><svg xmlns="http://www.w3.org/2000/svg" height="15px" width="15px" viewBox="0 0 320 512"><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" /></svg></button>
+                {
+                  showcalendarcheckout && (
+                    <Calendar onChange={changeValuecheckout} value={roomviewfacility.checkoutdate} />
+                  )
+                }
+
+              </div>
+            </div>
+            <div className='showdate'>
+              Check-OUT Date:-  {roomviewfacility.checkoutdate ? roomviewfacility.checkoutdate.toDateString() : 'No date selected'}
+            </div>
+          </div>
+          <div className='search'>
+            <button className='btn' onClick={fetchhoteldata}>Search</button>
+          </div>
+
+        </div>
+
+      </div>
 
       <div className='parent1'>
-        <div className='child1'>
+      <div className='child1' ref={showfilterdiv}>
           <div className='filters'>
             <div className='filter-heading'>
               <h2 className='filter-heading-text'>Select Filters</h2>
@@ -441,6 +518,37 @@ function Rooms() {
               </div>
             </div>
           </div>
+            <div className='checkincheckout'>
+                <div className='selectcitymobile'>
+                <select className='custom-select' value={selectedValue} onChange={(e) => SetselectedValue(e.target.value)}>
+                <option>Select City</option>
+                <option value="USA">United States</option>
+                <option value="Canada">Canada</option>
+                <option value="UK">United Kingdom</option>
+                <option value="Bangkok">Bangkok</option>
+              </select>
+              <div className='citynamemobile'>Selected City:-{selectedValue?selectedValue:chooseCity}
+            
+              </div>
+                </div>
+                <div className='checkindatamobile'>
+
+                <div className='checkindatamobile'>
+                <div>CheckinDate:- <input type='date' onChange={(e)=>setcheckindatemobile(e.target.value)}></input></div>
+                <div>CheckinDate:- {data.checkindatemobile?data.checkindatemobile:'Select Checkin Date'}</div>
+                {/*Here Store the selected checkin date*/}
+                </div>
+                <div>CheckoutDate:- <input type='date' onChange={(e)=>setcheckoutdatemobile(e.target.value)}></input></div>
+                <div>CheckoutDate:- {data.checkoutdatemobile?data.checkoutdatemobile:'Select Checkout Date'}</div>
+
+
+                {/* Here Store the checkout date*/}
+                </div>
+
+                {/* Search Button*/}
+                <div className='searchmobile'><button className='searchmobilebutton'>Search</button></div>
+
+            </div>
         </div>
         <div className='child2'>
           {displayalldata ? (
@@ -454,7 +562,7 @@ function Rooms() {
               <Filter_data checkboxselected={checkboxselected}></Filter_data>
             ) : wonderfulfilter ? (
               <Filter_data checkboxselected={checkboxselected}></Filter_data>
-            ) : otherfacility  ? (
+            ) : otherfacility ? (
               <OtherFacility ></OtherFacility>
             ) : roomviewfacility ? (
               <RoomViewFilter></RoomViewFilter>
@@ -465,7 +573,7 @@ function Rooms() {
               )}
         </div>
 
-         
+
       </div>
 
       {
@@ -480,9 +588,9 @@ function Rooms() {
               }
               <span onClick={() => selectPageHandler(page + 1)}>&gt;</span>
             </div>
-            
+
           </div>
-          
+
         )
 
 

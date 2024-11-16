@@ -1,0 +1,46 @@
+{
+    "routes":[
+        {
+            "src":"/",
+            "dest":"/"
+        },
+        {
+            "src":"/signup",
+            "dest":"/"
+        },
+        {
+            "src":"/signin",
+            "dest":"/"
+        },
+        {
+            "src":"/rooms",
+            
+            "dest":"/"
+        },
+        {
+            "src":"/bookingpage",
+            "dest":"/"
+        },
+        {
+            "src":"/orderhistory",
+            "dest":"/"
+        },
+        {
+            "src":"/postblog",
+            "dest":"/"
+        },
+        {
+            "src":"/seeallblog",
+            "dest":"/"
+        },
+        {
+            "src":"/roomservice",
+            "dest":"/"
+        },
+        {
+            "src":"/contactus",
+            "dest":"/"
+        }
+
+    ]
+}

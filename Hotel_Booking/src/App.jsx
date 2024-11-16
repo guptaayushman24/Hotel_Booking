@@ -23,30 +23,7 @@ import SeeBlog from './components/SeeBlog'
 import {BrowserRouter, Routes,Route} from "react-router-dom"
 import Services from './components/Services'
 import Contact_Us from './components/Contact_Us'
-// const router = createBrowserRouter(
-  
-//   [ 
-  
-//     {
-   
-//       path:'/', 
-    
-//       element:
-       
-//       <Home></Home>
-//     },
-//     {
-//       path:'/signup', 
-//       element:
-//         <Signup></Signup>
-//     },
-//     {
-//       path:'/signin',
-//       element:
-//       <Login></Login>
-//     }
-//   ]
-// )
+
 function App() {
  
 
@@ -69,10 +46,6 @@ function App() {
         </Routes>
       </BrowserRouter>
       </UserProvider>
-
-      {/* <UserProvider>
-        <Hotel_Booking></Hotel_Booking>
-      </UserProvider> */}
      
     </>
   )

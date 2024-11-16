@@ -63,11 +63,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 5rem;
 
 }
-.imagestyle{
-   height: "100%";
-   width: "100%";
+.googlelogo{
+    width: 10rem;
 }
 .emailwarning{
     color: red;
@@ -78,4 +78,14 @@
     color: red;
     margin-left: 5px;
     display: none;
+}
+
+/* Responsiveness*/
+@media only screen and (max-width:600px){
+    .emailheading{
+        text-align: center;
+    }
+    .emailinput{
+        text-align: center;
+    }
 }

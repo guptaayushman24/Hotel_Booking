@@ -62,7 +62,7 @@ function Filter_data({ checkboxselected }) {
         const hotelname = e.target.closest('.roomviewsparent').querySelector('.hotelname').textContent;
         sethotelname(hotelname);
         // Hotel Name
-        console.log(hotelname);
+        console.log("The desktop view hotel name is",hotelname);
         // Hotel Rating
         const hotelrating = e.target.closest('.roomviewsparent').querySelector('.hotelrating').textContent;
         sethotelrating(hotelrating);

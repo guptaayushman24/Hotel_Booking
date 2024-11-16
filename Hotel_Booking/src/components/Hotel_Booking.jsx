@@ -18,8 +18,8 @@ function Hotel_Booking() {
                 UserName: data.username,
 
                 Email: data.useremail,
-                CheckinDate: data.date,
-                CheckoutDate: data.checkoutdate
+                CheckinDate: data.date?data.date:data.checkinmobile,
+                CheckoutDate: data.checkoutdate?data.checkoutdate:data.checkoutmobile
             })
             if (response.status == 200) {
                 navigate('/orderhistory');
@@ -81,10 +81,10 @@ function Hotel_Booking() {
                     </div>
                     <div className='detaildiv'>
                         <div className='hotelname'>
-                            HotelName :- {data.hotelname}
+                            {data.hotelname}
                         </div>
                         <div className='hotelname'>
-                            Hotel Rating :- {data.hotelrating}
+                             {data.hotelrating}
                         </div>
 
                         <div className='hotelname'>

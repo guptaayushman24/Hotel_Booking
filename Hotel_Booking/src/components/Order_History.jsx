@@ -35,10 +35,10 @@ function Order_History() {
           <div className="box" key={order._id}>
         
             <div className="details">
-              <div className="detail-item">Hotel Name
+              <div className="detail-item">
                 <div className="detail-content">{order.HotelName || "No data"}</div>
               </div>
-              <div className="detail-item">Price
+              <div className="detail-item">
                 <div className="detail-content">{order.Price || "No data"}</div>
               </div>
               <div className="detail-item">Name

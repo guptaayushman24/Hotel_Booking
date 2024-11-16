@@ -59,7 +59,7 @@ function Home() {
         <div className='services'><button id='signup' onClick={opensignup}>SingUp</button></div>
        
        
-        <div className='services'><button id='login' onClick={opensignin}>LogIn</button></div>
+        <div className='services'><button id='login' onClick={opensignin}>Login</button></div>
      
       </div>
       {/* Mobile View/*/}

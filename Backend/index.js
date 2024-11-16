@@ -11,8 +11,10 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 
 // Mongoose Connection
-mongoose.connect('mongodb://localhost:27017/Hotel_Booking').then(()=>{
+mongoose.connect('mongodb+srv://HotelBookingWebsite:TLv9aBlR7XGZ31ex@hotelbookingwebsite.zwcai.mongodb.net/')
+.then(()=>{
     console.log("Mongodb Connected");
+
 }).catch((err)=>{
     
     console.log(err);

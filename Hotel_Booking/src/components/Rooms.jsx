@@ -7,7 +7,6 @@ import { Slider } from 'primereact/slider';
 import Filter_data from './Filter_Data'
 import { CheckboxContext } from './Context';
 import OtherFacility from './OtherFacility';
-import Newfile from './Newfile';
 import Newcomponent from './Newcomponent';
 import RoomsView from '../../Util/RoomsView';
 import RoomViewFilter from './RoomViewFilter';

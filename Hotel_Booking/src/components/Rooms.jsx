@@ -365,7 +365,6 @@ function Rooms() {
           <div className='sidenavbaritems' >
             <div className='profile'>Hello</div>
             <div className='profileitem'>{roomviewcheckboxselected.username + " " + roomviewcheckboxselected.userlastname}</div>
-            <div className='profileitem'>Rooms</div>
             <div className='profileitem' onClick={showorderhistory}>Order History</div>
           </div>
         </div>

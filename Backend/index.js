@@ -11,7 +11,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 
 // Mongoose Connection
-mongoose.connect('mongodb+srv://HotelBookingWebsite:TLv9aBlR7XGZ31ex@hotelbookingwebsite.zwcai.mongodb.net/')
+const connectionURL = "mongodb+srv://HotelBookingWebsite:HotelBookingWebsite@hotelbookingwebsite.zwcai.mongodb.net/"
+mongoose.connect(connectionURL)
 .then(()=>{
     console.log("Mongodb Connected");
 

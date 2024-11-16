@@ -21,8 +21,9 @@ mongoose.connect(connectionURL)
     console.log(err);
 })
 
+const PORT = 5000;
 app.use('/',router);
-app.listen(5000,()=>{
+app.listen(PORT,()=>{
    
     console.log("Server is running on the PORT",5000);
 })

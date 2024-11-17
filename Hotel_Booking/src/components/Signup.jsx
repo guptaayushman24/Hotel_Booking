@@ -151,7 +151,7 @@ function Signup() {
         // If all user data is correct save into the mongodb
         try {
             if (fnamecheck == true && lnamecheck == true && emailcheck == true && passwordcheck == true) {
-                await axios.post('http://localhost:5000/signupapi', {
+                await axios.post('https://hotel-booking-1lqf.onrender.com/signupapi', {
                     FirstName:fname,
                     LastName:lname,
                     EmailAddress:email,

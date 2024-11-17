@@ -9,7 +9,7 @@ function Blog() {
   const [blog, setblog] = useState('');
   async function postblog() {
     try {
-      const response = await axios.post('http://localhost:5000/blogpost', {
+      const response = await axios.post('https://hotel-booking-1lqf.onrender.com/blogpost', {
         WritterName:writtername,
         Title: title,
         Blog: blog

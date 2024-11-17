@@ -9,7 +9,7 @@ function Order_History() {
 
   async function fetchorderhistory() {
     try {
-      const response = await axios.post('http://localhost:5000/orderhistorydetail', {
+      const response = await axios.post('https://hotel-booking-1lqf.onrender.com/orderhistorydetail', {
         Email: data.useremail
       });
       setorderhistorydata(response.data);

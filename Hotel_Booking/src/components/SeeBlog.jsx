@@ -5,7 +5,7 @@ function SeeBlog() {
   const [blogdata, setblogdata] = useState([]);
   async function seeallblogs() {
      try{
-      const response = await axios.get('http://localhost:5000/allblogs');
+      const response = await axios.get('https://hotel-booking-1lqf.onrender.com/allblogs');
       setblogdata(response.data);
      }
      catch(err){

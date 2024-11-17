@@ -28,7 +28,7 @@ function OtherFacility() {
         try {
             setLoading(true);
 
-            const res = await axios.post("http://localhost:5000/otherfacility", {
+            const res = await axios.post("https://hotel-booking-1lqf.onrender.com/otherfacility", {
                 OtherFacility: checkboxselected.checkboxSelected// Ensure `checkboxselected` is valid
             });
             console.log("API Response in other facility:", res?.data || "No data"); // Handle missing data

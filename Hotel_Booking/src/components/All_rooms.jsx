@@ -15,7 +15,7 @@ function Allrooms() {
     // Fetching data
     async function fetchhoteldata() {
         try {
-            const data = await axios.get('http://localhost:5000/getalldata');
+            const data = await axios.get('https://hotel-booking-1lqf.onrender.com/getalldata');
             console.log("Data is", data);
 
             sethoteldata(data.data);

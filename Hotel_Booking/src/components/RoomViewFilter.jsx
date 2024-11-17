@@ -25,7 +25,7 @@ function RoomViewFilter() {
 
             setLoading(true);
 
-            const res = await axios.post("http://localhost:5000/filterroomview", {
+            const res = await axios.post("https://hotel-booking-1lqf.onrender.com/filterroomview", {
                 RoomViews: roomviewcheckboxselected.roomviewcheckboxselected
             });
             console.log("API response in Room View is:", res?.data || "No data");

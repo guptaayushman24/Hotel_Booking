@@ -22,7 +22,7 @@ function Filter_data({ checkboxselected }) {
 
 
     function fetchAndActivate() {
-        axios.post("http://localhost:5000/reviewscore", {
+        axios.post("https://hotel-booking-1lqf.onrender.com/reviewscore", {
             ReviewScore: userfacility.checkboxSelected // If any how we pass the data here out lots of work can be simplified
 
         }).then((res) => {

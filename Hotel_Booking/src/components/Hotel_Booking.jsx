@@ -12,7 +12,7 @@ function Hotel_Booking() {
     // Post the data in the Order History of the user
     async function orderhistory() {
         try {
-            const response = await axios.post('http://localhost:5000/orderhistory', {
+            const response = await axios.post('https://hotel-booking-1lqf.onrender.com/orderhistory', {
                 HotelName: data.hotelname,
                 Price: data.hotelprice,
                 UserName: data.username,

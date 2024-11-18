@@ -6,6 +6,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 function Hotel_Booking() {
     const data = useContext(UserContext);
+    const navigate = useNavigate();
     // const navigate = useNavigate();
     console.log(data);
 

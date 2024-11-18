@@ -23,15 +23,18 @@ function Rooms() {
   const [filterdiv, setfilterdiv] = useState(false);
   const showsidenavbar = useRef(null);
   const showfilterdiv = useRef(null);
-  function opensidenavbar() {
-    setsidenavigationstatus(!sidenavigationstatus);
-    showsidenavbar.current.style.display = 'inline';
-  }
-  function closesidenavbar() {
-    setsidenavigationstatus(!sidenavigationstatus);
-    showsidenavbar.current.style.display = 'none';
-  }
 
+  function togglesidenavbarrooms(){
+    setsidenavigationstatus(!sidenavigationstatus);
+    if (sidenavigationstatus==false){
+      showsidenavbar.current.style.display = 'flex';
+      setsidenavigationstatus(!sidenavigationstatus);
+    }
+    else{
+      showsidenavbar.current.style.display = 'none';
+      setsidenavigationstatus(!sidenavigationstatus);
+    }
+  }
   function openfilterdiv() {
     showfilterdiv.current.style.display = 'inline';
     setfilterdiv(!filterdiv);
@@ -308,9 +311,7 @@ function Rooms() {
     }
   }
   
-  // Checkin and Checkout for the mobile view
-//  const [checkindatemobile,setcheckindatemobile] = useState('');
-//  const [checkoutdatemobile,setcheckoutdatemobile] = useState('');
+
  const {setcheckindatemobile} = useContext(UserContext);
  const {setcheckoutdatemobile} = useContext(UserContext);
  let chooseCity = "Select City"
@@ -354,14 +355,14 @@ function Rooms() {
         {
 
           sidenavigationstatus ? (
-            <FontAwesomeIcon icon={faXmark} onClick={closesidenavbar} className='icon' />
+            <FontAwesomeIcon icon={faXmark} onClick={togglesidenavbarrooms} className='icon' />
           ) : (
-            <FontAwesomeIcon icon={faUser} onClick={opensidenavbar} className='icon' />
+            <FontAwesomeIcon icon={faUser} onClick={togglesidenavbarrooms} className='icon' />
 
           )
         }
         <div className='sidenavigation' ref={showsidenavbar}>
-          <div className='sidenavbaritems' >
+          <div className='sidenavbaritems'>
             <div className='profile'>Hello</div>
             <div className='profileitem'>{roomviewcheckboxselected.username + " " + roomviewcheckboxselected.userlastname}</div>
             <div className='profileitem' onClick={showorderhistory}>Order History</div>
@@ -370,13 +371,12 @@ function Rooms() {
       </div>
 
       <div className='searchdivparent'>
-        {/* <div className='dashicon' onClick={showfilter} ><FontAwesomeIcon icon={faBars} /></div> */}
         {
 
           filterdiv ? (
-           <div className='dashicon' onClick={closefilterdiv}><FontAwesomeIcon icon={faXmark} onClick={closefilterdiv} className='icon' /></div>
+           <div className='dashicon'><FontAwesomeIcon icon={faXmark} onClick={closefilterdiv} className='icon' /></div>
           ) : (
-            <div className='dashicon' onClick={openfilterdiv}><FontAwesomeIcon icon={faBars} onClick={closefilterdiv} className='icon' /></div>
+            <div className='dashicon'><FontAwesomeIcon icon={faBars} onClick={openfilterdiv} className='icon' /></div>
 
           )
         }

@@ -57,7 +57,7 @@ function Hotel_Booking() {
         }
 
         try {
-            const response = await fetch('http://localhost:5000/payment', {
+            const response = await fetch('https://hotel-booking-1lqf.onrender.com/payment', {
                 method: "POST",
                 header,
                 body: JSON.stringify(body)

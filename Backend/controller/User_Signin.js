@@ -4,6 +4,8 @@ async function usersignin (req,res){
     try{
         const {EmailAddress,Password} = req.body;
         const userdata = await Usersignupschema.findOne({EmailAddress});
+        console.log("Email Received in Backend:", EmailAddress);
+        console.log(userdata);
         if (userdata){
             if (userdata.Password==Password){
                 return res.status(200).json({'msg':'User Found','username':userdata.FirstName,'userlastname':userdata.LastName,'useremail':userdata.EmailAddress});

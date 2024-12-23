@@ -101,6 +101,10 @@ function Login() {
     function signup(){
         navigate('/signup');
     }
+    // Reset Password
+    function resetpassword(){
+        navigate('/resetpassword');
+    }
     return (
         <div>
             <div className='parentdiv'>
@@ -148,6 +152,10 @@ function Login() {
                     {/*div->Submit Button*/}
                     <div className='buttonclass'>
                         <button className='button' onClick={validateandchceckforuser}>Submit</button>
+                    </div>
+                    {/* Forgot Password*/}
+                    <div className='buttonclass'>
+                        <button className='button' onClick={resetpassword}>Forget Password</button>
                     </div>
                     {/* div-> NewUser*/}
                     <div className='newUser'>

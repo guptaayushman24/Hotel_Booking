@@ -12,6 +12,9 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 // Mongoose Connection
 const connectionURL = "mongodb+srv://HotelBookingWebsite:HotelBookingWebsite@hotelbookingwebsite.zwcai.mongodb.net/"
+
+
+
 mongoose.connect(connectionURL)
 .then(()=>{
     console.log("Mongodb Connected");
@@ -27,3 +30,6 @@ app.listen(PORT,()=>{
    
     console.log("Server is running on the PORT",5000);
 })
+
+
+// mongodb://localhost:27017/

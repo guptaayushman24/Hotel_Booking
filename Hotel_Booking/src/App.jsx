@@ -22,6 +22,8 @@ import SeeBlog from './components/SeeBlog'
 import {BrowserRouter, Routes,Route} from "react-router-dom"
 import Services from './components/Services'
 import Contact_Us from './components/Contact_Us'
+import Reset_Password from './components/Reset_Password'
+
 
 function App() {
  
@@ -42,9 +44,12 @@ function App() {
           <Route path='/seeallblog' element={<SeeBlog/>}></Route>
           <Route path='/roomservice' element={<Services/>}></Route>
           <Route path='/contactus' element={<Contact_Us/>}></Route>
+          <Route path='/resetpassword' element={<Reset_Password/>}></Route>
         </Routes>
       </BrowserRouter>
+      
       </UserProvider>
+      
      
     </>
   )

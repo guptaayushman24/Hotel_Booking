@@ -25,7 +25,7 @@ function Order_History() {
   async function deleteallordehistory(){
     try{
       console.log(data.useremail);
-      const response = await axios.delete(`https://hotel-booking-1lqf.onrender.com/deleteallorderhistory/${data.useremail}`);
+      const response = await axios.delete(`https://hotel-booking-1lqf.onrender.com/deleteallorderhistory/${data.useremail}`);  // deleteallorderhistory
       console.log("Frontend response",response);
       if (response.status===200){
         setorderhistorydata('');

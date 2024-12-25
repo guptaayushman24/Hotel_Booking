@@ -13,8 +13,8 @@ async function checkuser(req,res){
   }
   
   catch(err){
-   
     console.log(err);
+   
     return res.json(400).status({'msg':'Error'});
   
 }

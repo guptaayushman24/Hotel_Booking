@@ -6,7 +6,8 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars, faXmark, faUser,faCalendar, faEye } from '@fortawesome/free-solid-svg-icons';
 function Signup() {
     const [fname, Setfname] = useState('');
     const [lname, Setlname] = useState('');
@@ -21,6 +22,9 @@ function Signup() {
     const invalidlname = useRef();
     const displaypasswordwarning = useRef();
     const invalidpassword = useRef();
+
+    const [showhidepassword,setshowhidepassword] = useState('');
+    const [currentstate,setcurrentstate] = useState('password');
     
     const navigate = useNavigate();
 
@@ -179,6 +183,15 @@ function Signup() {
         console.log("Signin Clicked");
         navigate('/signin');
     }
+    // Show and Hide password
+    function functionpassword(){
+        if (currentstate=='password'){
+            setcurrentstate('text');
+        }
+        else if (currentstate=='text'){
+            setcurrentstate('password');
+        }
+    }
     return (
         <div>
             <div className='parentdiv'>
@@ -245,9 +258,17 @@ function Signup() {
 
                             Password
                         </div>
+                        <div className='passwordhide'>
+                        
                         <div>
-                            <input type='Email' placeholder='Enter Password' className='emailinput' onChange={(e) => Setpassword(e.target.value)}></input>
+                            <input type={currentstate} placeholder='Enter Password' className='emailinput'  onChange={(e) => Setpassword(e.target.value)}></input>
+                            
+                            
                         </div>
+                        <div className='input-container'><FontAwesomeIcon icon={faEye} onClick={functionpassword} />
+                        </div>
+                        </div>
+                        
                         {/* Email Warning*/}
                         <div className='passwordwarning' ref={displaypasswordwarning}>
                             *Please enter the password

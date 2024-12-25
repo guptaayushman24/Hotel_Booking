@@ -2,12 +2,17 @@ import React, { useState } from 'react'
 import './Reset_Password.css'
 import axios from "axios"
 import {useNavigate} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars, faXmark, faUser,faCalendar, faEye } from '@fortawesome/free-solid-svg-icons';
+
 function Reset_Password() {
   const [hidepassword, sethidepassword] = useState(false);
   const [hideaccountexist, sethideaccountexist] = useState(true);
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
   const [newpassword, setnewpassword] = useState('');
+   const [currentstate,setcurrentstate] = useState('password');
+   const [currentstatereenter,setcurrentstatereenter] = useState('password');
   const navigate = useNavigate();
   const passwordregex = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
   async function accountexist() {
@@ -73,46 +78,76 @@ function Reset_Password() {
     }
   }
 
+  function functionpassword(){
+    if (currentstate=='password'){
+      setcurrentstate('text');
+    }
+    else if (currentstate=='text'){
+      setcurrentstate('password');
+    }
+  }
+
+  function functionpasswordreenter(){
+    if (currentstatereenter=='password'){
+      setcurrentstatereenter('text');
+    }
+    else if (currentstatereenter=='text'){
+      setcurrentstatereenter('password');
+    }
+  }
+
   return (
     <div>
       <div className='mainrp'>
-        <div className='emailrp'>
-          <div className='emailcontent'>Enter your email address</div>
-        </div>
-
-        <div className='emailinputrp'>
-          <input placeholder='Enter email address' type='email' onChange={(e) => setemail(e.target.value)}></input>
+      {/* Email div*/}
+        <div className='emaildetailrp'>
+          <div className='emailtxt'>
+            Enter email address
+          </div>
+          <div className='email'>
+            <input placeholder='Enter email' type='email' onChange={(e)=>setemail(e.target.value)}></input>
+          </div>
         </div>
         {
           hidepassword && (
-
             <>
-              <div className='emailrp'>
-                <div className='emailcontentrp'>New Password</div>
+               {/* Password div*/}
+        <div className='passworddetailrp'>
+         <div className='newpasswordrp'>
+          Enter new password
+         </div>
+         <div className='passwordhiderp'>
+         <div className='newpasswordrpinput'>
+          <input placeholder='Enter new password' type={currentstate} onChange={(e)=>setpassword(e.target.value)}></input>
+         </div>
 
-              </div>
+          <div className='passwordhideiconrp'><FontAwesomeIcon icon={faEye} onClick={functionpassword} /></div>
+         </div>
+         
+         
+        </div>
+        
+        {/* Re-enter password*/}
+        <div className='passworddetailrp'>
+         <div className='newpasswordrp'>
+          Re-enter new password
+         </div>
+         <div className='passwordhiderp'>
+         <div className='newpasswordrpinput'>
+          <input placeholder='Enter new password' type={currentstatereenter} onChange={(e)=>setpassword(e.target.value)}></input>
+         </div>
 
-              <div className='emailinputrp'>
-                <input placeholder='New Password' onChange={(e) => setpassword(e.target.value)}></input>
-              </div>
-
-              <div className='emailrp'>
-                <div className='emailcontentrp'>Re-enter New Password</div>
-
-              </div>
-
-              <div className='emailinputrp'>
-                <input placeholder='Re-enter New Password' type='email' onChange={(e) => setnewpassword(e.target.value)}></input>
-              </div>
-
-
-
+          <div className='passwordhideiconrp'><FontAwesomeIcon icon={faEye} onClick={functionpasswordreenter} /></div>
+         </div>
+         
+        </div>
             </>
           )
         }
-
-
+        
       </div>
+      
+      <div className='buttonstyle'>
       <div className='buttonstylerp'>
         {
           hideaccountexist && (
@@ -126,6 +161,7 @@ function Reset_Password() {
           )
         }
 
+      </div>
       </div>
 
     </div>

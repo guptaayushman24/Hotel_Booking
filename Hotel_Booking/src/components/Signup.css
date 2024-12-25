@@ -28,6 +28,14 @@
     width: 20rem;
     height: 2rem;
 }
+.passwordhide{
+    display: flex;
+    flex-direction: row;
+}
+.input-container{
+    margin-top: 0.6rem;
+    margin-left: 0.2rem;
+}
 .buttonclass{
    display: flex;
    justify-content: center;

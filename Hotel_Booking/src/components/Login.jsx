@@ -1,37 +1,39 @@
 import axios from "axios";
-import React, {useState ,useRef, useContext} from 'react'
-import {toast} from 'react-toastify'
-import {useNavigate } from 'react-router-dom';
+import React, { useState, useRef, useContext } from 'react'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../Context/Context';
 import { useForm } from 'react-hook-form';
 import { auth } from './Firebase';
-import { GoogleAuthProvider ,signInWithPopup} from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars, faXmark, faUser,faCalendar, faEye } from '@fortawesome/free-solid-svg-icons';
 import './Login.css'
 
-
 function Login() {
-    const [email,Setemail] = useState('');
-    const [password,Setpassword] = useState('');
+    const [email, Setemail] = useState('');
+    const [password, Setpassword] = useState('');
     const displawarning = useRef();
     const invalidemail = useRef();
     const displaypasswordwarning = useRef();
     const invalidpassword = useRef();
-    const {setusername} = useContext(UserContext);
-    const {setuserlastname} = useContext(UserContext);
-    const {setuseremail} = useContext(UserContext);
+    const { setusername } = useContext(UserContext);
+    const { setuserlastname } = useContext(UserContext);
+    const { setuseremail } = useContext(UserContext);
 
-    let emailcheck,passwordcheck = false;
+    let emailcheck, passwordcheck = false;
     const navigate = useNavigate();
-    
+    const [currentstate,setcurrentstate] = useState('password');
+
     const emailregex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     const passwordregex = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
     function googleLogin() {
-      
+
         const provider = new GoogleAuthProvider();
 
         signInWithPopup(auth, provider)
-            
-        .then(async (result) => {
+
+            .then(async (result) => {
                 console.log(result);
                 if (result.user) {
 
@@ -44,66 +46,74 @@ function Login() {
     }
     async function validateandchceckforuser() {
         // Email Warning
-        if (email.length==0){
-            displawarning.current.style.display='block';
+        if (email.length == 0) {
+            displawarning.current.style.display = 'block';
             invalidemail.current.style.display = 'none';
-          }
-          else if (!emailregex.test(email)){
-            displawarning.current.style.display='none'
+        }
+        else if (!emailregex.test(email)) {
+            displawarning.current.style.display = 'none'
             invalidemail.current.style.display = 'block';
-          }
-          else{
+        }
+        else {
             displawarning.current.style.display = 'none';
             invalidemail.current.style.display = 'none';
             emailcheck = true;
-          }
-          // Password Waring
-          if (password.length==0){
-            displaypasswordwarning.current.style.display='block';
-          }
-          else if (!passwordregex.test(password)){
-            displaypasswordwarning.current.style.display='none'
+        }
+        // Password Waring
+        if (password.length == 0) {
+            displaypasswordwarning.current.style.display = 'block';
+        }
+        else if (!passwordregex.test(password)) {
+            displaypasswordwarning.current.style.display = 'none'
             invalidpassword.current.style.display = 'block';
-          }
-          else{
+        }
+        else {
             invalidpassword.current.style.display = 'none';
-            displaypasswordwarning.current.style.display='none'
+            displaypasswordwarning.current.style.display = 'none'
             passwordcheck = true;
-          }
+        }
 
-          try {
+        try {
             if (emailcheck === true && passwordcheck === true) {
                 const response = await axios.post('https://hotel-booking-1lqf.onrender.com/signinapi', {
                     EmailAddress: email,
-                    Password:password
+                    Password: password
                 });
-                if (response.status==200){
+                if (response.status == 200) {
                     setusername(response.data.username);
                     setuserlastname(response.data.userlastname);
                     setuseremail(response.data.useremail);
                     navigate('/rooms')
                 }
-                else if (response.status==201){
+                else if (response.status == 201) {
                     alert("Please check the password");
                 }
-                else if (response.status==202){
+                else if (response.status == 202) {
                     alert("Account not found check email address or do the signup");
                 }
             }
         }
-        catch(err){
+        catch (err) {
             console.log(err);
         }
 
     }
 
     // signup
-    function signup(){
+    function signup() {
         navigate('/signup');
     }
     // Reset Password
-    function resetpassword(){
+    function resetpassword() {
         navigate('/resetpassword');
+    }
+    function functionpassword(){
+        if (currentstate=='password'){
+            setcurrentstate('text');
+        }
+        else if (currentstate=='text'){
+            setcurrentstate('password');
+        }
     }
     return (
         <div>
@@ -137,17 +147,24 @@ function Login() {
 
                             Password
                         </div>
-                        <div>
-                            <input type='Email' placeholder='Enter Password' className='emailinput' onChange={(e) => Setpassword(e.target.value)}></input>
+                        <div className='passwordhide'>
+
+                            <div>
+                                <input type={currentstate} placeholder='Enter Password' className='emailinput' onChange={(e) => Setpassword(e.target.value)}></input>
+
+
+                            </div>
+                            <div className='input-container'><FontAwesomeIcon icon={faEye} onClick={functionpassword} />
+                            </div>
                         </div>
-                         {/* Email Warning*/}
-                         <div className='passwordwarning' ref={displaypasswordwarning}>
+                        {/* Email Warning*/}
+                        <div className='passwordwarning' ref={displaypasswordwarning}>
                             *Please enter the password
                         </div>
                         <div className='passwordwarning' ref={invalidpassword}>
                             *Please enter the strong password
                         </div>
-                        
+
                     </div>
                     {/*div->Submit Button*/}
                     <div className='buttonclass'>
@@ -170,9 +187,9 @@ function Login() {
                     </div>
 
                     <div className='image'>
-                    <div className='imagestyle'>
-                    <img src={'/SigninwithGoogle.png'}  onClick={googleLogin} className="googlelogo"></img>
-                    </div>
+                        <div className='imagestyle'>
+                            <img src={'/SigninwithGoogle.png'} onClick={googleLogin} className="googlelogo"></img>
+                        </div>
                     </div>
 
                 </div>

@@ -11,6 +11,7 @@ const {orderhistory,displayorderhistory} = require('../controller/Order_History'
 const {postblog,displayallblog} = require('../controller/Blog_Controller');
 const {checkuser} = require('../controller/Find_User');
 const { updateuserpassword } = require('../controller/Change_Password');
+const {deleteallorder} = require('../controller/Delete_Order_History')
 router.get('/getalldata',getAlldata);
 router.post('/reviewscore',filterReviewScore);
 router.post('/otherfacility',filterOtherFacility);
@@ -25,4 +26,5 @@ router.post('/checkuser',checkuser)
 router.post('/blogpost',postblog);
 router.get('/allblogs',displayallblog)
 router.put('/updatepassword',updateuserpassword);
+router.delete('/deleteallorderhistory/:useremail',deleteallorder)
 module.exports = router;

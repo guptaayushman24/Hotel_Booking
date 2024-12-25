@@ -35,20 +35,22 @@ function App() {
       <BrowserRouter>
         <Routes>
         <Route path='/' element={<Home/>}></Route>
-          <Route path='/signup' element={<Signup/>}></Route>
-          <Route path='/signin' element={<Login/>}></Route>
+           <Route path='/signup' element={<Signup/>}></Route>
+           <Route path='/signin' element={<Login/>}></Route>
           <Route path='/rooms' element={<Rooms/>}></Route>
           <Route path='/bookingpage' element={<Hotel_Booking/>}></Route>
           <Route path='/orderhistory' element={<Order_History/>}></Route>
           <Route path='/postblog' element={<Blog/>}></Route>
           <Route path='/seeallblog' element={<SeeBlog/>}></Route>
           <Route path='/roomservice' element={<Services/>}></Route>
-          <Route path='/contactus' element={<Contact_Us/>}></Route>
-          <Route path='/resetpassword' element={<Reset_Password/>}></Route>
+          <Route path='/contactus' element={<Contact_Us/>}></Route> 
+           <Route path='/resetpassword' element={<Reset_Password/>}></Route>
+          
         </Routes>
       </BrowserRouter>
       
       </UserProvider>
+      
       
      
     </>

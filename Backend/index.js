@@ -30,6 +30,3 @@ app.listen(PORT,()=>{
    
     console.log("Server is running on the PORT",5000);
 })
-
-
-// mongodb://localhost:27017/
